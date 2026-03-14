@@ -685,7 +685,7 @@ kbd{display:inline-flex;align-items:center;justify-content:center;background:var
 <nav id="navbar">
   <a href="#" class="nav-logo" onclick="showPage('home')">Nest<span>Lux</span></a>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('listings')">Home</a></li>
+    <li><a href="#" onclick="showPage('home')">Home</a></li>
     <li><a href="#" onclick="showPage('listings')">Properties</a></li>
     <li><a href="#" onclick="showPage('agents')">Agents</a></li>
     <li><a href="#" onclick="showPage('about')">About</a></li>
@@ -700,10 +700,174 @@ kbd{display:inline-flex;align-items:center;justify-content:center;background:var
   </div>
 </nav>
 
+<!-- ======= HOME PAGE ======= -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-img-panel">
+      <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80" alt="Luxury Home">
+    </div>
+    <div class="hero-content">
+      <div class="hero-tag">Curated Real Estate · 98 Cities</div>
+      <h1 class="hero-title">Find Your<br><em>Perfect</em> Home<br>In Minutes</h1>
+      <p class="hero-desc">Discover extraordinary properties handpicked for discerning buyers. Verified listings, zero hidden fees.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary" onclick="showPage('listings')">Explore Properties</a>
+        <a href="#" class="btn-outline" onclick="showPage('about')">How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num" data-target="4800">0</div><div class="stat-label">Properties</div></div>
+        <div><div class="stat-num" data-target="1200">0</div><div class="stat-label">Happy Clients</div></div>
+        <div><div class="stat-num" data-target="98">0</div><div class="stat-label">Cities</div></div>
+        <div><div class="stat-num" data-target="240">0</div><div class="stat-label">Agents</div></div>
+      </div>
+    </div>
+    <div class="scroll-indicator"><div class="scroll-line"></div><span class="scroll-label">Scroll</span></div>
+  </section>
+
+  <!-- SEARCH -->
+  <div class="search-section">
+    <div class="search-card reveal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+        <div class="search-tabs">
+          <button class="search-tab active" onclick="setTab(this)">Buy</button>
+          <button class="search-tab" onclick="setTab(this)">Rent</button>
+          <button class="search-tab" onclick="setTab(this)">Commercial</button>
+          <button class="search-tab" onclick="setTab(this)">New Projects</button>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="voice-btn" id="voiceBtn" onclick="startVoiceSearch()" title="Voice Search">🎤</button>
+          <div class="currency-bar">
+            <span>Currency:</span>
+            <select class="currency-select" onchange="setCurrency(this.value)">
+              <option value="INR">₹ INR</option>
+              <option value="USD">$ USD</option>
+              <option value="GBP">£ GBP</option>
+              <option value="EUR">€ EUR</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="search-row">
+        <div class="search-field search-field-wrap">
+          <label>Location</label>
+          <input type="text" placeholder="City, locality or landmark..." id="searchLocationInput" oninput="showSuggestions(this)" onblur="hideSuggestions()">
+          <div class="search-suggestions" id="searchSuggestions"></div>
+        </div>
+        <div class="search-field">
+          <label>Property Type</label>
+          <select><option>All Types</option><option>Apartment</option><option>Villa</option><option>Penthouse</option><option>Bungalow</option><option>Plot</option></select>
+        </div>
+        <div class="search-field">
+          <label>Budget</label>
+          <select><option>Any Budget</option><option>Under ₹50L</option><option>₹50L–₹1Cr</option><option>₹1Cr–₹2Cr</option><option>₹2Cr–₹5Cr</option><option>₹5Cr+</option></select>
+        </div>
+        <div class="search-field">
+          <label>BHK</label>
+          <select><option>Any BHK</option><option>1 BHK</option><option>2 BHK</option><option>3 BHK</option><option>4+ BHK</option></select>
+        </div>
+        <button class="search-btn" onclick="doSearch()">🔍 Search</button>
+      </div>
+      <div class="search-history">
+        <span class="search-history-label">Recent:</span>
+        <div class="history-tag" onclick="fillSearch('3 BHK Bandra')">🕐 3 BHK Bandra <span style="font-size:0.65rem;opacity:0.5">✕</span></div>
+        <div class="history-tag" onclick="fillSearch('Villas Gurugram')">🕐 Villas Gurugram <span style="font-size:0.65rem;opacity:0.5">✕</span></div>
+        <div class="history-tag" onclick="fillSearch('1 BHK Koregaon Park')">🕐 1 BHK Koregaon Park <span style="font-size:0.65rem;opacity:0.5">✕</span></div>
+        <button style="background:none;border:none;color:var(--gold);font-size:0.72rem;cursor:none;font-family:'DM Sans',sans-serif" onclick="showToast('🗑️ Search history cleared!')">Clear history</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section style="background:var(--dark);padding-top:70px">
+    <div class="section-header reveal">
+      <div class="section-tag">Browse By</div>
+      <h2 class="section-title">Property <em>Categories</em></h2>
+    </div>
+    <div class="categories-grid">
+      <div class="cat-card reveal" onclick="showPage('listings')" style="transition-delay:0.04s"><span class="cat-icon">🏢</span><div class="cat-name">Apartments</div><div class="cat-count">1,240 listings</div></div>
+      <div class="cat-card reveal" onclick="showPage('listings')" style="transition-delay:0.08s"><span class="cat-icon">🏡</span><div class="cat-name">Villas</div><div class="cat-count">486 listings</div></div>
+      <div class="cat-card reveal" onclick="showPage('listings')" style="transition-delay:0.12s"><span class="cat-icon">🏰</span><div class="cat-name">Bungalows</div><div class="cat-count">312 listings</div></div>
+      <div class="cat-card reveal" onclick="showPage('listings')" style="transition-delay:0.16s"><span class="cat-icon">🌆</span><div class="cat-name">Penthouses</div><div class="cat-count">94 listings</div></div>
+      <div class="cat-card reveal" onclick="showPage('listings')" style="transition-delay:0.20s"><span class="cat-icon">🏗️</span><div class="cat-name">Under Const.</div><div class="cat-count">620 listings</div></div>
+      <div class="cat-card reveal" onclick="showPage('listings')" style="transition-delay:0.24s"><span class="cat-icon">📐</span><div class="cat-name">Plots</div><div class="cat-count">850 listings</div></div>
+    </div>
+  </section>
+
+  <!-- FEATURED PROPERTIES -->
+  <section>
+    <div class="section-header-row">
+      <div><div class="section-tag reveal">Featured</div><h2 class="section-title reveal">Handpicked <em>Properties</em></h2></div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div class="currency-bar" style="margin:0"><span>Show in:</span><select class="currency-select" onchange="setCurrency(this.value)"><option>₹ INR</option><option>$ USD</option></select></div>
+        <button class="btn-ghost reveal" onclick="showPage('listings')">View All →</button>
+      </div>
+    </div>
+    <div class="property-grid" id="homePropertyGrid"></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section style="background:var(--dark)">
+    <div class="section-header" style="text-align:center">
+      <div class="section-tag reveal" style="justify-content:center">Process</div>
+      <h2 class="section-title reveal">How <em>NestLux</em> Works</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal"><div class="step-num">01</div><h3 class="step-title">Search & Filter</h3><p class="step-desc">Smart search with AI-powered suggestions finds properties matching your exact needs instantly.</p></div>
+      <div class="step-card reveal" style="transition-delay:0.1s"><div class="step-num">02</div><h3 class="step-title">Schedule Visit</h3><p class="step-desc">Book physical or virtual tours. Our verified agents handle all coordination seamlessly.</p></div>
+      <div class="step-card reveal" style="transition-delay:0.2s"><div class="step-num">03</div><h3 class="step-title">Make Offer</h3><p class="step-desc">Transparent negotiations with no hidden fees. Digital agreements make it paperless.</p></div>
+      <div class="step-card reveal" style="transition-delay:0.3s"><div class="step-num">04</div><h3 class="step-title">Move In</h3><p class="step-desc">Complete everything digitally. From token payment to key handover — all on NestLux.</p></div>
+    </div>
+  </section>
+
+  <!-- RECENTLY VIEWED -->
+  <section>
+    <div class="section-header-row">
+      <div><div class="section-tag reveal">History</div><h2 class="section-title reveal">Recently <em>Viewed</em></h2></div>
+      <button class="btn-ghost reveal" onclick="showToast('🗑️ History cleared!')">Clear History</button>
+    </div>
+    <div class="property-grid" id="recentlyViewedGrid"></div>
+  </section>
+
+  <!-- AGENTS -->
+  <section style="background:var(--dark)">
+    <div class="section-header-row">
+      <div><div class="section-tag reveal">Our Team</div><h2 class="section-title reveal">Top <em>Agents</em></h2></div>
+      <button class="btn-ghost reveal" onclick="showPage('agents')">All Agents →</button>
+    </div>
+    <div class="agents-grid">
+      <div class="agent-card reveal"><div class="agent-photo" style="position:relative">👩‍💼<div class="verified-agent-badge">✓</div></div><div class="agent-name">Priya Sharma</div><div class="agent-title">Senior Property Advisor</div><div style="display:flex;gap:3px;justify-content:center;margin-bottom:10px;font-size:0.82rem">⭐⭐⭐⭐⭐</div><div class="agent-stats"><div><div class="agent-stat-num">148</div><div class="agent-stat-label">Deals</div></div><div><div class="agent-stat-num">8yr</div><div class="agent-stat-label">Exp</div></div><div><div class="agent-stat-num">4.9</div><div class="agent-stat-label">Rating</div></div></div></div>
+      <div class="agent-card reveal" style="transition-delay:0.1s"><div class="agent-photo" style="position:relative">👨‍💼<div class="premium-agent-badge">★</div></div><div class="agent-name">Rahul Mehra</div><div class="agent-title">Luxury Homes Specialist</div><div style="display:flex;gap:3px;justify-content:center;margin-bottom:10px;font-size:0.82rem">⭐⭐⭐⭐⭐</div><div class="agent-stats"><div><div class="agent-stat-num">203</div><div class="agent-stat-label">Deals</div></div><div><div class="agent-stat-num">12yr</div><div class="agent-stat-label">Exp</div></div><div><div class="agent-stat-num">4.8</div><div class="agent-stat-label">Rating</div></div></div></div>
+      <div class="agent-card reveal" style="transition-delay:0.2s"><div class="agent-photo" style="position:relative">👩‍💼<div class="verified-agent-badge">✓</div></div><div class="agent-name">Ananya Patel</div><div class="agent-title">Investment Consultant</div><div style="display:flex;gap:3px;justify-content:center;margin-bottom:10px;font-size:0.82rem">⭐⭐⭐⭐⭐</div><div class="agent-stats"><div><div class="agent-stat-num">97</div><div class="agent-stat-label">Deals</div></div><div><div class="agent-stat-num">5yr</div><div class="agent-stat-label">Exp</div></div><div><div class="agent-stat-num">4.9</div><div class="agent-stat-label">Rating</div></div></div></div>
+      <div class="agent-card reveal" style="transition-delay:0.3s"><div class="agent-photo" style="position:relative">👨‍💼<div class="verified-agent-badge">✓</div></div><div class="agent-name">Vikram Singh</div><div class="agent-title">Commercial Expert</div><div style="display:flex;gap:3px;justify-content:center;margin-bottom:10px;font-size:0.82rem">⭐⭐⭐⭐⭐</div><div class="agent-stats"><div><div class="agent-stat-num">175</div><div class="agent-stat-label">Deals</div></div><div><div class="agent-stat-num">10yr</div><div class="agent-stat-label">Exp</div></div><div><div class="agent-stat-num">4.7</div><div class="agent-stat-label">Rating</div></div></div></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section>
+    <div class="section-header" style="text-align:center">
+      <div class="section-tag reveal" style="justify-content:center">Testimonials</div>
+      <h2 class="section-title reveal">What Our <em>Clients</em> Say</h2>
+    </div>
+    <div class="testimonials-track">
+      <div class="testimonial-card reveal"><div class="test-stars">★★★★★</div><p class="test-text">"NestLux helped me find my dream apartment in under 2 weeks. The verified listings gave me complete peace of mind."</p><div class="test-author"><div class="test-avatar">🙂</div><div><div class="test-name">Arjun Kapoor</div><div class="test-role">Bought in Bandra, Mumbai</div></div></div></div>
+      <div class="testimonial-card reveal" style="transition-delay:0.1s"><div class="test-stars">★★★★★</div><p class="test-text">"The AI chatbot suggested properties I would never have found on my own. The price drop alert saved me ₹12 lakhs!"</p><div class="test-author"><div class="test-avatar">🙂</div><div><div class="test-name">Neha Gupta</div><div class="test-role">Bought in Whitefield, Bengaluru</div></div></div></div>
+      <div class="testimonial-card reveal" style="transition-delay:0.2s"><div class="test-stars">★★★★★</div><p class="test-text">"The ROI calculator and investment analysis tools helped me pick the perfect investment property. Incredible platform."</p><div class="test-author"><div class="test-avatar">🙂</div><div><div class="test-name">Sunita Reddy</div><div class="test-role">Invested in Gurgaon, Delhi NCR</div></div></div></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:var(--dark)">
+    <div class="section-header reveal"><div class="section-tag">FAQ</div><h2 class="section-title">Frequently Asked <em>Questions</em></h2></div>
+    <div class="faq-list" id="faqList"></div>
+  </section>
+</div>
+
 <!-- ======= LISTINGS PAGE ======= -->
-<div class="page active" id="page-listings" style="display:block">
+<div class="page" id="page-listings">
   <section style="padding-top:110px">
-    <div class="breadcrumb reveal"><span>Home</span><span class="breadcrumb-sep">›</span><span>Properties</span></div>
+    <div class="breadcrumb reveal"><a href="#" onclick="showPage('home')">Home</a><span class="breadcrumb-sep">›</span><span>Properties</span></div>
     <div style="margin-bottom:28px">
       <div class="section-tag reveal">Discover</div>
       <h2 class="section-title reveal">All <em>Properties</em></h2>
@@ -2019,7 +2183,7 @@ document.addEventListener('keydown',e=>{
   if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();document.getElementById('searchLocationInput')?.focus();showToast('🔍 Search activated!')}
   if((e.ctrlKey||e.metaKey)&&e.key==='d'){e.preventDefault();showPage('dashboard')}
   if((e.ctrlKey||e.metaKey)&&e.key==='t'){e.preventDefault();toggleTheme()}
-  if(e.key==='Escape'){showPage('listings');closeQuickView();document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('open'));}
+  if(e.key==='Escape'){showPage('home');closeQuickView();document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('open'));}
 });
 
 /* ============ INIT ============ */
