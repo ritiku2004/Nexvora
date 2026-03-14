@@ -1,0 +1,2533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Premium E-Commerce Experience</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes slideRight {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.5s ease-out forwards;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-bounce-soft {
+            animation: bounce 0.3s ease-in-out;
+        }
+
+        /* Glass Morphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .glass-dark {
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hover Effects */
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Image Zoom */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom {
+            transition: transform 0.5s ease;
+        }
+        .img-zoom-container:hover .img-zoom {
+            transform: scale(1.1);
+        }
+
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite linear;
+        }
+
+        /* Custom Checkbox */
+        .custom-checkbox:checked {
+            background-color: #4f46e5;
+            border-color: #4f46e5;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(400px);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 9999;
+        }
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        /* Sticky Cart Badge Animation */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+        .cart-badge-pulse::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: #ef4444;
+            animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        /* Mega Menu */
+        .mega-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        .group:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Product Card Skeleton Loading */
+        .product-skeleton {
+            background: #f6f7f8;
+            background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+            background-repeat: no-repeat;
+            background-size: 800px 100%;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            animation-name: placeholderShimmer;
+            animation-timing-function: linear;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hide scrollbar for horizontal scroll */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Checkout Progress */
+        .progress-step {
+            position: relative;
+        }
+        .progress-step::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 100%;
+            height: 2px;
+            background: #e5e7eb;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+        .progress-step:last-child::after {
+            display: none;
+        }
+        .progress-step.active::after {
+            background: #4f46e5;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Cart Item Animation */
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .cart-item-enter {
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        /* Wishlist Heart Animation */
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .heart-animation {
+            animation: heartBeat 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased">
+
+    <!-- Top Bar -->
+    <div class="bg-indigo-900 text-white text-sm py-2 px-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-2 cursor-pointer hover:text-indigo-200 transition">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Download App</span>
+                </span>
+                <span class="hidden sm:inline text-indigo-300">|</span>
+                <span class="hidden sm:inline">Free shipping on orders over ₹999</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hover:text-indigo-200 transition">Help Center</a>
+                <a href="#" class="hover:text-indigo-200 transition">Track Order</a>
+                <select class="bg-transparent border-none outline-none cursor-pointer text-sm hover:text-indigo-200 transition">
+                    <option value="en" class="text-gray-900">English</option>
+                    <option value="hi" class="text-gray-900">हिंदी</option>
+                    <option value="ta" class="text-gray-900">தமிழ்</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-gray-600 hover:text-indigo-600 transition">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg">
+                        S
+                    </div>
+                    <span class="text-2xl font-bold gradient-text hidden sm:block">ShopHub</span>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="hidden md:flex flex-1 max-w-2xl mx-8">
+                    <div class="relative w-full group">
+                        <input type="text" 
+                               id="searchInput"
+                               placeholder="Search for products, brands and more..." 
+                               class="w-full pl-12 pr-24 py-2.5 bg-gray-100 border-2 border-transparent rounded-full focus:bg-white focus:border-indigo-500 focus:outline-none transition-all duration-300 group-hover:bg-white group-hover:shadow-md text-sm">
+                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors"></i>
+                        <button onclick="performSearch()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-indigo-600 text-white px-6 py-1.5 rounded-full text-sm font-medium hover:bg-indigo-700 transition-all hover:shadow-md">
+                            Search
+                        </button>
+                        <!-- Search Suggestions -->
+                        <div id="searchSuggestions" class="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 hidden overflow-hidden z-50">
+                            <div class="p-4">
+                                <h4 class="text-xs font-semibold text-gray-400 uppercase mb-2">Trending Searches</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span onclick="quickSearch('Wireless Earbuds')" class="px-3 py-1 bg-gray-100 rounded-full text-sm cursor-pointer hover:bg-indigo-100 hover:text-indigo-600 transition">Wireless Earbuds</span>
+                                    <span onclick="quickSearch('Smart Watch')" class="px-3 py-1 bg-gray-100 rounded-full text-sm cursor-pointer hover:bg-indigo-100 hover:text-indigo-600 transition">Smart Watch</span>
+                                    <span onclick="quickSearch('Running Shoes')" class="px-3 py-1 bg-gray-100 rounded-full text-sm cursor-pointer hover:bg-indigo-100 hover:text-indigo-600 transition">Running Shoes</span>
+                                    <span onclick="quickSearch('Laptop')" class="px-3 py-1 bg-gray-100 rounded-full text-sm cursor-pointer hover:bg-indigo-100 hover:text-indigo-600 transition">Laptop</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Icons -->
+                <div class="flex items-center gap-4 sm:gap-6">
+                    <button class="md:hidden text-gray-600 hover:text-indigo-600 transition" onclick="toggleMobileSearch()">
+                        <i class="fas fa-search text-xl"></i>
+                    </button>
+                    
+                    <div class="relative group cursor-pointer" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart text-xl text-gray-600 group-hover:text-indigo-600 transition"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center cart-badge-pulse">0</span>
+                    </div>
+                    
+                    <div class="relative group cursor-pointer" onclick="toggleWishlist()">
+                        <i class="far fa-heart text-xl text-gray-600 group-hover:text-red-500 transition"></i>
+                        <span id="wishlistCount" class="absolute -top-2 -right-2 bg-gray-800 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+                    </div>
+                    
+                    <div class="relative group cursor-pointer hidden sm:block" onclick="toggleProfile()">
+                        <div class="w-9 h-9 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-white font-semibold shadow-md hover:shadow-lg transition-all hover:scale-105">
+                            JD
+                        </div>
+                        <!-- Profile Dropdown -->
+                        <div class="absolute right-0 top-full mt-2 w-48 bg-white rounded-2xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform origin-top-right">
+                            <div class="p-2">
+                                <a href="#" class="block px-4 py-2 rounded-xl hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition">
+                                    <i class="fas fa-user mr-2"></i>My Profile
+                                </a>
+                                <a href="#" class="block px-4 py-2 rounded-xl hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition">
+                                    <i class="fas fa-box mr-2"></i>Orders
+                                </a>
+                                <a href="#" class="block px-4 py-2 rounded-xl hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition">
+                                    <i class="fas fa-heart mr-2"></i>Wishlist
+                                </a>
+                                <a href="#" class="block px-4 py-2 rounded-xl hover:bg-indigo-50 text-gray-700 hover:text-indigo-600 transition">
+                                    <i class="fas fa-cog mr-2"></i>Settings
+                                </a>
+                                <hr class="my-2">
+                                <a href="#" class="block px-4 py-2 rounded-xl hover:bg-red-50 text-red-600 transition">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Search Bar -->
+        <div id="mobileSearch" class="hidden md:hidden px-4 pb-4">
+            <div class="relative">
+                <input type="text" placeholder="Search products..." class="w-full pl-10 pr-4 py-2 bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+            </div>
+        </div>
+
+        <!-- Category Navigation -->
+        <div class="hidden lg:block border-t border-gray-100 bg-white">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="flex items-center gap-8 h-12 text-sm font-medium text-gray-700">
+                    <div class="group relative cursor-pointer h-full flex items-center hover:text-indigo-600 transition">
+                        <span>Electronics</span>
+                        <i class="fas fa-chevron-down ml-1 text-xs transition-transform group-hover:rotate-180"></i>
+                        <!-- Mega Menu -->
+                        <div class="mega-menu absolute top-full left-0 w-96 bg-white shadow-2xl rounded-b-2xl border border-gray-100 p-6 z-50 grid grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-3">Mobiles</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Smartphones</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Feature Phones</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Accessories</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-3">Laptops</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Gaming Laptops</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Business</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">2-in-1s</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-3">Audio</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Headphones</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Speakers</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Earphones</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-3">Wearables</h4>
+                                <ul class="space-y-2 text-gray-600">
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Smart Watches</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Fitness Bands</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">VR Headsets</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="group relative cursor-pointer h-full flex items-center hover:text-indigo-600 transition">
+                        <span>Fashion</span>
+                        <i class="fas fa-chevron-down ml-1 text-xs transition-transform group-hover:rotate-180"></i>
+                        <div class="mega-menu absolute top-full left-0 w-96 bg-white shadow-2xl rounded-b-2xl border border-gray-100 p-6 z-50 grid grid-cols-3 gap-4">
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-3">Men</h4>
+                                <ul class="space-y-2 text-gray-600 text-sm">
+                                    <li><a href="#" class="hover:text-indigo-600 transition">T-Shirts</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Shirts</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Jeans</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Footwear</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-3">Women</h4>
+                                <ul class="space-y-2 text-gray-600 text-sm">
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Dresses</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Tops</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Ethnic Wear</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Footwear</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-900 mb-3">Kids</h4>
+                                <ul class="space-y-2 text-gray-600 text-sm">
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Boys</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Girls</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Infants</a></li>
+                                    <li><a href="#" class="hover:text-indigo-600 transition">Toys</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cursor-pointer hover:text-indigo-600 transition">Home & Living</div>
+                    <div class="cursor-pointer hover:text-indigo-600 transition">Beauty</div>
+                    <div class="cursor-pointer hover:text-indigo-600 transition">Sports</div>
+                    <div class="cursor-pointer hover:text-indigo-600 transition">Toys</div>
+                    <div class="cursor-pointer hover:text-indigo-600 transition">Grocery</div>
+                    
+                    <div class="ml-auto flex items-center gap-4 text-indigo-600">
+                        <span class="flex items-center gap-2 cursor-pointer hover:underline font-semibold">
+                            <i class="fas fa-bolt animate-pulse"></i>
+                            <span>Deals of the Day</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu fixed inset-0 z-50 lg:hidden">
+        <div class="absolute inset-0 bg-black/50" onclick="toggleMobileMenu()"></div>
+        <div class="absolute left-0 top-0 h-full w-80 bg-white shadow-2xl overflow-y-auto">
+            <div class="p-6 border-b flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold">S</div>
+                    <span class="text-xl font-bold gradient-text">ShopHub</span>
+                </div>
+                <button onclick="toggleMobileMenu()" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center">
+                    <i class="fas fa-times text-gray-500"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                <div class="space-y-3">
+                    <h3 class="font-bold text-gray-900">Categories</h3>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600 transition">Electronics</a>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600 transition">Fashion</a>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600 transition">Home & Living</a>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600 transition">Beauty</a>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600 transition">Sports</a>
+                </div>
+                
+                <hr>
+                
+                <div class="space-y-3">
+                    <h3 class="font-bold text-gray-900">My Account</h3>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600 transition">Orders</a>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600 transition">Wishlist</a>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600 transition">Profile</a>
+                </div>
+                
+                <hr>
+                
+                <div class="space-y-3">
+                    <h3 class="font-bold text-gray-900">Help & Support</h3>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600 transition">Contact Us</a>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600 transition">FAQs</a>
+                    <a href="#" class="block py-2 text-gray-600 hover:text-indigo-600 transition">Return Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+                <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                    <div class="sm:text-center lg:text-left animate-slide-in">
+                        <div class="inline-flex items-center px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 text-sm font-semibold mb-6 border border-indigo-100 cursor-pointer hover:bg-indigo-100 transition">
+                            <span class="w-2 h-2 bg-indigo-600 rounded-full mr-2 animate-pulse"></span>
+                            New Collection 2025
+                        </div>
+                        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+                            <span class="block xl:inline">Summer Sale</span>
+                            <span class="block text-indigo-600 xl:inline">Up to 70% Off</span>
+                        </h1>
+                        <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            Discover the latest trends in fashion, electronics, and home decor. Premium quality products at unbeatable prices. Free shipping on all orders above ₹999.
+                        </p>
+                        <div class="mt-8 sm:mt-10 sm:flex sm:justify-center lg:justify-start gap-4">
+                            <button onclick="scrollToProducts()" class="rounded-full px-8 py-4 bg-indigo-600 text-white font-bold text-lg hover:bg-indigo-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2 group">
+                                Shop Now
+                                <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                            <button onclick="showVideoModal()" class="rounded-full px-8 py-4 bg-white text-indigo-600 font-bold text-lg border-2 border-indigo-600 hover:bg-indigo-50 transition-all flex items-center gap-2 group">
+                                <i class="fas fa-play-circle group-hover:scale-110 transition-transform"></i>
+                                Watch Video
+                            </button>
+                        </div>
+                        
+                        <!-- Trust Badges -->
+                        <div class="mt-10 flex items-center gap-6 text-sm text-gray-600 flex-wrap">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-shield-alt text-green-500 text-lg"></i>
+                                <span>Secure Payment</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-truck text-blue-500 text-lg"></i>
+                                <span>Free Shipping</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-undo text-orange-500 text-lg"></i>
+                                <span>Easy Returns</span>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+            <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" 
+                 src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
+                 alt="Shopping">
+            <div class="absolute inset-0 bg-gradient-to-r from-white via-transparent to-transparent lg:via-white/20"></div>
+        </div>
+    </section>
+
+    <!-- Features Banner -->
+    <section class="bg-white border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition cursor-pointer group">
+                    <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-truck text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Free Shipping</h3>
+                        <p class="text-sm text-gray-500">On orders over ₹999</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition cursor-pointer group">
+                    <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-shield-alt text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Secure Payment</h3>
+                        <p class="text-sm text-gray-500">100% secure checkout</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition cursor-pointer group">
+                    <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-undo text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Easy Returns</h3>
+                        <p class="text-sm text-gray-500">30-day return policy</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 transition cursor-pointer group">
+                    <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-headset text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900">24/7 Support</h3>
+                        <p class="text-sm text-gray-500">Dedicated support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-900">Shop by Category</h2>
+                    <p class="text-gray-600 mt-2">Explore our wide range of products</p>
+                </div>
+                <a href="#" class="text-indigo-600 font-semibold hover:text-indigo-700 flex items-center gap-2 group">
+                    View All
+                    <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div class="group cursor-pointer" onclick="filterByCategory('electronics')">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 hover-lift">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1498049860654-af1a5c5668ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
+                                 alt="Electronics">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-bold text-lg">Electronics</h3>
+                            <p class="text-sm opacity-90">2,456 Products</p>
+                        </div>
+                    </div>
+                    <h3 class="mt-3 text-center font-semibold text-gray-900 group-hover:text-indigo-600 transition">Electronics</h3>
+                </div>
+
+                <div class="group cursor-pointer" onclick="filterByCategory('fashion')">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 hover-lift">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
+                                 alt="Fashion">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-bold text-lg">Fashion</h3>
+                            <p class="text-sm opacity-90">5,234 Products</p>
+                        </div>
+                    </div>
+                    <h3 class="mt-3 text-center font-semibold text-gray-900 group-hover:text-indigo-600 transition">Fashion</h3>
+                </div>
+
+                <div class="group cursor-pointer" onclick="filterByCategory('home')">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 hover-lift">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
+                                 alt="Home">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-bold text-lg">Home & Living</h3>
+                            <p class="text-sm opacity-90">3,123 Products</p>
+                        </div>
+                    </div>
+                    <h3 class="mt-3 text-center font-semibold text-gray-900 group-hover:text-indigo-600 transition">Home & Living</h3>
+                </div>
+
+                <div class="group cursor-pointer" onclick="filterByCategory('beauty')">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 hover-lift">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
+                                 alt="Beauty">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-bold text-lg">Beauty</h3>
+                            <p class="text-sm opacity-90">1,892 Products</p>
+                        </div>
+                    </div>
+                    <h3 class="mt-3 text-center font-semibold text-gray-900 group-hover:text-indigo-600 transition">Beauty</h3>
+                </div>
+
+                <div class="group cursor-pointer" onclick="filterByCategory('sports')">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 hover-lift">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
+                                 alt="Sports">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-bold text-lg">Sports</h3>
+                            <p class="text-sm opacity-90">987 Products</p>
+                        </div>
+                    </div>
+                    <h3 class="mt-3 text-center font-semibold text-gray-900 group-hover:text-indigo-600 transition">Sports</h3>
+                </div>
+
+                <div class="group cursor-pointer" onclick="filterByCategory('toys')">
+                    <div class="relative overflow-hidden rounded-2xl bg-white shadow-md hover:shadow-xl transition-all duration-300 hover-lift">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                                 class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
+                                 alt="Toys">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            <h3 class="font-bold text-lg">Toys</h3>
+                            <p class="text-sm opacity-90">1,234 Products</p>
+                        </div>
+                    </div>
+                    <h3 class="mt-3 text-center font-semibold text-gray-900 group-hover:text-indigo-600 transition">Toys</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flash Sale Section -->
+    <section class="py-12 bg-gradient-to-r from-red-600 to-pink-600 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="flex items-center gap-4 mb-4 md:mb-0">
+                    <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
+                        <i class="fas fa-bolt text-3xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold">Flash Sale</h2>
+                        <p class="text-white/80">Hurry up! Limited time offers</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-4 bg-white/10 backdrop-blur-md rounded-2xl px-6 py-3 border border-white/20">
+                    <span class="text-sm font-medium">Ends in:</span>
+                    <div class="flex gap-2" id="countdown">
+                        <div class="bg-white text-red-600 rounded-lg px-3 py-2 font-bold text-xl min-w-[48px] text-center" id="hours">04</div>
+                        <span class="text-2xl">:</span>
+                        <div class="bg-white text-red-600 rounded-lg px-3 py-2 font-bold text-xl min-w-[48px] text-center" id="minutes">32</div>
+                        <span class="text-2xl">:</span>
+                        <div class="bg-white text-red-600 rounded-lg px-3 py-2 font-bold text-xl min-w-[48px] text-center" id="seconds">18</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="flashSaleProducts">
+                <!-- Flash sale products will be inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Products Section -->
+    <section id="products" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Sidebar Filters -->
+                <aside class="lg:w-64 flex-shrink-0">
+                    <div class="sticky top-24 space-y-6">
+                        <div class="flex items-center justify-between lg:hidden mb-4">
+                            <h3 class="text-lg font-bold">Filters</h3>
+                            <button onclick="toggleFilters()" class="text-indigo-600 p-2 bg-indigo-50 rounded-lg">
+                                <i class="fas fa-filter"></i>
+                            </button>
+                        </div>
+                        
+                        <div id="filterPanel" class="hidden lg:block space-y-6 bg-gray-50 p-6 rounded-2xl border border-gray-100">
+                            <!-- Price Range -->
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                    <i class="fas fa-tag text-indigo-600"></i>
+                                    Price Range
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 custom-checkbox" onchange="filterProducts()" value="0-500">
+                                        <span class="text-gray-700 group-hover:text-indigo-600 transition">Under ₹500</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 custom-checkbox" onchange="filterProducts()" value="500-1000">
+                                        <span class="text-gray-700 group-hover:text-indigo-600 transition">₹500 - ₹1000</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 custom-checkbox" onchange="filterProducts()" value="1000-5000">
+                                        <span class="text-gray-700 group-hover:text-indigo-600 transition">₹1000 - ₹5000</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 custom-checkbox" onchange="filterProducts()" value="5000+">
+                                        <span class="text-gray-700 group-hover:text-indigo-600 transition">Above ₹5000</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Categories -->
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                    <i class="fas fa-th-large text-indigo-600"></i>
+                                    Categories
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 custom-checkbox" onchange="filterProducts()" value="electronics">
+                                        <span class="text-gray-700 group-hover:text-indigo-600 transition">Electronics</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 custom-checkbox" onchange="filterProducts()" value="fashion">
+                                        <span class="text-gray-700 group-hover:text-indigo-600 transition">Fashion</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 custom-checkbox" onchange="filterProducts()" value="home">
+                                        <span class="text-gray-700 group-hover:text-indigo-600 transition">Home & Living</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 custom-checkbox" onchange="filterProducts()" value="beauty">
+                                        <span class="text-gray-700 group-hover:text-indigo-600 transition">Beauty</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Rating -->
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                    <i class="fas fa-star text-indigo-600"></i>
+                                    Rating
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="radio" name="rating" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500" onchange="filterProducts()" value="4">
+                                        <div class="flex text-yellow-400 text-sm">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-600">& Up</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="radio" name="rating" class="w-4 h-4 text-indigo-600 focus:ring-indigo-500" onchange="filterProducts()" value="3">
+                                        <div class="flex text-yellow-400 text-sm">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <span class="text-sm text-gray-600">& Up</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Discount -->
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-3 flex items-center gap-2">
+                                    <i class="fas fa-percent text-indigo-600"></i>
+                                    Discount
+                                </h4>
+                                <div class="space-y-2">
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 custom-checkbox" onchange="filterProducts()" value="50">
+                                        <span class="text-gray-700 group-hover:text-indigo-600 transition">50% or more</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 custom-checkbox" onchange="filterProducts()" value="30">
+                                        <span class="text-gray-700 group-hover:text-indigo-600 transition">30% or more</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer group">
+                                        <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 custom-checkbox" onchange="filterProducts()" value="20">
+                                        <span class="text-gray-700 group-hover:text-indigo-600 transition">20% or more</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button onclick="clearFilters()" class="w-full py-2.5 border-2 border-indigo-600 text-indigo-600 rounded-xl font-semibold hover:bg-indigo-600 hover:text-white transition-all flex items-center justify-center gap-2">
+                                <i class="fas fa-undo"></i>
+                                Clear Filters
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Products Grid -->
+                <div class="flex-1">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900">All Products</h2>
+                            <p class="text-gray-500 text-sm mt-1">Showing <span id="showingCount">12</span> of <span id="totalCount">48</span> products</p>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+                                <button onclick="setView('grid')" id="gridViewBtn" class="p-2 rounded-md bg-white shadow-sm text-indigo-600 transition">
+                                    <i class="fas fa-th-large"></i>
+                                </button>
+                                <button onclick="setView('list')" id="listViewBtn" class="p-2 rounded-md text-gray-500 hover:text-indigo-600 transition">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                            
+                            <select id="sortSelect" onchange="sortProducts()" class="bg-white border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-indigo-500 text-sm cursor-pointer hover:border-indigo-400 transition">
+                                <option value="featured">Featured</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="rating">Highest Rated</option>
+                                <option value="newest">Newest First</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Products Container -->
+                    <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Products will be dynamically inserted here -->
+                    </div>
+
+                    <!-- Empty State -->
+                    <div id="emptyState" class="hidden text-center py-20">
+                        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-search text-4xl text-gray-400"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">No products found</h3>
+                        <p class="text-gray-500 mb-4">Try adjusting your filters or search query</p>
+                        <button onclick="clearFilters()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                            Clear Filters
+                        </button>
+                    </div>
+
+                    <!-- Load More -->
+                    <div class="mt-12 text-center" id="loadMoreContainer">
+                        <button onclick="loadMore()" id="loadMoreBtn" class="px-8 py-3 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-full hover:border-indigo-600 hover:text-indigo-600 transition-all flex items-center gap-2 mx-auto group">
+                            Load More Products
+                            <i class="fas fa-chevron-down group-hover:translate-y-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recently Viewed -->
+    <section class="py-12 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">Recently Viewed</h2>
+                <a href="#" class="text-indigo-600 font-semibold hover:underline">View History</a>
+            </div>
+            <div class="flex gap-4 overflow-x-auto hide-scrollbar pb-4" id="recentlyViewed">
+                <!-- Recently viewed items -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">What Our Customers Say</h2>
+                <p class="text-gray-600 mt-2">Trusted by over 1 million customers worldwide</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-lg transition duration-300 border border-gray-100">
+                    <div class="flex text-yellow-400 mb-4 text-lg">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 leading-relaxed">"Amazing shopping experience! The delivery was super fast and the product quality exceeded my expectations. Will definitely shop again."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="w-12 h-12 rounded-full object-cover ring-2 ring-indigo-100" alt="User">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Priya Sharma</h4>
+                            <p class="text-sm text-gray-500">Delhi, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-lg transition duration-300 border border-gray-100">
+                    <div class="flex text-yellow-400 mb-4 text-lg">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 leading-relaxed">"Best prices compared to other platforms. The UI is so smooth and easy to navigate. Love the flash sales and discounts!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="w-12 h-12 rounded-full object-cover ring-2 ring-indigo-100" alt="User">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Rahul Kumar</h4>
+                            <p class="text-sm text-gray-500">Mumbai, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-8 rounded-2xl hover:shadow-lg transition duration-300 border border-gray-100">
+                    <div class="flex text-yellow-400 mb-4 text-lg">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 leading-relaxed">"Customer support is excellent. Had an issue with my order and it was resolved within hours. Highly recommended!"</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" class="w-12 h-12 rounded-full object-cover ring-2 ring-indigo-100" alt="User">
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Ananya Patel</h4>
+                            <p class="text-sm text-gray-500">Bangalore, India</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Download Section -->
+    <section class="py-16 bg-indigo-900 text-white overflow-hidden relative">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-pink-500 rounded-full filter blur-3xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Download Our App</h2>
+                    <p class="text-indigo-200 text-lg mb-6">Get exclusive app-only offers, track orders in real-time, and shop on the go!</p>
+                    <div class="flex gap-4 flex-wrap">
+                        <button class="flex items-center gap-3 bg-white text-gray-900 px-6 py-3 rounded-xl hover:bg-gray-100 transition">
+                            <i class="fab fa-apple text-2xl"></i>
+                            <div class="text-left">
+                                <div class="text-xs">Download on the</div>
+                                <div class="font-bold">App Store</div>
+                            </div>
+                        </button>
+                        <button class="flex items-center gap-3 bg-white text-gray-900 px-6 py-3 rounded-xl hover:bg-gray-100 transition">
+                            <i class="fab fa-google-play text-2xl"></i>
+                            <div class="text-left">
+                                <div class="text-xs">Get it on</div>
+                                <div class="font-bold">Google Play</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="App" class="rounded-3xl shadow-2xl transform rotate-6 hover:rotate-0 transition duration-500 max-w-xs">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Subscribe to Our Newsletter</h2>
+            <p class="text-gray-600 mb-8 text-lg">Get the latest deals, updates, and exclusive offers directly to your inbox.</p>
+            
+            <form onsubmit="subscribeNewsletter(event)" class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input type="email" placeholder="Enter your email" required
+                       class="flex-1 px-6 py-4 rounded-full border-2 border-gray-300 focus:border-indigo-500 focus:outline-none text-gray-900 transition">
+                <button type="submit" class="px-8 py-4 bg-indigo-600 hover:bg-indigo-700 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg text-white">
+                    Subscribe
+                </button>
+            </form>
+            
+            <p class="text-sm text-gray-500 mt-4">Join 50,000+ subscribers. No spam, unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                            S
+                        </div>
+                        <span class="text-2xl font-bold text-white">ShopHub</span>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Your one-stop destination for all your shopping needs. Quality products, unbeatable prices, and exceptional service.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-indigo-600 transition text-white hover:scale-110 transform">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-pink-600 transition text-white hover:scale-110 transform">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-400 transition text-white hover:scale-110 transform">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition text-white hover:scale-110 transform">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition hover:translate-x-1 inline-block">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition hover:translate-x-1 inline-block">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition hover:translate-x-1 inline-block">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition hover:translate-x-1 inline-block">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition hover:translate-x-1 inline-block">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6">Customer Service</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition hover:translate-x-1 inline-block">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition hover:translate-x-1 inline-block">Returns & Refunds</a></li>
+                        <li><a href="#" class="hover:text-white transition hover:translate-x-1 inline-block">Shipping Info</a></li>
+                        <li><a href="#" class="hover:text-white transition hover:translate-x-1 inline-block">Track Order</a></li>
+                        <li><a href="#" class="hover:text-white transition hover:translate-x-1 inline-block">Size Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6">Contact Info</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-map-marker-alt mt-1 text-indigo-400"></i>
+                            <span>123 Shopping Street, Tech City,<br>Bangalore, India 560001</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-indigo-400"></i>
+                            <span>+91 98765 43210</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-indigo-400"></i>
+                            <span>support@shophub.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-500">&copy; 2025 ShopHub. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <div class="h-8 w-12 bg-white/10 rounded flex items-center justify-center text-xs font-bold hover:bg-white/20 transition cursor-pointer">VISA</div>
+                    <div class="h-8 w-12 bg-white/10 rounded flex items-center justify-center text-xs font-bold hover:bg-white/20 transition cursor-pointer">MC</div>
+                    <div class="h-8 w-12 bg-white/10 rounded flex items-center justify-center text-xs font-bold hover:bg-white/20 transition cursor-pointer">AMEX</div>
+                    <div class="h-8 w-12 bg-white/10 rounded flex items-center justify-center text-xs font-bold hover:bg-white/20 transition cursor-pointer">UPI</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="toggleCart()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl transform transition-transform duration-300 translate-x-full" id="cartContent">
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between p-6 border-b bg-gray-50">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                        <i class="fas fa-shopping-bag text-indigo-600"></i>
+                        Shopping Cart
+                        <span id="cartItemCount" class="bg-indigo-100 text-indigo-600 px-2 py-1 rounded-full text-sm">0</span>
+                    </h2>
+                    <button onclick="toggleCart()" class="w-10 h-10 rounded-full hover:bg-gray-200 flex items-center justify-center transition">
+                        <i class="fas fa-times text-gray-500"></i>
+                    </button>
+                </div>
+                
+                <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Cart items will be inserted here -->
+                </div>
+                
+                <div class="border-t p-6 bg
+                <div class="border-t p-6 bg-gray-50">
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between text-gray-600">
+                            <span>Subtotal</span>
+                            <span id="cartSubtotal" class="font-semibold">₹0</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Shipping</span>
+                            <span class="text-green-600 font-semibold">Free</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                            <span>Tax (18% GST)</span>
+                            <span id="cartTax" class="font-semibold">₹0</span>
+                        </div>
+                        <div class="border-t pt-3 flex justify-between text-xl font-bold text-gray-900">
+                            <span>Total</span>
+                            <span id="cartTotal">₹0</span>
+                        </div>
+                    </div>
+                    <button onclick="proceedToCheckout()" class="w-full py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition-all transform hover:scale-[1.02] shadow-lg flex items-center justify-center gap-2 group">
+                        Proceed to Checkout
+                        <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                    <button onclick="toggleCart()" class="w-full mt-3 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-gray-400 transition">
+                        Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Sidebar -->
+    <div id="wishlistSidebar" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleWishlist()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl transform transition-transform duration-300 translate-x-full" id="wishlistContent">
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between p-6 border-b bg-pink-50">
+                    <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                        <i class="fas fa-heart text-pink-500"></i>
+                        My Wishlist
+                        <span id="wishlistSidebarCount" class="bg-pink-100 text-pink-600 px-2 py-1 rounded-full text-sm">0</span>
+                    </h2>
+                    <button onclick="toggleWishlist()" class="w-10 h-10 rounded-full hover:bg-pink-200 flex items-center justify-center transition">
+                        <i class="fas fa-times text-gray-500"></i>
+                    </button>
+                </div>
+                
+                <div id="wishlistItems" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <!-- Wishlist items will be inserted here -->
+                </div>
+                
+                <div class="border-t p-6 bg-gray-50">
+                    <button onclick="toggleWishlist(); scrollToProducts()" class="w-full py-3 bg-pink-500 text-white font-bold rounded-xl hover:bg-pink-600 transition-all">
+                        Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Quick View Modal -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeProductModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto transform scale-95 opacity-0 transition-all duration-300" id="modalContent">
+                <button onclick="closeProductModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition z-10">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div id="modalBody" class="grid md:grid-cols-2 gap-8 p-8">
+                    <!-- Product details will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCheckout()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform scale-95 opacity-0 transition-all duration-300" id="checkoutContent">
+                <div class="p-6 border-b flex items-center justify-between bg-indigo-50 rounded-t-2xl">
+                    <h2 class="text-2xl font-bold text-gray-900">Checkout</h2>
+                    <button onclick="closeCheckout()" class="w-10 h-10 rounded-full hover:bg-white flex items-center justify-center transition">
+                        <i class="fas fa-times text-gray-500"></i>
+                    </button>
+                </div>
+                
+                <!-- Progress Steps -->
+                <div class="flex justify-center py-6 px-8">
+                    <div class="flex items-center w-full max-w-md">
+                        <div class="progress-step active flex-1 flex flex-col items-center" id="step1">
+                            <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold mb-2">1</div>
+                            <span class="text-sm font-medium text-indigo-600">Shipping</span>
+                        </div>
+                        <div class="progress-step flex-1 flex flex-col items-center" id="step2">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold mb-2">2</div>
+                            <span class="text-sm font-medium text-gray-500">Payment</span>
+                        </div>
+                        <div class="progress-step flex-1 flex flex-col items-center" id="step3">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold mb-2">3</div>
+                            <span class="text-sm font-medium text-gray-500">Confirm</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="checkoutBody" class="p-8">
+                    <!-- Step 1: Shipping -->
+                    <div id="shippingStep" class="space-y-4">
+                        <h3 class="text-lg font-semibold mb-4">Shipping Information</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" placeholder="First Name" class="col-span-1 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                            <input type="text" placeholder="Last Name" class="col-span-1 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                        </div>
+                        <input type="email" placeholder="Email Address" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                        <input type="tel" placeholder="Phone Number" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                        <textarea placeholder="Full Address" rows="3" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none"></textarea>
+                        <div class="grid grid-cols-3 gap-4">
+                            <input type="text" placeholder="City" class="p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                            <input type="text" placeholder="State" class="p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                            <input type="text" placeholder="PIN Code" class="p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                        </div>
+                        <button onclick="goToPayment()" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition mt-4">
+                            Continue to Payment
+                        </button>
+                    </div>
+
+                    <!-- Step 2: Payment -->
+                    <div id="paymentStep" class="space-y-4 hidden">
+                        <h3 class="text-lg font-semibold mb-4">Payment Method</h3>
+                        
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-4 p-4 border-2 border-indigo-500 rounded-xl cursor-pointer bg-indigo-50">
+                                <input type="radio" name="payment" checked class="w-5 h-5 text-indigo-600">
+                                <div class="flex-1">
+                                    <div class="font-semibold">Credit/Debit Card</div>
+                                    <div class="text-sm text-gray-500">Visa, Mastercard, RuPay</div>
+                                </div>
+                                <i class="fas fa-credit-card text-2xl text-indigo-600"></i>
+                            </label>
+                            
+                            <label class="flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-gray-50 transition">
+                                <input type="radio" name="payment" class="w-5 h-5 text-indigo-600">
+                                <div class="flex-1">
+                                    <div class="font-semibold">UPI</div>
+                                    <div class="text-sm text-gray-500">Google Pay, PhonePe, Paytm</div>
+                                </div>
+                                <i class="fas fa-mobile-alt text-2xl text-gray-400"></i>
+                            </label>
+                            
+                            <label class="flex items-center gap-4 p-4 border rounded-xl cursor-pointer hover:bg-gray-50 transition">
+                                <input type="radio" name="payment" class="w-5 h-5 text-indigo-600">
+                                <div class="flex-1">
+                                    <div class="font-semibold">Cash on Delivery</div>
+                                    <div class="text-sm text-gray-500">Pay when you receive</div>
+                                </div>
+                                <i class="fas fa-money-bill-wave text-2xl text-gray-400"></i>
+                            </label>
+                        </div>
+
+                        <div id="cardDetails" class="space-y-4 mt-4">
+                            <input type="text" placeholder="Card Number" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" placeholder="MM/YY" class="p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                                <input type="text" placeholder="CVV" class="p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                            </div>
+                            <input type="text" placeholder="Name on Card" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none">
+                        </div>
+
+                        <div class="flex gap-4 mt-4">
+                            <button onclick="backToShipping()" class="flex-1 py-3 border-2 border-gray-300 text-gray-700 font-bold rounded-xl hover:border-gray-400 transition">
+                                Back
+                            </button>
+                            <button onclick="goToConfirm()" class="flex-1 py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">
+                                Review Order
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Confirm -->
+                    <div id="confirmStep" class="space-y-4 hidden">
+                        <div class="text-center mb-6">
+                            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-check text-4xl text-green-600"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900">Order Confirmed!</h3>
+                            <p class="text-gray-600">Thank you for your purchase</p>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-xl p-6 space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Order ID</span>
+                                <span class="font-semibold">#ORD-2025-78432</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Total Amount</span>
+                                <span class="font-bold text-xl" id="confirmTotal">₹0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Estimated Delivery</span>
+                                <span class="font-semibold text-green-600">3-5 Business Days</span>
+                            </div>
+                        </div>
+
+                        <button onclick="closeCheckout(); clearCart();" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition mt-4">
+                            Continue Shopping
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeVideoModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-black rounded-2xl shadow-2xl max-w-4xl w-full aspect-video relative overflow-hidden">
+                <button onclick="closeVideoModal()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition z-10 text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="w-full h-full flex items-center justify-center text-white">
+                    <div class="text-center">
+                        <i class="fas fa-play-circle text-6xl mb-4 opacity-50"></i>
+                        <p>Video Player Placeholder</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div id="toastIcon" class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+            <i class="fas fa-check"></i>
+        </div>
+        <div>
+            <h4 class="font-semibold text-gray-900" id="toastTitle">Success!</h4>
+            <p class="text-sm text-gray-600" id="toastMessage">Item added to cart</p>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button onclick="scrollToTop()" id="backToTop" class="fixed bottom-8 right-8 w-14 h-14 bg-indigo-600 text-white rounded-full shadow-lg hover:bg-indigo-700 transition-all transform translate-y-20 opacity-0 z-40 flex items-center justify-center hover:scale-110 group">
+        <i class="fas fa-arrow-up text-xl group-hover:-translate-y-1 transition-transform"></i>
+    </button>
+
+    <!-- Sticky Bottom Bar (Mobile) -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 md:hidden z-30 flex justify-around items-center shadow-lg">
+        <button onclick="window.scrollTo(0,0)" class="flex flex-col items-center gap-1 text-indigo-600">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-xs">Home</span>
+        </button>
+        <button onclick="scrollToProducts()" class="flex flex-col items-center gap-1 text-gray-600">
+            <i class="fas fa-th-large text-xl"></i>
+            <span class="text-xs">Shop</span>
+        </button>
+        <button onclick="toggleCart()" class="flex flex-col items-center gap-1 text-gray-600 relative">
+            <i class="fas fa-shopping-cart text-xl"></i>
+            <span class="text-xs">Cart</span>
+            <span id="mobileCartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+        </button>
+        <button onclick="toggleWishlist()" class="flex flex-col items-center gap-1 text-gray-600">
+            <i class="far fa-heart text-xl"></i>
+            <span class="text-xs">Wishlist</span>
+        </button>
+    </div>
+
+    <script>
+        // Product Data
+        const products = [
+            {
+                id: 1,
+                name: "Wireless Bluetooth Headphones",
+                category: "electronics",
+                price: 2499,
+                originalPrice: 4999,
+                rating: 4.5,
+                reviews: 2341,
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "Best Seller",
+                description: "Premium wireless headphones with active noise cancellation, 30-hour battery life, and superior sound quality. Features comfortable over-ear design and built-in microphone for calls."
+            },
+            {
+                id: 2,
+                name: "Smart Watch Pro",
+                category: "electronics",
+                price: 3999,
+                originalPrice: 7999,
+                rating: 4.3,
+                reviews: 1823,
+                image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "Trending",
+                description: "Advanced fitness tracking, heart rate monitor, SpO2 sensor, and seamless smartphone integration. Water-resistant up to 50m with 7-day battery life."
+            },
+            {
+                id: 3,
+                name: "Men's Casual Sneakers",
+                category: "fashion",
+                price: 1499,
+                originalPrice: 2999,
+                rating: 4.2,
+                reviews: 876,
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "50% Off",
+                description: "Comfortable and stylish sneakers perfect for everyday wear. Breathable mesh upper with cushioned sole for all-day comfort."
+            },
+            {
+                id: 4,
+                name: "Women's Summer Dress",
+                category: "fashion",
+                price: 1299,
+                originalPrice: 2599,
+                rating: 4.6,
+                reviews: 543,
+                image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "New Arrival",
+                description: "Elegant floral print dress, perfect for summer occasions. Lightweight fabric with comfortable fit and beautiful design."
+            },
+            {
+                id: 5,
+                name: "Modern Table Lamp",
+                category: "home",
+                price: 899,
+                originalPrice: 1799,
+                rating: 4.4,
+                reviews: 321,
+                image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: null,
+                description: "Minimalist design lamp with adjustable brightness and warm lighting. Perfect for bedside or study table."
+            },
+            {
+                id: 6,
+                name: "Skincare Gift Set",
+                category: "beauty",
+                price: 1999,
+                originalPrice: 3999,
+                rating: 4.7,
+                reviews: 1567,
+                image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "Limited",
+                description: "Complete skincare routine with natural ingredients for glowing skin. Includes cleanser, toner, serum, and moisturizer."
+            },
+            {
+                id: 7,
+                name: "Yoga Mat Premium",
+                category: "sports",
+                price: 799,
+                originalPrice: 1599,
+                rating: 4.5,
+                reviews: 892,
+                image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: null,
+                description: "Non-slip, eco-friendly yoga mat with carrying strap. 6mm thickness for optimal cushioning and joint protection."
+            },
+            {
+                id: 8,
+                name: "Wireless Mouse",
+                category: "electronics",
+                price: 599,
+                originalPrice: 1199,
+                rating: 4.1,
+                reviews: 2345,
+                image: "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: null,
+                description: "Ergonomic wireless mouse with precision tracking. 2.4GHz connectivity with 12-month battery life."
+            },
+            {
+                id: 9,
+                name: "Leather Wallet",
+                category: "fashion",
+                price: 699,
+                originalPrice: 1399,
+                rating: 4.3,
+                reviews: 445,
+                image: "https://images.unsplash.com/photo-1627123424574-724758594e93?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: null,
+                description: "Genuine leather wallet with multiple card slots and coin pocket. RFID blocking technology for security."
+            },
+            {
+                id: 10,
+                name: "Coffee Maker",
+                category: "home",
+                price: 3499,
+                originalPrice: 6999,
+                rating: 4.6,
+                reviews: 678,
+                image: "https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "Best Seller",
+                description: "Programmable coffee maker with thermal carafe. Brews up to 12 cups with adjustable strength settings."
+            },
+            {
+                id: 11,
+                name: "Running Shoes",
+                category: "sports",
+                price: 2999,
+                originalPrice: 5999,
+                rating: 4.4,
+                reviews: 1234,
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: null,
+                description: "Lightweight running shoes with superior cushioning and breathability. Designed for marathon training."
+            },
+            {
+                id: 12,
+                name: "Makeup Kit",
+                category: "beauty",
+                price: 1499,
+                originalPrice: 2999,
+                rating: 4.2,
+                reviews: 567,
+                image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: null,
+                description: "Complete makeup palette with eyeshadows, blush, and lip colors. Professional quality for everyday use."
+            },
+            {
+                id: 13,
+                name: "Laptop Stand",
+                category: "electronics",
+                price: 1299,
+                originalPrice: 2499,
+                rating: 4.5,
+                reviews: 890,
+                image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "New",
+                description: "Adjustable aluminum laptop stand for better ergonomics. Compatible with all laptop sizes."
+            },
+            {
+                id: 14,
+                name: "Denim Jacket",
+                category: "fashion",
+                price: 1999,
+                originalPrice: 3999,
+                rating: 4.4,
+                reviews: 432,
+                image: "https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: null,
+                description: "Classic denim jacket with modern fit. Perfect layering piece for all seasons."
+            },
+            {
+                id: 15,
+                name: "Plant Pot Set",
+                category: "home",
+                price: 599,
+                originalPrice: 1199,
+                rating: 4.3,
+                reviews: 234,
+                image: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: null,
+                description: "Set of 3 ceramic plant pots with drainage holes. Perfect for indoor plants and succulents."
+            },
+            {
+                id: 16,
+                name: "Face Serum",
+                category: "beauty",
+                price: 899,
+                originalPrice: 1799,
+                rating: 4.6,
+                reviews: 1123,
+                image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                badge: "Popular",
+                description: "Vitamin C serum for brightening and anti-aging. Lightweight formula absorbs quickly."
+            }
+        ];
+
+        // Flash Sale Products
+        const flashSaleProducts = products.slice(0, 4).map(p => ({
+            ...p,
+            flashPrice: Math.floor(p.price * 0.6),
+            sold: Math.floor(Math.random() * 80) + 10
+        }));
+
+        // State
+        let cart = [];
+        let wishlist = [];
+        let currentView = 'grid';
+        let displayedProducts = 12;
+        let filteredProducts = [...products];
+        let recentlyViewed = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            renderFlashSale();
+            startCountdown();
+            setupScrollListener();
+            setupSearch();
+            loadRecentlyViewed();
+        });
+
+        // Render Products
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            const toShow = filteredProducts.slice(0, displayedProducts);
+            
+            if (toShow.length === 0) {
+                grid.innerHTML = '';
+                document.getElementById('emptyState').classList.remove('hidden');
+                document.getElementById('loadMoreContainer').classList.add('hidden');
+                return;
+            }
+            
+            document.getElementById('emptyState').classList.add('hidden');
+            document.getElementById('loadMoreContainer').classList.remove('hidden');
+            
+            grid.innerHTML = toShow.map((product, index) => createProductCard(product, index)).join('');
+            
+            document.getElementById('showingCount').textContent = toShow.length;
+            document.getElementById('totalCount').textContent = filteredProducts.length;
+        }
+
+        function createProductCard(product, index) {
+            const discount = Math.round((1 - product.price/product.originalPrice) * 100);
+            const isWishlisted = wishlist.includes(product.id);
+            
+            if (currentView === 'list') {
+                return `
+                    <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col sm:flex-row animate-slide-in" 
+                         style="animation-delay: ${index * 0.05}s">
+                        <div class="relative w-full sm:w-48 h-48 sm:h-auto overflow-hidden bg-gray-100 flex-shrink-0 cursor-pointer" onclick="quickView(${product.id})">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                            ${product.badge ? `<div class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">${product.badge}</div>` : ''}
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col">
+                            <div class="flex items-start justify-between mb-2">
+                                <h3 class="font-semibold text-gray-900 text-lg hover:text-indigo-600 transition cursor-pointer" onclick="quickView(${product.id})">${product.name}</h3>
+                                <button onclick="toggleWishlistItem(${product.id})" class="text-gray-400 hover:text-red-500 transition ${isWishlisted ? 'text-red-500' : ''}">
+                                    <i class="${isWishlisted ? 'fas' : 'far'} fa-heart text-xl ${isWishlisted ? 'heart-animation' : ''}"></i>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <div class="flex text-yellow-400 text-sm">${renderStars(product.rating)}</div>
+                                <span class="text-sm text-gray-500">(${product.reviews})</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-2">${product.description}</p>
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="text-2xl font-bold text-gray-900">₹${product.price.toLocaleString()}</span>
+                                <span class="text-sm text-gray-400 line-through">₹${product.originalPrice.toLocaleString()}</span>
+                                <span class="text-sm text-green-600 font-semibold bg-green-50 px-2 py-1 rounded">${discount}% off</span>
+                            </div>
+                            <div class="flex gap-3 mt-auto">
+                                <button onclick="addToCart(${product.id})" class="flex-1 py-2.5 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition flex items-center justify-center gap-2">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    Add to Cart
+                                </button>
+                                <button onclick="quickView(${product.id})" class="px-4 py-2.5 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:border-indigo-600 hover:text-indigo-600 transition">
+                                    Quick View
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return `
+                <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 hover-lift overflow-hidden border border-gray-100 animate-slide-in" 
+                     style="animation-delay: ${index * 0.05}s">
+                    <div class="relative aspect-square overflow-hidden img-zoom-container bg-gray-100 cursor-pointer" onclick="quickView(${product.id})">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover img-zoom">
+                        ${product.badge ? `<div class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">${product.badge}</div>` : ''}
+                        <div class="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-4 group-hover:translate-x-0">
+                            <button onclick="event.stopPropagation(); toggleWishlistItem(${product.id})" class="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-gray-600 hover:text-red-500 hover:scale-110 transition-all ${isWishlisted ? 'text-red-500' : ''}">
+                                <i class="${isWishlisted ? 'fas' : 'far'} fa-heart ${isWishlisted ? 'heart-animation' : ''}"></i>
+                            </button>
+                            <button onclick="event.stopPropagation(); quickView(${product.id})" class="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-gray-600 hover:text-indigo-600 hover:scale-110 transition-all">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-full group-hover:translate-y-0">
+                            <button onclick="event.stopPropagation(); addToCart(${product.id})" class="w-full py-3 bg-white text-gray-900 font-bold rounded-xl hover:bg-indigo-600 hover:text-white transition-colors flex items-center justify-center gap-2 shadow-lg">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-900 mb-1 line-clamp-1 hover:text-indigo-600 transition cursor-pointer" onclick="quickView(${product.id})">${product.name}</h3>
+                        <div class="flex items-center gap-2 mb-2">
+                            <div class="flex text-yellow-400 text-xs">${renderStars(product.rating)}</div>
+                            <span class="text-xs text-gray-500">(${product.reviews})</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg font-bold text-gray-900">₹${product.price.toLocaleString()}</span>
+                            <span class="text-sm text-gray-400 line-through">₹${product.originalPrice.toLocaleString()}</span>
+                            <span class="text-xs text-green-600 font-semibold">${discount}% off</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render Flash Sale
+        function renderFlashSale() {
+            const container = document.getElementById('flashSaleProducts');
+            container.innerHTML = flashSaleProducts.map(product => {
+                const discount = Math.round((1 - product.flashPrice/product.originalPrice) * 100);
+                return `
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300 cursor-pointer group" onclick="quickView(${product.id})">
+                        <div class="relative aspect-square overflow-hidden">
+                            <img src="${product.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute top-2 left-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded">
+                                -${discount}%
+                            </div>
+                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                                <div class="text-white text-xs mb-1">${product.sold}% Sold</div>
+                                <div class="w-full bg-white/30 rounded-full h-1.5">
+                                    <div class="bg-yellow-400 h-1.5 rounded-full" style="width: ${product.sold}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                            <h3 class="font-semibold text-gray-900 text-sm mb-1 line-clamp-1">${product.name}</h3>
+                            <div class="flex items-center gap-2">
+                                <span class="text-lg font-bold text-red-600">₹${product.flashPrice.toLocaleString()}</span>
+                                <span class="text-xs text-gray-400 line-through">₹${product.originalPrice.toLocaleString()}</span>
+                            </div>
+                            <button onclick="event.stopPropagation(); addToCart(${product.id}, true)" class="w-full mt-2 py-2 bg-red-600 text-white text-sm font-bold rounded-lg hover:bg-red-700 transition">
+                                Grab Deal
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render Stars
+        function renderStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) stars += '<i class="fas fa-star"></i>';
+                else if (i - 0.5 <= rating) stars += '<i class="fas fa-star-half-alt"></i>';
+                else stars += '<i class="far fa-star"></i>';
+            }
+            return stars;
+        }
+
+        // Cart Functions
+        function addToCart(productId, isFlash = false) {
+            const product = isFlash ? 
+                flashSaleProducts.find(p => p.id === productId) : 
+                products.find(p => p.id === productId);
+            
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1,
+                    isFlash: isFlash
+                });
+            }
+            
+            updateCartUI();
+            showToast('Added to Cart', `${product.name} has been added to your cart`, 'success');
+            
+            // Animate cart icon
+            const cartIcon = document.querySelector('.fa-shopping-cart');
+            cartIcon.classList.add('animate-bounce-soft');
+            setTimeout(() => cartIcon.classList.remove('animate-bounce-soft'), 300);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        function updateQuantity(productId, delta) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCartUI();
+                }
+            }
+        }
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cartCount');
+            const mobileCartCount = document.getElementById('mobileCartCount');
+            const cartItemCount = document.getElementById('cartItemCount');
+            const cartItems = document.getElementById('cartItems');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const subtotal = cart.reduce((sum, item) => sum + (item.isFlash ? item.flashPrice : item.price) * item.quantity, 0);
+            const tax = Math.round(subtotal * 0.18);
+            const total = subtotal + tax;
+            
+            cartCount.textContent = totalItems;
+            cartItemCount.textContent = totalItems;
+            
+            if (totalItems > 0) {
+                mobileCartCount.textContent = totalItems;
+                mobileCartCount.classList.remove('hidden');
+            } else {
+                mobileCartCount.classList.add('hidden');
+            }
+            
+            document.getElementById('cartSubtotal').textContent = `₹${subtotal.toLocaleString()}`;
+            document.getElementById('cartTax').textContent = `₹${tax.toLocaleString()}`;
+            document.getElementById('cartTotal').textContent = `₹${total.toLocaleString()}`;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="text-center text-gray-500 mt-20">
+                        <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-shopping-cart text-4xl text-gray-300"></i>
+                        </div>
+                        <p class="text-lg font-medium mb-2">Your cart is empty</p>
+                        <p class="text-sm mb-4">Looks like you haven't added anything yet</p>
+                        <button onclick="toggleCart(); scrollToProducts()" class="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
+                            Start Shopping
+                        </button>
+                    </div>
+                `;
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="flex gap-4 bg-gray-50 p-4 rounded-xl cart-item-enter">
+                        <img src="${item.image}" class="w-20 h-20 object-cover rounded-lg" alt="${item.name}">
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-900 line-clamp-1">${item.name}</h4>
+                            <p class="text-indigo-600 font-bold">₹${(item.isFlash ? item.flashPrice : item.price).toLocaleString()}</p>
+                            <div class="flex items-center gap-3 mt-2">
+                                <div class="flex items-center gap-2 bg-white rounded-lg border">
+                                    <button onclick="updateQuantity(${item.id}, -1)" class="w-8 h-8 flex items-center justify-center hover:bg-gray-100 transition">-</button>
+                                    <span class="w-8 text-center font-medium">${item.quantity}</span>
+                                    <button onclick="updateQuantity(${item.id}, 1)" class="w-8 h-8 flex items-center justify-center hover:bg-gray-100 transition">+</button>
+                                </div>
+                                <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700 transition text-sm">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cartSidebar');
+            const content = document.getElementById('cartContent');
+            
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.classList.remove('hidden');
+                setTimeout(() => {
+                    content.classList.remove('translate-x-full');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                content.classList.add('translate-x-full');
+                setTimeout(() => {
+                    sidebar.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = '';
+            }
+        }
+
+        function clearCart() {
+            cart = [];
+            updateCartUI();
+        }
+
+        // Wishlist Functions
+        function toggleWishlistItem(productId) {
+            const index = wishlist.indexOf(productId);
+            const product = products.find(p => p.id === productId);
+            
+            if (index > -1) {
+                wishlist.splice(index, 1);
+                showToast('Removed from Wishlist', `${product.name} removed from your wishlist`, 'info');
+            } else {
+                wishlist.push(productId);
+                showToast('Added to Wishlist', `${product.name} added to your wishlist`, 'success');
+            }
+            
+            updateWishlistUI();
+            renderProducts(); // Re-render to update heart icons
+        }
+
+        function addToWishlist(productId) {
+            if (!wishlist.includes(productId)) {
+                wishlist.push(productId);
+                updateWishlistUI();
+                const product = products.find(p => p.id === productId);
+                showToast('Added to Wishlist', `${product.name} added to your wishlist`, 'success');
+            }
+        }
+
+        function updateWishlistUI() {
+            const wishlistCount = document.getElementById('wishlistCount');
+            const wishlistSidebarCount = document.getElementById('wishlistSidebarCount');
+            const wishlistItems = document.getElementById('wishlistItems');
+            
+            wishlistCount.textContent = wishlist.length;
+            wishlistSidebarCount.textContent = wishlist.length;
+            
+            if (wishlist.length === 0) {
+                wishlistItems.innerHTML = `
+                    <div class="text-center text-gray-500 mt-20">
+                        <div class="w-24 h-24 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-heart text-4xl text-pink-300"></i>
+                        </div>
+                        <p class="text-lg font-medium mb-2">Your wishlist is empty</p>
+                        <p class="text-sm mb-4">Save items you love for later</p>
+                        <button onclick="toggleWishlist(); scrollToProducts()" class="px-6 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition">
+                            Explore Products
+                        </button>
+                    </div>
+                `;
+            } else {
+                const wishlistProducts = products.filter(p => wishlist.includes(p.id));
+                wishlistItems.innerHTML = wishlistProducts.map(product => `
+                    <div class="flex gap-4 bg-white border border-gray-100 p-4 rounded-xl">
+                        <img src="${product.image}" class="w-20 h-20 object-cover rounded-lg" alt="${product.name}">
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-900 line-clamp-1">${product.name}</h4>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-lg font-bold text-gray-900">₹${product.price.toLocaleString()}</span>
+                                <span class="text-sm text-gray-400 line-through">₹${product.originalPrice.toLocaleString()}</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="addToCart(${product.id}); toggleWishlistItem(${product.id})" class="flex-1 py-2 bg-indigo-600 text-white text-sm font-bold rounded-lg hover:bg-indigo-700 transition">
+                                    Move to Cart
+                                </button>
+                                <button onclick="toggleWishlistItem(${product.id})" class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition text-gray-500">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function toggleWishlist() {
+            const sidebar = document.getElementById('wishlistSidebar');
+            const content = document.getElementById('wishlistContent');
+            
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.classList.remove('hidden');
+                setTimeout(() => {
+                    content.classList.remove('translate-x-full');
+                }, 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                content.classList.add('translate-x-full');
+                setTimeout(() => {
+                    sidebar.classList.add('hidden');
+                }, 300);
+                document.body.style.overflow = '';
+            }
+        }
+
+        // Quick View Modal
+        function quickView(productId) {
+            const product = products.find(p => p.id === productId) || flashSaleProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            addToRecentlyViewed(product);
+            
+            const modal = document.getElementById('productModal');
+            const content = document.getElementById('modalContent');
+            const body = document.getElementById('modalBody');
+            
+            const isWishlisted = wishlist.includes(productId);
+            const discount = Math.round((1 - product.price/product.originalPrice) * 100);
+            
+            body.innerHTML = `
+                <div class="relative">
+                    <img src="${product.image}" class="w-full h-96 object-cover rounded-2xl" alt="${product.name}">
+                    ${product.badge ? `<div class="absolute top-4 left-4 bg-red-500 text-white text-sm font-bold px-4 py-2 rounded-full">${product.badge}</div>` : ''}
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">${product.name}</h2>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="flex text-yellow-400 text-lg">${renderStars(product.rating)}</div>
+                            <span class="text-gray-500">(${product.reviews} reviews)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                        <span class="text-3xl font-bold text-gray-900">₹${product.price.toLocaleString()}</span>
+                        <span class="text-xl text-gray-400 line-through">₹${product.originalPrice.toLocaleString()}</span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-semibold">${discount}% OFF</span>
+                    </div>
+                    
+                    <p class="text-gray-600 leading-relaxed">${product.description}</p>
+                    
+                    <div class="space-y-3">
+                        <h4 class="font-semibold text-gray-900">Highlights:</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Premium Quality</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> 1 Year Warranty</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> 30-Day Returns</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-green-500"></i> Free Shipping</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex gap-4 pt-4">
+                        <button onclick="addToCart(${product.id}); closeProductModal()" class="flex-1 py-4 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition flex items-center justify-center gap-2">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add to Cart
+                        </button>
+                        <button onclick="toggleWishlistItem(${product.id})" class="px-6 py-4 border-2 ${isWishlisted ? 'border-red-500 text-red-500' : 'border-gray-300 text-gray-700'} rounded-xl font-bold hover:border-red-500 hover:text-red-500 transition">
+                            <i class="${isWishlisted ? 'fas' : 'far'} fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
+            const content = document.getElementById('modalContent');
+            
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Checkout Functions
+        function proceedToCheckout() {
+            if (cart.length === 0) {
+                showToast('Empty Cart', 'Please add items to your cart first', 'error');
+                return;
+            }
+            toggleCart();
+            
+            const modal = document.getElementById('checkoutModal');
+            const content = document.getElementById('checkoutContent');
+            
+            // Reset to step 1
+            document.getElementById('shippingStep').classList.remove('hidden');
+            document.getElementById('paymentStep').classList.add('hidden');
+            document.getElementById('confirmStep').classList.add('hidden');
+            updateCheckoutSteps(1);
+            
+            const subtotal = cart.reduce((sum, item) => sum + (item.isFlash ? item.flashPrice : item.price) * item.quantity, 0);
+            const tax = Math.round(subtotal * 0.18);
+            const total = subtotal + tax;
+            document.getElementById('confirmTotal').textContent = `₹${total.toLocaleString()}`;
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeCheckout() {
+            const modal = document.getElementById('checkoutModal');
+            const content = document.getElementById('checkoutContent');
+            
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function updateCheckoutSteps(step) {
+            for (let i = 1; i <= 3; i++) {
+                const stepEl = document.getElementById(`step${i}`);
+                const circle = stepEl.querySelector('div');
+                const text = stepEl.querySelector('span');
+                
+                if (i <= step) {
+                    stepEl.classList.add('active');
+                    circle.classList.remove('bg-gray-200', 'text-gray-600');
+                    circle.classList.add('bg-indigo-600', 'text-white');
+                    text.classList.remove('text-gray-500');
+                    text.classList.add('text-indigo-600');
+                } else {
+                    stepEl.classList.remove('active');
+                    circle.classList.add('bg-gray-200', 'text-gray-600');
+                    circle.classList.remove('bg-indigo-600', 'text-white');
+                    text.classList.add('text-gray-500');
+                    text.classList.remove('text-indigo-600');
+                }
+            }
+        }
+
+        function goToPayment() {
+            document.getElementById('shippingStep').classList.add('hidden');
+            document.getElementById('paymentStep').classList.remove('hidden');
+            updateCheckoutSteps(2);
+        }
+
+        function backToShipping() {
+            document.getElementById('paymentStep').classList.add('hidden');
+            document.getElementById('shippingStep').classList.remove('hidden');
+            updateCheckoutSteps(1);
+        }
+
+        function goToConfirm() {
+            document.getElementById('paymentStep').classList.add('hidden');
+            document.getElementById('confirmStep').classList.remove('hidden');
+            updateCheckoutSteps(3);
+        }
+
+        // Filter Functions
+        function filterProducts() {
+            const checkboxes = document.querySelectorAll('#filterPanel input[type="checkbox"]:checked');
+            const ratingRadio = document.querySelector('#filterPanel input[name="rating"]:checked');
+            
+            let filtered = [...products];
+            
+            // Category filter
+            const categories = Array.from(checkboxes)
+                .filter(cb => ['electronics', 'fashion', 'home', 'beauty', 'sports'].includes(cb.value))
+                .map(cb => cb.value);
+            
+            if (categories.length > 0) {
+                filtered = filtered.filter(p => categories.includes(p.category));
+            }
+            
+            // Price filter
+            const priceRanges = Array.from(checkboxes)
+                .filter(cb => cb.value.includes('-') || cb.value.endsWith('+'))
+                .map(cb => cb.value);
+            
+            if (priceRanges.length > 0) {
+                filtered = filtered.filter(p => {
+                    return priceRanges.some(range => {
+                        if (range === '0-500') return p.price < 500;
+                        if (range === '500-1000') return p.price >= 500 && p.price <= 1000;
+                        if (range === '1000-5000') return p.price > 1000 && p.price <= 5000;
+                        if (range === '5000+') return p.price > 5000;
+                        return false;
+                    });
+                });
+            }
+            
+            // Rating filter
+            if (ratingRadio) {
+                const minRating = parseInt(ratingRadio.value);
+                filtered = filtered.filter(p => p.rating >= minRating);
+            }
+            
+            // Discount filter
+            const discounts = Array.from(checkboxes)
+                .filter(cb => ['50', '30', '20'].includes(cb.value))
+                .map(cb => parseInt(cb.value));
+            
+            if (discounts.length > 0) {
+                const minDiscount = Math.min(...discounts);
+                filtered = filtered.filter(p => {
+                    const discount = (1 - p.price/p.originalPrice) * 100;
+                    return discount >= minDiscount;
+                });
+            }
+            
+            filteredProducts = filtered;
+            displayedProducts = 12;
+            renderProducts();
+        }
+
+        function filterByCategory(category) {
+            clearFilters();
+            const checkbox = document.querySelector(`input[value="${category}"]`);
+            if (checkbox) {
+                checkbox.checked = true;
+                filterProducts();
+            }
+            scrollToProducts();
+        }
+
+        function clearFilters() {
+            document.querySelectorAll('#filterPanel input').forEach(input => {
+                input.checked = false;
+            });
+            filteredProducts = [...products];
+            displayedProducts = 12;
+            renderProducts();
+        }
+
+        function toggleFilters() {
+            const panel = document.getElementById('filterPanel');
+            panel.classList.toggle('hidden');
+        }
+
+        // Sort Functions
+        function sortProducts() {
+            const sortValue = document.getElementById('sortSelect').value;
+            
+            switch(sortValue) {
+                case 'price-low':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'rating':
+                    filteredProducts.sort((a, b) => b.rating - a.rating);
+                    break;
+                case 'newest':
+                    filteredProducts.sort((a, b) => b.id - a.id);
+                    break;
+                default:
+                    filteredProducts.sort((a, b) => a.id - b.id);
+            }
+            
+            renderProducts();
+        }
+
+        function setView(view) {
+            currentView = view;
+            document.getElementById('gridViewBtn').className = view === 'grid' ? 'p-2 rounded-md bg-white shadow-sm text-indigo-600 transition' : 'p-2 rounded-md text-gray-500 hover:text-indigo-600 transition';
+            document.getElementById('listViewBtn').className = view === 'list' ? 'p-2 rounded-md bg-white shadow-sm text-indigo-600 transition' : 'p-2 rounded-md text-gray-500 hover:text-indigo-600 transition';
+            renderProducts();
+        }
+
+        function loadMore() {
+            displayedProducts += 6;
+            if (displayedProducts >= filteredProducts.length) {
+                document.getElementById('loadMoreBtn').innerHTML = 'No More Products <i class="fas fa-check"></i>';
+                document.getElementById('loadMoreBtn').disabled = true;
+                document.getElementById('loadMoreBtn').classList.add('opacity-50', 'cursor-not-allowed');
+            }
+            renderProducts();
+        }
+
+        // Search Functions
+        function setupSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const suggestions = document.getElementById('searchSuggestions');
+            
+            searchInput.addEventListener('focus', () => {
+                suggestions.classList.remove('hidden');
+            });
+            
+            searchInput.addEventListener('blur', () => {
+                setTimeout(() => suggestions.classList.add('hidden'), 200);
+            });
+            
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                if (query.length > 0) {
+                    filteredProducts = products.filter(p => 
+                        p.name.toLowerCase().includes(query) || 
+                        p.category.toLowerCase().includes(query)
+                    );
+                } else {
+                    filteredProducts = [...products];
+                }
+                displayedProducts = 12;
+                renderProducts();
+            });
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            if (query) {
+                filteredProducts = products.filter(p => 
+                    p.name.toLowerCase().includes(query) || 
+                    p.category.toLowerCase().includes(query)
+                );
+                displayedProducts = 12;
+                renderProducts();
+                scrollToProducts();
+            }
+        }
+
+        function quickSearch(term) {
+            document.getElementById('searchInput').value = term;
+            performSearch();
+        }
+
+        // Recently Viewed
+        function addToRecentlyViewed(product) {
+            const index = recentlyViewed.findIndex(p => p.id === product.id);
+            if (index > -1) {
+                recentlyViewed.splice(index, 1);
+            }
+            recentlyViewed.unshift(product);
+            if (recentlyViewed.length > 6) recentlyViewed.pop();
+            renderRecentlyViewed();
+        }
+
+        function renderRecentlyViewed() {
+            const container = document.getElementById('recentlyViewed');
+            if (recentlyViewed.length === 0) {
+                container.parentElement.classList.add('hidden');
+                return;
+            }
+            
+            container.parentElement.classList.remove('hidden');
+            container.innerHTML = recentlyViewed.map(product => `
+                <div class="flex-shrink-0 w-40 cursor-pointer group" onclick="quickView(${product.id})">
+                    <div class="aspect-square rounded-xl overflow-hidden mb-2 bg-gray-100">
+                        <img src="${product.image}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
+                    <h4 class="text-sm font-medium text-gray-900 line-clamp-1 group-hover:text-indigo-600 transition">${product.name}</h4>
+                    <p class="text-sm font-bold text-gray-900">₹${product.price.toLocaleString()}</p>
+                </div>
+            `).join('');
+        }
+
+        function loadRecentlyViewed() {
+            // Simulate loading from localStorage
+            recentlyViewed = products.slice(0, 4);
+            renderRecentlyViewed();
+        }
+
+        // Countdown Timer
+        function startCountdown() {
+            let hours = 4, minutes = 32, seconds = 18;
+            
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                    if (minutes < 0) {
+                        minutes = 59;
+                        hours--;
+                        if (hours < 0) {
+                            hours = 4;
+                            minutes = 32;
+                            seconds = 18;
+                        }
+                    }
+                }
+                
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }, 1000);
+        }
+
+        // Toast Notification
+        function showToast(title, message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+            
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            
+            // Set icon based on type
+            if (type === 'success') {
+                toastIcon.className = 'w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600';
+                toastIcon.innerHTML = '<i class="fas fa-check"></i>';
+            } else if (type === 'error') {
+                toastIcon.className = 'w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600';
+                toastIcon.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                toastIcon.className = 'w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600';
+                toastIcon.innerHTML = '<i class="fas fa-info"></i>';
+            }
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Scroll Functions
+        function setupScrollListener() {
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.remove('translate-y-20', 'opacity-0');
+                } else {
+                    backToTop.classList.add('translate-y-20', 'opacity-0');
+                }
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToProducts() {
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('open');
+            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        }
+
+        function toggleMobileSearch() {
+            const search = document.getElementById('mobileSearch');
+            search.classList.toggle('hidden');
+        }
+
+        // Video Modal
+        function showVideoModal() {
+            const modal = document.getElementById('videoModal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeVideoModal() {
+            document.getElementById('videoModal').classList.add('hidden');
+        }
+
+        // Newsletter
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            showToast('Subscribed!', 'Thank you for subscribing to our newsletter', 'success');
+            e.target.reset();
+        }
+
+        // Profile Toggle
+        function toggleProfile() {
+            // Profile dropdown is handled by CSS hover
+        }
+
+        // Close modals on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeProductModal();
+                closeCheckout();
+                closeVideoModal();
+                if (!document.getElementById('cartSidebar').classList.contains('hidden')) toggleCart();
+                if (!document.getElementById('wishlistSidebar').classList.contains('hidden')) toggleWishlist();
+            }
+        });
+    </script>
+</body>
+</html>

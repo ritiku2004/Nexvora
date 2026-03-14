@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CW Academy - Next Generation Learning Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        accent: '#ec4899',
+                        dark: '#0f172a',
+                        glass: 'rgba(255, 255, 255, 0.1)',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 15s ease infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gradient: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-dark {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .bg-gradient-animate {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+        .hover\:rotate-y-180:hover {
+            transform: rotateY(180deg);
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(99, 102, 241, 0.5);
+            pointer-events: none;
+        }
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+        }
+        .dark .wave {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%230f172a" fill-opacity="0.3" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-dark text-gray-900 dark:text-white transition-colors duration-300 overflow-x-hidden">
+
+    <!-- Background Animation -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-yellow-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="glass-dark mx-4 mt-4 rounded-2xl px-6 py-4">
+            <div class="flex items-center justify-between max-w-7xl mx-auto">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-xl">
+                        CW
+                    </div>
+                    <span class="font-display font-bold text-2xl tracking-tight">Academy</span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="hover:text-primary transition-colors font-medium">Home</a>
+                    <a href="#courses" class="hover:text-primary transition-colors font-medium">Courses</a>
+                    <a href="#features" class="hover:text-primary transition-colors font-medium">Features</a>
+                    <a href="#ai-tutor" class="hover:text-primary transition-colors font-medium">AI Tutor</a>
+                    <a href="#leaderboard" class="hover:text-primary transition-colors font-medium">Leaderboard</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleDarkMode()" class="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
+                    </button>
+                    <button onclick="openModal('loginModal')" class="hidden md:block px-6 py-2 rounded-full glass hover:bg-white/20 transition-all font-medium">
+                        Login
+                    </button>
+                    <button onclick="openModal('signupModal')" class="px-6 py-2 rounded-full bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/50 transition-all font-medium text-white">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium text-primary">
+                        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        <span id="typing-text" class="typing-cursor">AI-Powered Learning</span>
+                    </div>
+                    
+                    <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight">
+                        Master Your Future with <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">AI Learning</span>
+                    </h1>
+                    
+                    <p class="text-xl text-gray-600 dark:text-gray-300 max-w-lg">
+                        Experience the next generation of education. Personalized AI tutoring, interactive courses, and gamified learning for Classes 1-12.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="scrollToSection('courses')" class="px-8 py-4 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-xl hover:shadow-primary/30 transition-all transform hover:-translate-y-1 flex items-center gap-2">
+                            <span>Explore Courses</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button onclick="openModal('demoModal')" class="px-8 py-4 rounded-full glass font-semibold hover:bg-white/20 transition-all flex items-center gap-2">
+                            <i class="fas fa-play-circle text-primary"></i>
+                            <span>Watch Demo</span>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-6 pt-4">
+                        <div class="flex -space-x-3">
+                            <img src="https://i.pravatar.cc/150?img=1" class="w-12 h-12 rounded-full border-2 border-white dark:border-dark" alt="User">
+                            <img src="https://i.pravatar.cc/150?img=2" class="w-12 h-12 rounded-full border-2 border-white dark:border-dark" alt="User">
+                            <img src="https://i.pravatar.cc/150?img=3" class="w-12 h-12 rounded-full border-2 border-white dark:border-dark" alt="User">
+                            <div class="w-12 h-12 rounded-full border-2 border-white dark:border-dark bg-primary flex items-center justify-center text-white text-sm font-bold">+50K</div>
+                        </div>
+                        <div>
+                            <p class="font-semibold">50,000+ Students</p>
+                            <p class="text-sm text-gray-500">Trust CW Academy</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="relative z-10 grid gap-4">
+                        <!-- Floating Cards -->
+                        <div class="glass-strong rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-float" style="animation-delay: 0s;">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white">
+                                    <i class="fas fa-robot text-xl"></i>
+                                </div>
+                                <span class="px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-semibold">Active</span>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-1">AI Doubt Solver</h3>
+                            <p class="text-sm text-gray-500">Get instant answers 24/7</p>
+                        </div>
+
+                        <div class="glass-strong rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-float ml-12" style="animation-delay: 1s;">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white">
+                                    <i class="fas fa-trophy text-xl"></i>
+                                </div>
+                                <span class="text-2xl font-bold text-yellow-400">2,450</span>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-1">Your XP Points</h3>
+                            <div class="w-full bg-gray-700 rounded-full h-2 mt-2">
+                                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+
+                        <div class="glass-strong rounded-2xl p-6 transform hover:scale-105 transition-all duration-300 animate-float" style="animation-delay: 2s;">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="relative">
+                                    <svg class="w-16 h-16 transform -rotate-90">
+                                        <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="4" fill="none" class="text-gray-700" />
+                                        <circle cx="32" cy="32" r="28" stroke="currentColor" stroke-width="4" fill="none" class="text-primary progress-ring__circle" stroke-dasharray="175.9" stroke-dashoffset="44" stroke-linecap="round" />
+                                    </svg>
+                                    <span class="absolute inset-0 flex items-center justify-center font-bold text-sm">75%</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold">Weekly Goal</h3>
+                                    <p class="text-sm text-gray-500">15/20 hours completed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative Elements -->
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/30 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-secondary/30 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="wave"></div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="glass rounded-3xl p-8 md:p-12">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="space-y-2">
+                        <div class="text-4xl md:text-5xl font-bold text-gradient counter" data-target="50000">0</div>
+                        <p class="text-gray-600 dark:text-gray-400">Active Students</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-4xl md:text-5xl font-bold text-gradient counter" data-target="1200">0</div>
+                        <p class="text-gray-600 dark:text-gray-400">Video Lessons</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-4xl md:text-5xl font-bold text-gradient counter" data-target="98">0</div>
+                        <p class="text-gray-600 dark:text-gray-400">% Success Rate</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="text-4xl md:text-5xl font-bold text-gradient counter" data-target="50">0</div>
+                        <p class="text-gray-600 dark:text-gray-400">Expert Teachers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Class Selection -->
+    <section id="courses" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Choose Your Class</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Select your grade level to access curated content designed specifically for your curriculum</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4" id="classGrid">
+                <!-- Generated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section id="subjects" class="py-20 relative hidden">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between mb-12">
+                <div>
+                    <button onclick="showClasses()" class="text-primary hover:underline mb-2 flex items-center gap-2">
+                        <i class="fas fa-arrow-left"></i> Back to Classes
+                    </button>
+                    <h2 class="font-display text-4xl font-bold">Class <span id="selectedClass">10</span> Subjects</h2>
+                </div>
+                <div class="glass rounded-full p-1 flex gap-2">
+                    <button onclick="setView('grid')" class="p-2 rounded-full bg-primary text-white transition-all"><i class="fas fa-th"></i></button>
+                    <button onclick="setView('list')" class="p-2 rounded-full hover:bg-white/10 transition-all"><i class="fas fa-list"></i></button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="subjectGrid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Tutor Section -->
+    <section id="ai-tutor" class="py-20 relative bg-gradient-to-b from-transparent to-primary/5">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary font-medium mb-6">
+                        <i class="fas fa-magic"></i>
+                        <span>AI Powered</span>
+                    </div>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">Your Personal AI Tutor Available 24/7</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                        Stuck on a problem? Our advanced AI understands your learning style and provides personalized explanations, step-by-step solutions, and practice questions tailored just for you.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary flex-shrink-0">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg">Instant Answers</h4>
+                                <p class="text-gray-600 dark:text-gray-400">Get solutions in seconds, not hours</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary flex-shrink-0">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg">Adaptive Learning</h4>
+                                <p class="text-gray-600 dark:text-gray-400">AI adjusts difficulty based on your progress</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-accent/20 flex items-center justify-center text-accent flex-shrink-0">
+                                <i class="fas fa-image"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-lg">Image Recognition</h4>
+                                <p class="text-gray-600 dark:text-gray-400">Upload photos of problems for instant solving</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="openAITutor()" class="mt-8 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-xl transition-all flex items-center gap-2">
+                        <i class="fas fa-robot"></i>
+                        <span>Try AI Tutor Now</span>
+                    </button>
+                </div>
+
+                <div class="relative">
+                    <div class="glass-strong rounded-3xl p-6 space-y-4 max-w-md mx-auto">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                                    <i class="fas fa-robot text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">CW AI Tutor</h4>
+                                    <p class="text-xs text-green-400 flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+                                        Online
+                                    </p>
+                                </div>
+                            </div>
+                            <button class="text-gray-400 hover:text-white"><i class="fas fa-ellipsis-v"></i></button>
+                        </div>
+
+                        <div class="space-y-4 h-96 overflow-y-auto scrollbar-hide" id="chatContainer">
+                            <div class="flex gap-3">
+                                <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-robot text-primary text-sm"></i>
+                                </div>
+                                <div class="glass rounded-2xl rounded-tl-none p-3 max-w-[80%]">
+                                    <p class="text-sm">Hi! I'm your AI tutor. I can help you with any subject. Try asking me a math problem or upload an image of your homework!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-white/10 pt-4">
+                            <div class="flex gap-2">
+                                <button class="p-3 rounded-xl glass hover:bg-white/10 transition-colors">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <input type="text" id="chatInput" placeholder="Ask anything..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 focus:outline-none focus:border-primary transition-colors" onkeypress="handleChat(event)">
+                                <button onclick="sendMessage()" class="p-3 rounded-xl bg-primary hover:bg-primary/80 transition-colors">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gamification & Leaderboard -->
+    <section id="leaderboard" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Leaderboard & Achievements</h2>
+                <p class="text-gray-600 dark:text-gray-400">Compete with friends and earn rewards as you learn</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Leaderboard -->
+                <div class="lg:col-span-2 glass rounded-3xl p-6 md:p-8">
+                    <div class="flex items-center justify-between mb-8">
+                        <h3 class="text-2xl font-bold flex items-center gap-2">
+                            <i class="fas fa-trophy text-yellow-400"></i>
+                            Top Performers
+                        </h3>
+                        <select class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-primary">
+                            <option>This Week</option>
+                            <option>This Month</option>
+                            <option>All Time</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-4" id="leaderboardList">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="glass rounded-3xl p-6 md:p-8">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                        <i class="fas fa-medal text-accent"></i>
+                        Your Badges
+                    </h3>
+                    
+                    <div class="grid grid-cols-3 gap-4" id="badgeGrid">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <div class="mt-8 p-4 rounded-2xl bg-gradient-to-r from-primary/20 to-secondary/20 border border-primary/30">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white text-xl">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Study Streak</p>
+                                <p class="text-2xl font-bold text-primary">12 Days</p>
+                            </div>
+                        </div>
+                        <div class="w-full bg-black/20 rounded-full h-2">
+                            <div class="bg-gradient-to-r from-orange-400 to-red-500 h-2 rounded-full" style="width: 60%"></div>
+                        </div>
+                        <p class="text-xs mt-2 text-gray-400">3 more days to beat your record!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Why Choose CW Academy?</h2>
+                <p class="text-gray-600 dark:text-gray-400">Advanced features designed for modern learners</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-500/20 flex items-center justify-center text-blue-400 text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">HD Video Lessons</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Crystal clear 4K video lessons with speed control and offline downloads</p>
+                </div>
+
+                <div class="glass rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-500/20 flex items-center justify-center text-purple-400 text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Smart Notes</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">AI-generated summaries and printable PDF notes for every chapter</p>
+                </div>
+
+                <div class="glass rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-green-500/20 flex items-center justify-center text-green-400 text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-test-tube"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">AI Test Generator</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Personalized tests based on your weak topics with instant feedback</p>
+                </div>
+
+                <div class="glass rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-yellow-500/20 flex items-center justify-center text-yellow-400 text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Study Planner</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Smart revision scheduler that adapts to your learning pace</p>
+                </div>
+
+                <div class="glass rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-red-500/20 flex items-center justify-center text-red-400 text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Secure Learning</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">DRM-protected content with anti-cheating measures</p>
+                </div>
+
+                <div class="glass rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-pink-500/20 flex items-center justify-center text-pink-400 text-2xl mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Mobile App</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Learn on the go with our iOS and Android applications</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Series Section -->
+    <section id="test-series" class="py-20 relative bg-gradient-to-b from-primary/5 to-transparent">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Test Series & Exams</h2>
+                <p class="text-gray-600 dark:text-gray-400">Practice with board exam pattern tests and previous year papers</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" id="testGrid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Choose Your Plan</h2>
+                <p class="text-gray-600 dark:text-gray-400">Affordable pricing for quality education</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="glass rounded-3xl p-8 hover:transform hover:scale-105 transition-all duration-300">
+                    <h3 class="text-xl font-semibold mb-2">Basic</h3>
+                    <div class="text-4xl font-bold mb-6">₹999<span class="text-lg font-normal text-gray-500">/month</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-400"></i> Access to all videos</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-400"></i> Basic notes</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-400"></i> 5 tests per month</li>
+                        <li class="flex items-center gap-3 text-gray-500"><i class="fas fa-times"></i> AI Tutor</li>
+                    </ul>
+                    <button onclick="selectPlan('basic')" class="w-full py-3 rounded-xl border border-primary text-primary hover:bg-primary hover:text-white transition-all font-semibold">Get Started</button>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="glass rounded-3xl p-8 border-2 border-primary relative transform scale-105">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-primary text-white rounded-full text-sm font-semibold">Most Popular</div>
+                    <h3 class="text-xl font-semibold mb-2">Pro</h3>
+                    <div class="text-4xl font-bold mb-6">₹1,999<span class="text-lg font-normal text-gray-500">/month</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-400"></i> Everything in Basic</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-400"></i> AI Tutor Access</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-400"></i> Unlimited tests</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-400"></i> Doubt solving</li>
+                    </ul>
+                    <button onclick="selectPlan('pro')" class="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg transition-all font-semibold">Get Started</button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="glass rounded-3xl p-8 hover:transform hover:scale-105 transition-all duration-300">
+                    <h3 class="text-xl font-semibold mb-2">Premium</h3>
+                    <div class="text-4xl font-bold mb-6">₹3,999<span class="text-lg font-normal text-gray-500">/month</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-400"></i> Everything in Pro</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-400"></i> 1-on-1 Mentorship</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-400"></i> Career counseling</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-green-400"></i> Parent dashboard</li>
+                    </ul>
+                    <button onclick="selectPlan('premium')" class="w-full py-3 rounded-xl border border-primary text-primary hover:bg-primary hover:text-white transition-all font-semibold">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative pt-20 pb-10 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold">CW</div>
+                        <span class="font-display font-bold text-2xl">Academy</span>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400">Transforming education through AI-powered personalized learning experiences.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-white transition-all"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                        <li><a href="#" class="hover:text-primary transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Courses</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Teachers</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-400">
+                        <li><a href="#" class="hover:text-primary transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Newsletter</h4>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Subscribe for study tips and updates</p>
+                    <div class="flex gap-2">
+                        <input type="email" placeholder="Enter email" class="flex-1 px-4 py-2 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary">
+                        <button class="px-4 py-2 rounded-xl bg-primary hover:bg-primary/80 transition-colors text-white">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 text-center text-gray-600 dark:text-gray-400">
+                <p>&copy; 2024 CW Academy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeModal('loginModal')"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-6">
+            <div class="glass-strong rounded-3xl p-8 relative">
+                <button onclick="closeModal('loginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                
+                <h2 class="text-3xl font-bold mb-2 text-center">Welcome Back</h2>
+                <p class="text-gray-400 text-center mb-8">Continue your learning journey</p>
+                
+                <form onsubmit="handleLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary transition-colors" placeholder="student@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Password</label>
+                        <input type="password" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary transition-colors" placeholder="••••••••">
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" class="rounded bg-white/5 border-white/10">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="text-primary hover:underline">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg transition-all">
+                        Sign In
+                    </button>
+                </form>
+
+                <div class="mt-6 text-center">
+                    <p class="text-gray-400 text-sm">Or continue with</p>
+                    <div class="flex justify-center gap-4 mt-4">
+                        <button class="p-3 rounded-xl glass hover:bg-white/10 transition-colors">
+                            <i class="fab fa-google text-xl"></i>
+                        </button>
+                        <button class="p-3 rounded-xl glass hover:bg-white/10 transition-colors">
+                            <i class="fab fa-apple text-xl"></i>
+                        </button>
+                        <button class="p-3 rounded-xl glass hover:bg-white/10 transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <p class="mt-6 text-center text-sm text-gray-400">
+                    Don't have an account? 
+                    <button onclick="switchModal('loginModal', 'signupModal')" class="text-primary hover:underline font-medium">Sign up</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeModal('signupModal')"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-6">
+            <div class="glass-strong rounded-3xl p-8 relative">
+                <button onclick="closeModal('signupModal')" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+                
+                <h2 class="text-3xl font-bold mb-2 text-center">Create Account</h2>
+                <p class="text-gray-400 text-center mb-8">Start your learning journey today</p>
+                
+                <form onsubmit="handleSignup(event)" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">First Name</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary transition-colors" placeholder="John">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Last Name</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary transition-colors" placeholder="Doe">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary transition-colors" placeholder="student@example.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Class</label>
+                        <select required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary transition-colors">
+                            <option value="">Select Class</option>
+                            ${Array.from({length: 12}, (_, i) => `<option value="${i+1}">Class ${i+1}</option>`).join('')}
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Password</label>
+                        <input type="password" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:outline-none focus:border-primary transition-colors" placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-primary to-secondary text-white font-semibold hover:shadow-lg transition-all">
+                        Create Account
+                    </button>
+                </form>
+
+                <p class="mt-6 text-center text-sm text-gray-400">
+                    Already have an account? 
+                    <button onclick="switchModal('signupModal', 'loginModal')" class="text-primary hover:underline font-medium">Sign in</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Player Modal -->
+    <div id="videoModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm" onclick="closeModal('videoModal')"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-5xl p-6">
+            <div class="glass-strong rounded-3xl overflow-hidden relative">
+                <button onclick="closeModal('videoModal')" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70 transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="aspect-video bg-black flex items-center justify-center relative group">
+                    <video id="courseVideo" class="w-full h-full" controls>
+                        <source src="" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none" id="videoOverlay">
+                        <button onclick="playVideo()" class="w-20 h-20 rounded-full bg-primary/90 text-white text-3xl flex items-center justify-center pointer-events-auto hover:scale-110 transition-transform">
+                            <i class="fas fa-play ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold mb-2" id="videoTitle">Introduction to Algebra</h3>
+                    <div class="flex items-center gap-4 text-sm text-gray-400">
+                        <span><i class="fas fa-clock mr-2"></i>45 minutes</span>
+                        <span><i class="fas fa-signal mr-2"></i>Beginner</span>
+                        <span class="flex items-center gap-1"><i class="fas fa-star text-yellow-400"></i> 4.9</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Interface Modal -->
+    <div id="testModal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-sm"></div>
+        <div class="absolute inset-4 md:inset-10 glass-strong rounded-3xl overflow-hidden flex flex-col">
+            <div class="p-6 border-b border-white/10 flex items-center justify-between">
+                <div>
+                    <h3 class="text-xl font-bold" id="testTitle">Mathematics Test</h3>
+                    <p class="text-sm text-gray-400">Class 10 • Chapter 1</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="px-4 py-2 rounded-full bg-red-500/20 text-red-400 font-mono font-bold" id="timer">30:00</div>
+                    <button onclick="submitTest()" class="px-6 py-2 rounded-full bg-primary hover:bg-primary/80 transition-colors text-white font-medium">Submit</button>
+                    <button onclick="closeModal('testModal')" class="text-gray-400 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+                </div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-6" id="testContainer">
+                <!-- Test questions populated by JS -->
+            </div>
+
+            <div class="p-6 border-t border-white/10 bg-black/20">
+                <div class="flex items-center justify-between">
+                    <div class="flex gap-2" id="questionNavigator">
+                        <!-- Question numbers -->
+                    </div>
+                    <div class="text-sm text-gray-400">
+                        <span id="answeredCount">0</span> / <span id="totalCount">20</span> Answered
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-8 right-8 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <div class="glass-strong rounded-xl px-6 py-4 flex items-center gap-3">
+            <i class="fas fa-check-circle text-green-400 text-xl"></i>
+            <span id="toastMessage" class="font-medium">Operation successful</span>
+        </div>
+    </div>
+
+    <script>
+        // State Management
+        const state = {
+            currentUser: null,
+            selectedClass: null,
+            darkMode: false,
+            studyStreak: 12,
+            xpPoints: 2450,
+            leaderboard: [
+                { name: "Aarav Sharma", points: 3250, avatar: "https://i.pravatar.cc/150?img=11", trend: "up" },
+                { name: "Priya Patel", points: 3100, avatar: "https://i.pravatar.cc/150?img=5", trend: "same" },
+                { name: "Rahul Kumar", points: 2980, avatar: "https://i.pravatar.cc/150?img=3", trend: "up" },
+                { name: "Sneha Gupta", points: 2750, avatar: "https://i.pravatar.cc/150?img=9", trend: "down" },
+                { name: "Vikram Singh", points: 2600, avatar: "https://i.pravatar.cc/150?img=12", trend: "up" }
+            ],
+            badges: [
+                { icon: "fa-fire", color: "text-orange-400", bg: "bg-orange-400/20", name: "7 Day Streak", earned: true },
+                { icon: "fa-star", color: "text-yellow-400", bg: "bg-yellow-400/20", name: "Top Scorer", earned: true },
+                { icon: "fa-trophy", color: "text-purple-400", bg: "bg-purple-400/20", name: "Champion", earned: true },
+                { icon: "fa-bolt", color: "text-blue-400", bg: "bg-blue-400/20", name: "Quick Learner", earned: false },
+                { icon: "fa-heart", color: "text-red-400", bg: "bg-red-400/20", name: "Helper", earned: true },
+                { icon: "fa-crown", color: "text-amber-400", bg: "bg-amber-400/20", name: "Master", earned: false }
+            ],
+            subjects: {
+                1: ["Mathematics", "English", "EVS", "Hindi"],
+                2: ["Mathematics", "English", "EVS", "Hindi"],
+                3: ["Mathematics", "English", "Science", "Social Studies", "Hindi"],
+                4: ["Mathematics", "English", "Science", "Social Studies", "Hindi"],
+                5: ["Mathematics", "English", "Science", "Social Studies", "Hindi", "Computer"],
+                6: ["Mathematics", "English", "Science", "Social Studies", "Hindi", "Sanskrit"],
+                7: ["Mathematics", "English", "Science", "Social Studies", "Hindi", "Sanskrit"],
+                8: ["Mathematics", "English", "Science", "Social Studies", "Hindi", "Sanskrit"],
+                9: ["Mathematics", "English", "Science", "Social Science", "Hindi", "Information Technology"],
+                10: ["Mathematics", "English", "Science", "Social Science", "Hindi", "Information Technology"],
+                11: ["Physics", "Chemistry", "Mathematics", "Biology", "English", "Computer Science"],
+                12: ["Physics", "Chemistry", "Mathematics", "Biology", "English", "Computer Science"]
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initApp();
+        });
+
+        function initApp() {
+            renderClasses();
+            renderLeaderboard();
+            renderBadges();
+            renderTests();
+            initCounters();
+            initTypingEffect();
+            checkDarkMode();
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('glass-dark');
+                } else {
+                    navbar.classList.remove('glass-dark');
+                }
+            });
+        }
+
+        // Dark Mode
+        function toggleDarkMode() {
+            state.darkMode = !state.darkMode;
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('darkMode', state.darkMode);
+        }
+
+        function checkDarkMode() {
+            if (localStorage.getItem('darkMode') === 'true' || 
+                (!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                state.darkMode = true;
+                document.documentElement.classList.add('dark');
+            }
+        }
+
+        // Class Selection
+        function renderClasses() {
+            const grid = document.getElementById('classGrid');
+            grid.innerHTML = Array.from({length: 12}, (_, i) => {
+                const classNum = i + 1;
+                const isHighSchool = classNum >= 9;
+                const gradient = isHighSchool ? 'from-purple-500 to-pink-500' : 'from-blue-400 to-cyan-400';
+                return `
+                    <button onclick="selectClass(${classNum})" class="glass rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300 group relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                        <div class="relative z-10 text-center">
+                            <div class="text-3xl font-bold mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:${gradient} transition-all">Class ${classNum}</div>
+                            <p class="text-xs text-gray-500">${isHighSchool ? 'High School' : 'Primary'}</p>
+                            <div class="mt-3 flex justify-center gap-1">
+                                ${Array(3).fill(0).map(() => `<div class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-primary transition-colors"></div>`).join('')}
+                            </div>
+                        </div>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectClass(classNum) {
+            state.selectedClass = classNum;
+            document.getElementById('selectedClass').textContent = classNum;
+            document.getElementById('courses').classList.add('hidden');
+            document.getElementById('subjects').classList.remove('hidden');
+            renderSubjects(classNum);
+            scrollToSection('subjects');
+        }
+
+        function showClasses() {
+            document.getElementById('subjects').classList.add('hidden');
+            document.getElementById('courses').classList.remove('hidden');
+            scrollToSection('courses');
+        }
+
+        function renderSubjects(classNum) {
+            const subjects = state.subjects[classNum] || [];
+            const grid = document.getElementById('subjectGrid');
+            const colors = ['blue', 'purple', 'green', 'orange', 'pink', 'cyan'];
+            
+            grid.innerHTML = subjects.map((subject, idx) => {
+                const color = colors[idx % colors.length];
+                const chapters = Math.floor(Math.random() * 10) + 10;
+                return `
+                    <div class="glass rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300 cursor-pointer group" onclick="openSubject('${subject}')">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-${color}-500/20 flex items-center justify-center text-${color}-400 text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fas fa-${getSubjectIcon(subject)}"></i>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-white/5 text-xs">${chapters} Chapters</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">${subject}</h3>
+                        <div class="flex items-center gap-2 text-sm text-gray-400 mb-4">
+                            <i class="fas fa-book-open"></i>
+                            <span>${Math.floor(Math.random() * 50) + 20} Lessons</span>
+                        </div>
+                        <div class="w-full bg-gray-700 rounded-full h-1.5">
+                            <div class="bg-${color}-400 h-1.5 rounded-full" style="width: ${Math.random() * 100}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getSubjectIcon(subject) {
+            const icons = {
+                'Mathematics': 'calculator',
+                'Science': 'flask',
+                'Physics': 'atom',
+                'Chemistry': 'vial',
+                'Biology': 'dna',
+                'English': 'book',
+                'Hindi': 'language',
+                'Social Science': 'globe',
+                'Computer': 'laptop-code',
+                'EVS': 'leaf'
+            };
+            return icons[subject] || 'book';
+        }
+
+        function openSubject(subject) {
+            showToast(`Opening ${subject} course content...`);
+            openModal('videoModal');
+        }
+
+        // Leaderboard
+        function renderLeaderboard() {
+            const list = document.getElementById('leaderboardList');
+            list.innerHTML = state.leaderboard.map((user, idx) => `
+                <div class="flex items-center gap-4 p-4 rounded-xl ${idx < 3 ? 'bg-gradient-to-r from-yellow-500/10 to-transparent border border-yellow-500/20' : 'hover:bg-white/5'} transition-all">
+                    <div class="w-8 h-8 rounded-full flex items-center justify-center font-bold ${idx === 0 ? 'bg-yellow-400 text-black' : idx === 1 ? 'bg-gray-300 text-black' : idx === 2 ? 'bg-amber-600 text-white' : 'bg-white/10'}">
+                        ${idx + 1}
+                    </div>
+                    <img src="${user.avatar}" class="w-12 h-12 rounded-full border-2 border-white/10" alt="${user.name}">
+                    <div class="flex-1">
+                        <h4 class="font-semibold">${user.name}</h4>
+                        <p class="text-sm text-gray-400">Level ${Math.floor(user.points / 500) + 1}</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-bold text-lg">${user.points.toLocaleString()} XP</div>
+                        <i class="fas fa-caret-${user.trend === 'up' ? 'up text-green-400' : user.trend === 'down' ? 'down text-red-400' : 'right text-gray-400'}"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Badges
+        function renderBadges() {
+            const grid = document.getElementById('badgeGrid');
+            grid.innerHTML = state.badges.map(badge => `
+                <div class="aspect-square rounded-xl ${badge.bg} flex flex-col items-center justify-center gap-2 ${badge.earned ? 'opacity-100' : 'opacity-40 grayscale'} hover:scale-110 transition-transform cursor-pointer" title="${badge.name}">
+                    <i class="fas ${badge.icon} ${badge.color} text-2xl"></i>
+                    <span class="text-[10px] text-center px-2">${badge.name}</span>
+                </div>
+            `).join('');
+        }
+
+        // Tests
+        function renderTests() {
+            const tests = [
+                { subject: 'Mathematics', chapters: 'Chapters 1-5', questions: 50, time: '60 min', difficulty: 'Medium' },
+                { subject: 'Science', chapters: 'Physics - Motion', questions: 30, time: '45 min', difficulty: 'Hard' },
+                { subject: 'English', chapters: 'Grammar & Literature', questions: 40, time: '40 min', difficulty: 'Easy' },
+                { subject: 'Full Syllabus', chapters: 'All Subjects', questions: 100, time: '120 min', difficulty: 'Hard' }
+            ];
+
+            document.getElementById('testGrid').innerHTML = tests.map((test, idx) => `
+                <div class="glass rounded-2xl p-6 hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+                            <i class="fas fa-file-alt text-xl"></i>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs ${test.difficulty === 'Hard' ? 'bg-red-500/20 text-red-400' : test.difficulty === 'Medium' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-green-500/20 text-green-400'}">${test.difficulty}</span>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-1">${test.subject}</h3>
+                    <p class="text-sm text-gray-400 mb-4">${test.chapters}</p>
+                    <div class="flex items-center gap-4 text-sm text-gray-400 mb-6">
+                        <span><i class="fas fa-question-circle mr-1"></i>${test.questions}</span>
+                        <span><i class="fas fa-clock mr-1"></i>${test.time}</span>
+                    </div>
+                    <button onclick="startTest('${test.subject}')" class="w-full py-2 rounded-xl bg-primary/20 text-primary hover:bg-primary hover:text-white transition-all font-medium">
+                        Start Test
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function startTest(subject) {
+            document.getElementById('testTitle').textContent = subject + ' Test';
+            openModal('testModal');
+            generateTestQuestions();
+            startTimer(1800); // 30 minutes
+        }
+
+        function generateTestQuestions() {
+            const container = document.getElementById('testContainer');
+            const navigator = document.getElementById('questionNavigator');
+            let html = '';
+            let navHtml = '';
+
+            for (let i = 1; i <= 20; i++) {
+                html += `
+                    <div class="mb-8" id="question-${i}">
+                        <div class="flex items-start gap-4 mb-4">
+                            <span class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-semibold flex-shrink-0">${i}</span>
+                            <p class="text-lg font-medium">What is the solution to the equation 2x + 5 = 15?</p>
+                        </div>
+                        <div class="space-y-3 ml-12">
+                            ${['A', 'B', 'C', 'D'].map(opt => `
+                                <label class="flex items-center gap-3 p-4 rounded-xl glass cursor-pointer hover:bg-white/5 transition-colors">
+                                    <input type="radio" name="q${i}" value="${opt}" class="w-4 h-4 text-primary" onchange="markAnswered(${i})">
+                                    <span>${opt}. ${opt === 'A' ? 'x = 5' : opt === 'B' ? 'x = 10' : opt === 'C' ? 'x = 7.5' : 'x = 20'}</span>
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                navHtml += `<button onclick="scrollToQuestion(${i})" id="nav-${i}" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-primary hover:text-white transition-all text-sm font-medium">${i}</button>`;
+            }
+
+            container.innerHTML = html;
+            navigator.innerHTML = navHtml;
+            document.getElementById('totalCount').textContent = '20';
+        }
+
+        function markAnswered(qNum) {
+            document.getElementById(`nav-${qNum}`).classList.add('bg-green-500', 'text-white');
+            updateAnsweredCount();
+        }
+
+        function updateAnsweredCount() {
+            const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+            document.getElementById('answeredCount').textContent = answered;
+        }
+
+        function scrollToQuestion(num) {
+            document.getElementById(`question-${num}`).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function startTimer(seconds) {
+            const timerEl = document.getElementById('timer');
+            let remaining = seconds;
+            
+            const interval = setInterval(() => {
+                if (!document.getElementById('testModal').classList.contains('hidden')) {
+                    remaining--;
+                    const mins = Math.floor(remaining / 60);
+                    const secs = remaining % 60;
+                    timerEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                    
+                    if (remaining <= 0) {
+                        clearInterval(interval);
+                        submitTest();
+                    }
+                } else {
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+
+        function submitTest() {
+            closeModal('testModal');
+            showToast('Test submitted successfully! Check your results in the dashboard.');
+        }
+
+        // AI Chat
+        function handleChat(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const container = document.getElementById('chatContainer');
+            
+            // User message
+            container.innerHTML += `
+                <div class="flex gap-3 justify-end">
+                    <div class="glass rounded-2xl rounded-tr-none p-3 max-w-[80%] bg-primary/20">
+                        <p class="text-sm">${message}</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-user text-secondary text-sm"></i>
+                    </div>
+                </div>
+            `;
+            
+            input.value = '';
+            container.scrollTop = container.scrollHeight;
+
+            // AI Response simulation
+            setTimeout(() => {
+                const responses = [
+                    "I'd be happy to help you with that! Let me break it down step by step...",
+                    "Great question! Here's how you can solve this problem...",
+                    "Based on your learning style, I recommend focusing on these key concepts...",
+                    "Let me generate some practice questions for you on this topic."
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                
+                container.innerHTML += `
+                    <div class="flex gap-3">
+                        <div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-robot text-primary text-sm"></i>
+                        </div>
+                        <div class="glass rounded-2xl rounded-tl-none p-3 max-w-[80%]">
+                            <p class="text-sm">${randomResponse}</p>
+                            <div class="mt-2 flex gap-2">
+                                <button class="text-xs px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 transition-colors">Explain more</button>
+                                <button class="text-xs px-3 py-1 rounded-full bg-white/5 hover:bg-white/10 transition-colors">Practice</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.scrollTop = container.scrollHeight;
+            }, 1000);
+        }
+
+        function openAITutor() {
+            scrollToSection('ai-tutor');
+            document.getElementById('chatInput').focus();
+        }
+
+        // Modal Functions
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function switchModal(from, to) {
+            closeModal(from);
+            setTimeout(() => openModal(to), 300);
+        }
+
+        // Video Player
+        function playVideo() {
+            document.getElementById('videoOverlay').style.display = 'none';
+            document.getElementById('courseVideo').play();
+        }
+
+        // Form Handlers
+        function handleLogin(e) {
+            e.preventDefault();
+            closeModal('loginModal');
+            showToast('Welcome back! Continue your learning journey.');
+            state.currentUser = { email: e.target.querySelector('input[type="email"]').value };
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            closeModal('signupModal');
+            showToast('Account created successfully! Welcome to CW Academy.');
+        }
+
+        function selectPlan(plan) {
+            showToast(`Selected ${plan} plan. Redirecting to payment...`);
+        }
+
+        // Utilities
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+                
+                const updateCounter = () => {
+                    current += step;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current).toLocaleString();
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target.toLocaleString() + (target === 98 ? '%' : '+');
+                    }
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        updateCounter();
+                        observer.disconnect();
+                    }
+                });
+                observer.observe(counter);
+            });
+        }
+
+        function initTypingEffect() {
+            const text = "AI-Powered Learning";
+            const element = document.getElementById('typing-text');
+            let i = 0;
+            
+            setInterval(() => {
+                element.textContent = text.slice(0, i) + (i % 2 === 0 ? '|' : '');
+                i = (i + 1) % (text.length + 1);
+                if (i === 0) element.textContent = '';
+            }, 200);
+        }
+
+        // View Toggle
+        function setView(view) {
+            // Implementation for view toggle
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('[id$="Modal"]').forEach(modal => {
+                    if (!modal.classList.contains('hidden')) closeModal(modal.id);
+                });
+            }
+            if (e.ctrlKey && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('chatInput')?.focus();
+            }
+        });
+    </script>
+</body>
+</html>

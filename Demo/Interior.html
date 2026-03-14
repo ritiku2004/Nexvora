@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>गृह Vastu — Premium Indian Furniture</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --saffron:#FF9933;
+  --deep-saffron:#E65100;
+  --marigold:#FFB300;
+  --royal-blue:#1A237E;
+  --indigo:#283593;
+  --deep-red:#B71C1C;
+  --terracotta:#E07A5F;
+  --warm-terracotta:#D84315;
+  --ivory:#FFFBF0;
+  --cream:#FDF6E3;
+  --sand:#D4A574;
+  --gold:#D4AF37;
+  --brass:#B5A642;
+  --copper:#B87333;
+  --charcoal:#2C241B;
+  --warm-brown:#5D4037;
+  --olive:#556B2F;
+  --magenta:#8B0046;
+}
+
+html{scroll-behavior:smooth}
+body{font-family:'Poppins',sans-serif;background:var(--ivory);color:var(--charcoal);overflow-x:hidden}
+
+/* ── ANNOUNCE ── */
+.ann{
+  background:linear-gradient(90deg,var(--saffron),var(--deep-saffron));
+  color:rgba(255,255,255,.95);
+  text-align:center;
+  padding:12px 20px;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  font-weight:500;
+  position:relative;
+  overflow:hidden;
+}
+.ann::before{
+  content:'✦';
+  position:absolute;left:20px;top:50%;transform:translateY(-50%);
+  color:rgba(255,255,255,.4);font-size:14px;
+}
+.ann::after{
+  content:'✦';
+  position:absolute;right:20px;top:50%;transform:translateY(-50%);
+  color:rgba(255,255,255,.4);font-size:14px;
+}
+.ann strong{color:#fff;font-weight:700}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  height:72px;
+  background:rgba(255,251,240,.98);
+  backdrop-filter:blur(20px);
+  border-bottom:2px solid var(--saffron);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;
+  transition:box-shadow .3s;
+}
+nav.scrolled{box-shadow:0 4px 30px rgba(230,81,0,.15)}
+.logo{
+  font-family:'Noto Serif Devanagari','Cormorant Garamond',serif;
+  font-size:28px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  text-decoration:none;color:var(--royal-blue);
+  display:flex;align-items:center;gap:8px;
+}
+.logo::before{
+  content:'ॐ';
+  color:var(--saffron);font-size:32px;font-weight:400;
+}
+.logo span{color:var(--saffron);font-weight:700}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--warm-brown);
+  font-size:13px;letter-spacing:1px;text-transform:uppercase;
+  font-weight:500;transition:all .3s;
+  position:relative;padding-bottom:4px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:0;width:0;height:2px;
+  background:var(--saffron);transition:width .3s;
+}
+.nav-links a:hover{color:var(--deep-saffron)}
+.nav-links a:hover::after{width:100%}
+.nav-links a.sale{color:var(--deep-red);font-weight:600}
+.nav-icons{display:flex;align-items:center;gap:12px}
+.nav-icon{
+  width:42px;height:42px;
+  border:2px solid var(--sand);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .3s;position:relative;
+  background:transparent;
+}
+.nav-icon:hover{background:var(--royal-blue);border-color:var(--royal-blue)}
+.nav-icon:hover svg{stroke:#fff}
+.nav-icon svg{width:18px;height:18px;stroke:var(--warm-brown);fill:none;stroke-width:1.5;transition:stroke .3s}
+.cart-badge{
+  position:absolute;top:-5px;right:-5px;
+  width:20px;height:20px;background:var(--deep-red);
+  border-radius:50%;font-size:10px;color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;
+  border:2px solid var(--ivory);
+}
+
+/* ── HERO ── */
+.hero{
+  min-height:calc(100vh - 100px);
+  display:grid;grid-template-columns:1fr 1fr;
+  background:linear-gradient(135deg,var(--royal-blue) 0%,var(--indigo) 100%);
+  overflow:hidden;position:relative;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity:.4;
+}
+.hero-left{
+  padding:100px 6%;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:2;
+}
+.hero-tag{
+  font-size:12px;letter-spacing:4px;text-transform:uppercase;
+  color:var(--marigold);display:flex;align-items:center;gap:12px;
+  margin-bottom:28px;
+  animation:fadeUp .8s .2s both;
+}
+.hero-tag::before{content:'';width:40px;height:2px;background:var(--saffron)}
+.hero-tag::after{content:'वास्तु शास्त्र';margin-left:8px;font-family:'Noto Serif Devanagari';opacity:.7}
+.hero-title{
+  font-family:'Cormorant Garamond','Noto Serif Devanagari',serif;
+  font-size:clamp(52px,6.5vw,88px);
+  font-weight:400;line-height:1.1;
+  color:#fff;margin-bottom:24px;
+  animation:fadeUp .9s .4s both;
+}
+.hero-title em{
+  font-style:italic;color:var(--saffron);
+  position:relative;
+}
+.hero-title em::after{
+  content:'';position:absolute;bottom:5px;left:0;right:0;height:8px;
+  background:var(--saffron);opacity:.3;z-index:-1;
+}
+.hero-desc{
+  font-size:16px;line-height:2;
+  color:rgba(255,255,255,.7);
+  max-width:480px;margin-bottom:48px;
+  font-weight:300;
+  animation:fadeUp .9s .6s both;
+}
+.hero-btns{
+  display:flex;gap:16px;align-items:center;
+  animation:fadeUp .9s .8s both;
+}
+.btn-saffron{
+  background:linear-gradient(135deg,var(--saffron),var(--deep-saffron));
+  color:#fff;
+  padding:16px 36px;
+  font-size:12px;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;
+  border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+  transition:all .3s;position:relative;overflow:hidden;
+  box-shadow:0 8px 25px rgba(230,81,0,.4);
+}
+.btn-saffron::before{
+  content:'→';transition:transform .3s;
+}
+.btn-saffron:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 35px rgba(230,81,0,.5);
+}
+.btn-outline{
+  color:rgba(255,255,255,.7);
+  font-size:12px;letter-spacing:2px;text-transform:uppercase;
+  text-decoration:none;font-weight:500;
+  border:2px solid rgba(255,255,255,.3);
+  padding:16px 32px;
+  transition:all .3s;display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.05);
+}
+.btn-outline:hover{
+  color:#fff;border-color:var(--saffron);
+  background:rgba(255,153,51,.1);
+}
+.hero-stats{
+  display:flex;gap:48px;
+  margin-top:64px;padding-top:40px;
+  border-top:1px solid rgba(255,255,255,.15);
+  animation:fadeUp .9s 1s both;
+}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:40px;font-weight:400;color:var(--marigold);line-height:1;
+}
+.stat-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:6px}
+.hero-right{
+  position:relative;overflow:hidden;
+}
+.hero-right img{
+  width:100%;height:100%;object-fit:cover;
+  opacity:.85;
+  transition:transform 8s ease;
+}
+.hero-right:hover img{transform:scale(1.05)}
+.hero-right::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(26,35,126,.7) 0%,transparent 60%);
+}
+.hero-float{
+  position:absolute;z-index:2;
+  background:rgba(255,255,255,.95);
+  border-left:4px solid var(--saffron);
+  padding:16px 24px;
+  display:flex;align-items:center;gap:14px;
+  animation:fadeUp .8s both;
+  box-shadow:0 10px 40px rgba(0,0,0,.2);
+}
+.hero-float.f1{top:20%;right:6%;animation-delay:1.2s}
+.hero-float.f2{bottom:20%;left:5%;animation-delay:1.4s}
+.hf-dot{width:12px;height:12px;background:var(--saffron);border-radius:50%;position:relative}
+.hf-dot::after{
+  content:'';position:absolute;inset:-4px;border:2px solid var(--saffron);
+  border-radius:50%;animation:pulse 2s infinite;
+}
+@keyframes pulse{0%{transform:scale(1);opacity:1}100%{transform:scale(1.5);opacity:0}}
+.hf-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--warm-brown);margin-bottom:3px}
+.hf-val{font-size:15px;font-weight:600;color:var(--royal-blue)}
+
+/* ── MARQUEE ── */
+.marquee{
+  background:linear-gradient(90deg,var(--marigold),var(--saffron));
+  padding:16px 0;overflow:hidden;display:flex;position:relative;
+}
+.marquee::before,.marquee::after{
+  content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;
+}
+.marquee::before{left:0;background:linear-gradient(90deg,var(--marigold),transparent)}
+.marquee::after{right:0;background:linear-gradient(-90deg,var(--saffron),transparent)}
+.marquee-track{display:flex;animation:scroll 25s linear infinite;white-space:nowrap}
+.m-item{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-weight:400;
+  color:rgba(255,255,255,.9);padding:0 32px;flex-shrink:0;
+  display:flex;align-items:center;gap:12px;
+}
+.m-item b{font-size:20px;color:rgba(255,255,255,.6)}
+.m-item span{font-family:'Noto Serif Devanagari';font-size:14px;opacity:.8}
+
+/* ── SECTION COMMON ── */
+.section{padding:100px 5%}
+.section-label{
+  font-size:11px;letter-spacing:4px;text-transform:uppercase;
+  display:flex;align-items:center;gap:12px;margin-bottom:16px;
+  color:var(--deep-saffron);font-weight:600;
+}
+.section-label::before{content:'';width:30px;height:2px;background:var(--saffron)}
+.section-title{
+  font-family:'Cormorant Garamond','Noto Serif Devanagari',serif;
+  font-size:clamp(36px,4vw,56px);
+  font-weight:400;line-height:1.15;
+}
+.section-title em{
+  font-style:italic;color:var(--royal-blue);
+  position:relative;
+}
+.section-title em::after{
+  content:'';position:absolute;bottom:4px;left:0;right:0;height:6px;
+  background:var(--saffron);opacity:.2;
+}
+.section-head{margin-bottom:56px}
+
+/* ── CATEGORIES ── */
+.cat-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;
+  grid-template-rows:280px 280px;
+  gap:16px;
+}
+.cat-card{
+  position:relative;overflow:hidden;cursor:pointer;
+  border-radius:4px;box-shadow:0 4px 20px rgba(0,0,0,.1);
+}
+.cat-card:first-child{grid-row:1/3}
+.cat-card img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .8s cubic-bezier(.16,1,.3,1);
+}
+.cat-card:hover img{transform:scale(1.1)}
+.cat-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,35,126,.85) 0%,transparent 60%);
+  transition:background .35s;
+}
+.cat-card:hover .cat-overlay{background:linear-gradient(to top,rgba(26,35,126,.95) 0%,rgba(26,35,126,.2) 60%)}
+.cat-info{position:absolute;bottom:0;left:0;right:0;padding:28px}
+.cat-name{
+  font-family:'Cormorant Garamond','Noto Serif Devanagari',serif;
+  font-size:26px;font-weight:400;color:#fff;margin-bottom:6px;
+}
+.cat-name span{display:block;font-size:13px;opacity:.7;font-family:'Noto Serif Devanagari';margin-top:4px}
+.cat-count{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--marigold)}
+.cat-arrow{
+  position:absolute;top:20px;right:20px;
+  width:44px;height:44px;
+  border:2px solid rgba(255,255,255,.4);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(.8) rotate(-45deg);
+  transition:all .4s;background:rgba(255,255,255,.1);
+  backdrop-filter:blur(10px);
+}
+.cat-card:hover .cat-arrow{opacity:1;transform:scale(1) rotate(0)}
+.cat-arrow svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2}
+
+/* ── PRODUCTS ── */
+.products-sec{background:linear-gradient(180deg,var(--cream) 0%,var(--ivory) 100%);position:relative}
+.products-sec::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:200px;
+  background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4a574' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity:.5;pointer-events:none;
+}
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:48px}
+.filter-btn{
+  padding:10px 24px;
+  border:2px solid var(--sand);background:transparent;
+  font-family:'Poppins',sans-serif;font-size:12px;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--warm-brown);
+  cursor:pointer;transition:all .3s;font-weight:500;
+  border-radius:30px;
+}
+.filter-btn.active,.filter-btn:hover{
+  background:var(--royal-blue);color:#fff;border-color:var(--royal-blue);
+  box-shadow:0 4px 15px rgba(26,35,126,.3);
+}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.product-card{
+  background:#fff;position:relative;border-radius:8px;
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+  overflow:hidden;border:1px solid rgba(212,165,116,.3);
+}
+.product-card:hover{
+  transform:translateY(-12px);
+  box-shadow:0 30px 60px rgba(26,35,126,.15);
+  border-color:var(--saffron);
+}
+.product-img{height:280px;position:relative;overflow:hidden}
+.product-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.product-card:hover .product-img img{transform:scale(1.08)}
+.product-badge{
+  position:absolute;top:16px;left:16px;z-index:2;
+  color:#fff;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:6px 14px;font-weight:700;border-radius:20px;
+}
+.product-wish{
+  position:absolute;top:16px;right:16px;z-index:2;
+  width:40px;height:40px;background:rgba(255,255,255,.95);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(.8);
+  transition:all .3s;cursor:pointer;border:none;
+  box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+.product-card:hover .product-wish{opacity:1;transform:scale(1)}
+.product-wish svg{width:18px;height:18px;stroke:var(--deep-red);fill:none;stroke-width:1.5;transition:all .25s}
+.product-wish.wishlisted svg{stroke:var(--deep-red);fill:var(--deep-red)}
+.product-qadd{
+  position:absolute;bottom:0;left:0;right:0;z-index:2;
+  background:linear-gradient(135deg,var(--royal-blue),var(--indigo));
+  color:#fff;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  text-align:center;padding:16px;
+  transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+  cursor:pointer;border:none;width:100%;font-family:'Poppins';font-weight:600;
+}
+.product-card:hover .product-qadd{transform:translateY(0)}
+.product-info{padding:20px 24px}
+.product-cat{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--deep-saffron);margin-bottom:8px;font-weight:600}
+.product-name{
+  font-family:'Cormorant Garamond','Noto Serif Devanagari',serif;
+  font-size:20px;font-weight:400;color:var(--charcoal);
+  line-height:1.4;margin-bottom:10px;
+}
+.product-stars{color:var(--marigold);font-size:13px;margin-bottom:14px}
+.product-stars span{color:var(--sand);font-size:12px;margin-left:4px}
+.product-footer{display:flex;align-items:center;justify-content:space-between}
+.product-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:24px;font-weight:600;color:var(--royal-blue);
+}
+.product-old{font-size:14px;color:var(--sand);text-decoration:line-through;margin-left:8px;font-weight:400}
+.add-to-cart{
+  width:44px;height:44px;background:var(--saffron);
+  border:none;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .3s;border-radius:50%;
+  box-shadow:0 4px 15px rgba(255,153,51,.4);
+}
+.add-to-cart:hover{background:var(--deep-saffron);transform:scale(1.1)}
+.add-to-cart:active{transform:scale(.95)}
+.add-to-cart svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2}
+
+/* ── OFFER BAND ── */
+.offer-band{
+  background:linear-gradient(135deg,var(--deep-red) 0%,var(--magenta) 100%);
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:520px;align-items:center;
+  position:relative;overflow:hidden;
+}
+.offer-band::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.offer-band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.25;mix-blend-mode:multiply}
+.offer-left{
+  position:relative;z-index:2;padding:80px 6%;
+}
+.offer-tag{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--marigold);margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.offer-tag::before{content:'🪔'}
+.offer-title{
+  font-family:'Cormorant Garamond','Noto Serif Devanagari',serif;
+  font-size:clamp(40px,5vw,64px);font-weight:400;
+  color:#fff;line-height:1.1;margin-bottom:24px;
+}
+.offer-title span{display:block;font-size:24px;color:var(--marigold);margin-top:8px;font-style:italic}
+/* countdown */
+.countdown{display:flex;gap:12px;align-items:center;margin-bottom:36px}
+.count-unit{text-align:center;background:rgba(255,255,255,.1);padding:16px 20px;border-radius:8px;border:1px solid rgba(255,255,255,.2)}
+.count-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:48px;font-weight:400;color:#fff;line-height:1;
+  display:block;min-width:70px;text-align:center;
+}
+.count-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:6px;text-align:center}
+.count-sep{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--marigold);padding-bottom:24px}
+.offer-desc{font-size:15px;line-height:1.9;color:rgba(255,255,255,.7);margin-bottom:36px;font-weight:300;max-width:90%}
+.offer-right{
+  position:relative;z-index:2;padding:60px 5%;
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+.offer-item{
+  background:rgba(255,255,255,.1);
+  border:2px solid rgba(255,255,255,.15);
+  padding:32px 24px;text-align:center;
+  transition:all .3s;cursor:pointer;border-radius:8px;
+  backdrop-filter:blur(10px);
+}
+.offer-item:hover{background:rgba(255,255,255,.2);border-color:var(--marigold);transform:translateY(-5px)}
+.offer-pct{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;font-weight:400;color:#fff;line-height:1;
+}
+.offer-pct span{font-size:20px;vertical-align:top}
+.offer-room{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:8px}
+
+/* ── TRUST ── */
+.trust-sec{background:linear-gradient(180deg,#fff 0%,var(--ivory) 100%);padding:80px 5%;position:relative}
+.trust-sec::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--saffron),transparent);
+}
+.trust-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:24px;
+}
+.trust-item{
+  background:#fff;padding:40px 24px;text-align:center;
+  transition:all .3s;cursor:default;border-radius:8px;
+  border:1px solid rgba(212,165,116,.2);
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+.trust-item:hover{
+  transform:translateY(-8px);
+  border-color:var(--saffron);
+  box-shadow:0 12px 40px rgba(255,153,51,.15);
+}
+.trust-icon{margin:0 auto 20px;width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--cream),var(--ivory));border-radius:50%;border:2px solid var(--sand)}
+.trust-icon svg{width:28px;height:28px;stroke:var(--deep-saffron);fill:none;stroke-width:1.5}
+.trust-title{font-family:'Cormorant Garamond','Noto Serif Devanagari',serif;font-size:18px;font-weight:600;margin-bottom:8px;color:var(--charcoal)}
+.trust-text{font-size:12px;color:var(--warm-brown);line-height:1.8;font-weight:400}
+
+/* ── SHOWCASE ── */
+.showcase-sec{background:linear-gradient(135deg,var(--charcoal) 0%,#1a1a2e 100%);padding:100px 5%;position:relative;overflow:hidden}
+.showcase-sec::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4af37' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+.showcase-sec .section-label{color:var(--marigold)}
+.showcase-sec .section-label::before{background:var(--saffron)}
+.showcase-sec .section-title{color:var(--ivory)}
+.showcase-sec .section-title em{color:var(--saffron)}
+.showcase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.showcase-card{position:relative;overflow:hidden;cursor:pointer;border-radius:8px;aspect-ratio:3/4}
+.showcase-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.showcase-card:hover img{transform:scale(1.1)}
+.showcase-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,35,126,.9) 0%,transparent 60%);
+  opacity:0;transition:opacity .4s;
+}
+.showcase-card:hover .showcase-overlay{opacity:1}
+.showcase-info{
+  position:absolute;bottom:0;left:0;right:0;padding:32px;
+  transform:translateY(20px);opacity:0;
+  transition:all .4s cubic-bezier(.16,1,.3,1);
+}
+.showcase-card:hover .showcase-info{transform:translateY(0);opacity:1}
+.sh-cat{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--marigold);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.sh-cat::before{content:'✦'}
+.sh-name{font-family:'Cormorant Garamond','Noto Serif Devanagari',serif;font-size:28px;color:#fff;font-weight:400;line-height:1.3}
+.sh-name span{display:block;font-size:14px;font-family:'Noto Serif Devanagari';opacity:.7;margin-top:6px}
+
+/* ── TESTIMONIALS ── */
+.testi-sec{padding:100px 5%;background:var(--ivory);position:relative}
+.testi-sec::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:200px;
+  background:linear-gradient(to top,var(--cream),transparent);
+  pointer-events:none;
+}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:56px}
+.testi-card{
+  background:#fff;padding:36px;
+  border-radius:12px;border:1px solid rgba(212,165,116,.3);
+  transition:all .3s;position:relative;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+.testi-card:hover{
+  border-color:var(--saffron);
+  box-shadow:0 20px 50px rgba(255,153,51,.12);
+  transform:translateY(-8px);
+}
+.testi-card::before{
+  content:'"';
+  font-family:'Cormorant Garamond',serif;font-size:72px;
+  color:var(--saffron);opacity:.2;line-height:.5;display:block;margin-bottom:20px;
+  position:absolute;top:20px;left:24px;
+}
+.testi-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:17px;font-style:italic;line-height:1.9;
+  color:var(--charcoal);margin-bottom:28px;position:relative;z-index:1;
+}
+.testi-author{display:flex;align-items:center;gap:16px}
+.testi-avatar{width:52px;height:52px;border-radius:50%;object-fit:cover;border:3px solid var(--saffron);padding:2px;background:#fff}
+.testi-name{font-size:14px;font-weight:600;color:var(--charcoal)}
+.testi-loc{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--deep-saffron);margin-top:4px;display:flex;align-items:center;gap:6px}
+.testi-loc::before{content:'📍'}
+
+/* ── NEWSLETTER ── */
+.nl-sec{
+  background:linear-gradient(135deg,var(--royal-blue),var(--indigo));
+  padding:80px 5%;text-align:center;position:relative;overflow:hidden;
+}
+.nl-sec::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ff9933' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.nl-title{
+  font-family:'Cormorant Garamond','Noto Serif Devanagari',serif;
+  font-size:clamp(36px,5vw,56px);font-weight:400;color:#fff;margin-bottom:16px;position:relative;z-index:1;
+}
+.nl-title span{color:var(--marigold)}
+.nl-desc{font-size:15px;color:rgba(255,255,255,.7);font-weight:300;margin-bottom:40px;position:relative;z-index:1;max-width:500px;margin-left:auto;margin-right:auto}
+.nl-form{display:flex;max-width:520px;margin:0 auto;position:relative;z-index:1;gap:12px}
+.nl-input{
+  flex:1;padding:16px 24px;border:none;border-radius:50px;
+  background:rgba(255,255,255,.15);color:#fff;
+  font-family:'Poppins';font-size:14px;outline:none;
+  border:2px solid rgba(255,255,255,.2);
+  transition:all .3s;
+}
+.nl-input:focus{border-color:var(--saffron);background:rgba(255,255,255,.2)}
+.nl-input::placeholder{color:rgba(255,255,255,.5)}
+.nl-submit{
+  background:linear-gradient(135deg,var(--saffron),var(--deep-saffron));color:#fff;border:none;border-radius:50px;
+  padding:16px 36px;font-family:'Poppins';
+  font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;
+  cursor:pointer;transition:all .3s;
+  box-shadow:0 8px 25px rgba(255,153,51,.4);
+}
+.nl-submit:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(255,153,51,.5)}
+
+/* ── FOOTER ── */
+footer{background:var(--charcoal);padding:80px 5% 40px;position:relative}
+footer::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--saffron),var(--marigold),var(--saffron));
+}
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;
+  gap:48px;margin-bottom:56px;
+}
+.footer-logo{
+  font-family:'Noto Serif Devanagari','Cormorant Garamond',serif;
+  font-size:32px;letter-spacing:4px;text-transform:uppercase;
+  color:#fff;margin-bottom:20px;display:flex;align-items:center;gap:12px;
+}
+.footer-logo::before{content:'ॐ';color:var(--saffron);font-size:36px}
+.footer-logo span{color:var(--saffron);font-weight:700}
+.footer-desc{font-size:14px;line-height:2;color:rgba(255,251,240,.5);font-weight:300;max-width:280px;margin-bottom:32px}
+.social-links{display:flex;gap:12px}
+.social-btn{
+  width:44px;height:44px;border:2px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;border-radius:50%;
+  cursor:pointer;transition:all .3s;background:rgba(255,255,255,.05);
+}
+.social-btn:hover{background:var(--saffron);border-color:var(--saffron);transform:translateY(-4px)}
+.social-btn svg{width:16px;height:16px;stroke:rgba(255,255,255,.6);fill:none;stroke-width:1.5;transition:stroke .3s}
+.social-btn:hover svg{stroke:#fff}
+.footer-col h4{
+  font-size:12px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--saffron);font-weight:600;margin-bottom:24px;
+}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:12px}
+.footer-col ul a{
+  text-decoration:none;color:rgba(255,251,240,.5);
+  font-size:14px;font-weight:300;transition:all .3s;
+  display:flex;align-items:center;gap:8px;
+}
+.footer-col ul a:hover{color:#fff;padding-left:8px}
+.footer-col ul a::before{content:'→';opacity:0;transition:opacity .3s;font-size:10px;color:var(--saffron)}
+.footer-col ul a:hover::before{opacity:1}
+.footer-bottom{
+  padding-top:32px;border-top:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:12px;color:rgba(255,251,240,.3);letter-spacing:1px;
+}
+.footer-bottom span{display:flex;align-items:center;gap:8px}
+.footer-bottom span::before{content:'🇮🇳'}
+
+/* ── CART DRAWER ── */
+.cart-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.6);
+  z-index:900;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(8px);
+}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-drawer{
+  position:fixed;top:0;right:-480px;width:480px;height:100vh;
+  background:var(--ivory);z-index:901;
+  transition:right .45s cubic-bezier(.16,1,.3,1);
+  display:flex;flex-direction:column;
+  box-shadow:-20px 0 80px rgba(0,0,0,.2);
+  border-left:3px solid var(--saffron);
+}
+.cart-drawer.open{right:0}
+.cart-header{
+  padding:28px 32px;border-bottom:2px solid var(--sand);
+  display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(135deg,var(--ivory),var(--cream));
+}
+.cart-title{font-family:'Cormorant Garamond','Noto Serif Devanagari',serif;font-size:28px;font-weight:600;color:var(--charcoal)}
+.cart-title span{font-size:14px;color:var(--deep-saffron);font-weight:400;margin-left:8px}
+.cart-close{
+  width:44px;height:44px;border:2px solid var(--sand);
+  background:none;cursor:pointer;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;transition:all .3s;
+}
+.cart-close:hover{background:var(--deep-red);border-color:var(--deep-red)}
+.cart-close:hover svg{stroke:#fff}
+.cart-close svg{width:18px;height:18px;stroke:var(--warm-brown);fill:none;stroke-width:2}
+.cart-body{flex:1;overflow-y:auto;padding:24px 32px}
+.cart-item{display:flex;gap:18px;padding:24px 0;border-bottom:1px solid rgba(212,165,116,.3)}
+.cart-item:last-child{border-bottom:none}
+.cart-item-img{width:90px;height:90px;object-fit:cover;flex-shrink:0;background:var(--sand);border-radius:8px}
+.cart-item-info{flex:1}
+.cart-item-name{font-family:'Cormorant Garamond',serif;font-size:20px;margin-bottom:6px;color:var(--charcoal);font-weight:600}
+.cart-item-var{font-size:12px;color:var(--warm-brown);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.cart-item-var::before{content:'✦';color:var(--saffron);font-size:8px}
+.cart-item-footer{display:flex;align-items:center;justify-content:space-between}
+.cart-item-price{font-size:16px;font-weight:700;color:var(--royal-blue)}
+.qty-control{display:flex;align-items:center;gap:12px;background:var(--cream);padding:6px;border-radius:30px;border:1px solid var(--sand)}
+.qty-btn{
+  width:32px;height:32px;border:none;
+  background:#fff;cursor:pointer;font-size:18px;color:var(--charcoal);
+  display:flex;align-items:center;justify-content:center;border-radius:50%;
+  transition:all .3s;font-weight:300;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+.qty-btn:hover{background:var(--saffron);color:#fff}
+.qty-num{font-size:15px;font-weight:600;min-width:24px;text-align:center;color:var(--charcoal)}
+.cart-footer{padding:28px 32px 32px;border-top:2px solid var(--sand);background:linear-gradient(135deg,var(--ivory),var(--cream))}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.cart-total-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--warm-brown)}
+.cart-total-value{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--royal-blue)}
+.checkout-btn{
+  display:block;width:100%;background:linear-gradient(135deg,var(--royal-blue),var(--indigo));color:#fff;
+  padding:20px;text-align:center;border-radius:50px;
+  font-size:13px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;
+  border:none;cursor:pointer;transition:all .3s;
+  box-shadow:0 8px 25px rgba(26,35,126,.3);
+}
+.checkout-btn:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(26,35,126,.4)}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.1s}
+.reveal.d2{transition-delay:.2s}
+.reveal.d3{transition-delay:.3s}
+
+/* ── FLY DOT ── */
+@keyframes flyDot{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.15) translate(60px,-200px)}}
+.fly-dot{position:fixed;width:12px;height:12px;background:var(--saffron);border-radius:50%;pointer-events:none;z-index:8000;animation:flyDot .7s cubic-bezier(.4,0,.2,1) forwards;box-shadow:0 0 20px var(--saffron)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .product-grid{grid-template-columns:repeat(3,1fr)}
+  .cat-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .cat-card:first-child{grid-row:auto}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:40px}
+  .trust-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:768px){
+  nav{padding:0 4%}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-right{height:50vh}
+  .section{padding:60px 4%}
+  .product-grid{grid-template-columns:1fr 1fr;gap:16px}
+  .trust-grid{grid-template-columns:repeat(2,1fr)}
+  .testi-grid{grid-template-columns:1fr}
+  .showcase-grid{grid-template-columns:1fr}
+  .offer-band{grid-template-columns:1fr}
+  .cart-drawer{width:100%;right:-100%;border-left:none}
+  .hero-stats{gap:24px;flex-wrap:wrap}
+  .offer-right{padding:40px 5%}
+  .nl-form{flex-direction:column}
+  .nl-input,.nl-submit{width:100%;border-radius:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCE -->
+<div class="ann">🪔 Festive Sale Live! Free delivery above <strong>₹25,000</strong> &nbsp;·&nbsp; Code <strong>DIWALI25</strong> for 25% off &nbsp;·&nbsp; <strong>Zero Cost EMI</strong> available</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="logo">गृह <span>Vastu</span></a>
+  <ul class="nav-links">
+    <li><a href="#">Living Room</a></li>
+    <li><a href="#">Bedroom</a></li>
+    <li><a href="#">Dining</a></li>
+    <li><a href="#">Pooja Room</a></li>
+    <li><a href="#">Outdoor</a></li>
+    <li><a href="#" class="sale">Festive Sale</a></li>
+  </ul>
+  <div class="nav-icons">
+    <button class="nav-icon" aria-label="Search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </button>
+    <button class="nav-icon" aria-label="Wishlist">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </button>
+    <button class="nav-icon" id="cartToggleBtn" aria-label="Cart">
+      <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <div class="cart-badge" id="cartBadge">3</div>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Shubh Collection 2025</div>
+    <h1 class="hero-title">Crafted with<br><em>Indian Soul</em><br>Global Standards</h1>
+    <p class="hero-desc">Authentic Indian craftsmanship meets contemporary design. Handcrafted furniture blessed with traditional Vastu principles for harmony and prosperity in your home.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-saffron">Explore Collection</a>
+      <a href="#" class="btn-outline">Our Heritage</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">50K+</div><div class="stat-label">Blessed Homes</div></div>
+      <div><div class="stat-num">500+</div><div class="stat-label">Artisan Designs</div></div>
+      <div><div class="stat-num">7yr</div><div class="stat-label">Shubh Warranty</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=1400&q=90&auto=format&fit=crop" alt="Indian luxury living room">
+    <div class="hero-float f1">
+      <div class="hf-dot"></div>
+      <div><div class="hf-label">Material</div><div class="hf-val">Sheesham Wood</div></div>
+    </div>
+    <div class="hero-float f2">
+      <div class="hf-dot"></div>
+      <div><div class="hf-label">Certified</div><div class="hf-val">Vastu Compliant</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="m-item">Living Room <span>बैठक</span> <b>✦</b></span>
+    <span class="m-item">Bedroom <span>शयनकक्ष</span> <b>✦</b></span>
+    <span class="m-item">Dining <span>भोजनकक्ष</span> <b>✦</b></span>
+    <span class="m-item">Pooja Room <span>पूजाघर</span> <b>✦</b></span>
+    <span class="m-item">Outdoor <span>बाह्य</span> <b>✦</b></span>
+    <span class="m-item">Storage <span>भंडारण</span> <b>✦</b></span>
+    <span class="m-item">Kids Room <span>बालकक्ष</span> <b>✦</b></span>
+    <span class="m-item">Decor <span>सजावट</span> <b>✦</b></span>
+    <span class="m-item">Lighting <span>प्रकाश</span> <b>✦</b></span>
+    <span class="m-item">Living Room <span>बैठक</span> <b>✦</b></span>
+    <span class="m-item">Bedroom <span>शयनकक्ष</span> <b>✦</b></span>
+    <span class="m-item">Dining <span>भोजनकक्ष</span> <b>✦</b></span>
+    <span class="m-item">Pooja Room <span>पूजाघर</span> <b>✦</b></span>
+    <span class="m-item">Outdoor <span>बाह्य</span> <b>✦</b></span>
+    <span class="m-item">Storage <span>भंडारण</span> <b>✦</b></span>
+    <span class="m-item">Kids Room <span>बालकक्ष</span> <b>✦</b></span>
+    <span class="m-item">Decor <span>सजावट</span> <b>✦</b></span>
+    <span class="m-item">Lighting <span>प्रकाश</span> <b>✦</b></span>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="section">
+  <div class="section-head reveal">
+    <div class="section-label">Browse by Space</div>
+    <h2 class="section-title">Shop by <em>Room</em></h2>
+  </div>
+  <div class="cat-grid reveal">
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=85&auto=format&fit=crop" alt="Living Room">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">Living Room <span>बैठक</span></div><div class="cat-count">142 Products</div></div>
+      <div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=85&auto=format&fit=crop" alt="Bedroom">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">Bedroom <span>शयनकक्ष</span></div><div class="cat-count">98 Products</div></div>
+      <div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1604578762246-41134e37f9cc?w=600&q=85&auto=format&fit=crop" alt="Dining">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">Dining <span>भोजनकक्ष</span></div><div class="cat-count">74 Products</div></div>
+      <div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1593642702909-dec73df255d7?w=600&q=85&auto=format&fit=crop" alt="Pooja Room">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">Pooja Room <span>पूजाघर</span></div><div class="cat-count">56 Products</div></div>
+      <div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1600210491369-e753d80a41f3?w=600&q=85&auto=format&fit=crop" alt="Outdoor">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">Outdoor <span>बाह्य</span></div><div class="cat-count">48 Products</div></div>
+      <div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?w=600&q=85&auto=format&fit=crop" alt="Storage">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">Storage <span>भंडारण</span></div><div class="cat-count">62 Products</div></div>
+      <div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=85&auto=format&fit=crop" alt="Kids">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">Kids Room <span>बालकक्ष</span></div><div class="cat-count">39 Products</div></div>
+      <div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1534400266-c6bef3e8b1b6?w=600&q=85&auto=format&fit=crop" alt="Lighting">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">Lighting <span>प्रकाश</span></div><div class="cat-count">85 Products</div></div>
+      <div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+    <div class="cat-card">
+      <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=85&auto=format&fit=crop" alt="Decor">
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><div class="cat-name">Decor & Art <span>सजावट</span></div><div class="cat-count">110 Products</div></div>
+      <div class="cat-arrow"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section products-sec" id="products">
+  <div class="section-head reveal" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px">
+    <div>
+      <div class="section-label">Handpicked for You</div>
+      <h2 class="section-title">Festival <em>Best Sellers</em></h2>
+    </div>
+    <a href="#" style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--warm-brown);text-decoration:none;font-weight:600;margin-bottom:10px;transition:color .3s;display:flex;align-items:center;gap:8px" onmouseover="this.style.color='var(--deep-saffron)'" onmouseout="this.style.color='var(--warm-brown)'">View All Collection →</a>
+  </div>
+  <div class="filter-bar reveal" id="filterBar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="living">Living Room</button>
+    <button class="filter-btn" data-filter="bedroom">Bedroom</button>
+    <button class="filter-btn" data-filter="dining">Dining</button>
+    <button class="filter-btn" data-filter="pooja">Pooja Room</button>
+    <button class="filter-btn" data-filter="outdoor">Outdoor</button>
+    <button class="filter-btn" data-filter="decor">Decor</button>
+  </div>
+  <div class="product-grid" id="productGrid">
+    <!-- Products injected by JS -->
+  </div>
+</section>
+
+<!-- OFFER BAND -->
+<div class="offer-band">
+  <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1400&q=85&auto=format&fit=crop" alt="">
+  <div class="offer-left reveal">
+    <div class="offer-tag">Festive Season Special</div>
+    <h2 class="offer-title">Up to 40% Off<br>Bedroom Sets <span>शयनकक्ष संग्रह</span></h2>
+    <div class="countdown">
+      <div class="count-unit"><span class="count-num" id="cH">08</span><div class="count-label">Hours</div></div>
+      <div class="count-sep">:</div>
+      <div class="count-unit"><span class="count-num" id="cM">34</span><div class="count-label">Mins</div></div>
+      <div class="count-sep">:</div>
+      <div class="count-unit"><span class="count-num" id="cS">17</span><div class="count
+      <div class="count-label">Secs</div></div>
+      </div>
+      <p class="offer-desc">Premium solid wood beds, wardrobes and dressers at exceptional prices this festive season. Handcrafted by master artisans with traditional joinery techniques passed down through generations.</p>
+      <a href="#" class="btn-saffron">Shop the Sale</a>
+    </div>
+    <div class="offer-right reveal d2">
+      <div class="offer-item"><div class="offer-pct">40<span>%</span></div><div class="offer-room">Bedroom</div></div>
+      <div class="offer-item"><div class="offer-pct">25<span>%</span></div><div class="offer-room">Dining</div></div>
+      <div class="offer-item"><div class="offer-pct">30<span>%</span></div><div class="offer-room">Sofas</div></div>
+      <div class="offer-item"><div class="offer-pct">35<span>%</span></div><div class="offer-room">Pooja Room</div></div>
+    </div>
+  </div>
+  
+  <!-- TRUST -->
+  <div class="trust-sec">
+    <div class="trust-grid reveal">
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="trust-title">Free Delivery</div>
+        <div class="trust-text">Above ₹25,000 to 1200+ cities</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div class="trust-title">7 Year Warranty</div>
+        <div class="trust-text">Shubh warranty on every piece</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="trust-title">Expert Assembly</div>
+        <div class="trust-text">Professional carpenters, always free</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div>
+        <div class="trust-title">Easy Returns</div>
+        <div class="trust-text">30-day free pickup returns</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <div class="trust-title">Zero Cost EMI</div>
+        <div class="trust-text">Starting from ₹999/month</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- SHOWCASE -->
+  <section class="showcase-sec">
+    <div class="section-head">
+      <div class="section-label">Room Inspiration</div>
+      <h2 class="section-title">Styled <em>Interiors</em></h2>
+    </div>
+    <div class="showcase-grid">
+      <div class="showcase-card reveal d1">
+        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=85&auto=format&fit=crop" alt="Royal Living">
+        <div class="showcase-overlay"></div>
+        <div class="showcase-info"><div class="sh-cat">Living Room</div><div class="sh-name">The Royal Rajputana <span>राजपूताना शैली</span></div></div>
+      </div>
+      <div class="showcase-card reveal d2">
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=85&auto=format&fit=crop" alt="Bedroom">
+        <div class="showcase-overlay"></div>
+        <div class="showcase-info"><div class="sh-cat">Bedroom</div><div class="sh-name">Kerala Serenity <span>केरल शांति</span></div></div>
+      </div>
+      <div class="showcase-card reveal d3">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=85&auto=format&fit=crop" alt="Dining">
+        <div class="showcase-overlay"></div>
+        <div class="showcase-info"><div class="sh-cat">Dining Room</div><div class="sh-name">Chettinad Heritage <span>चेट्टीनाड विरासत</span></div></div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- TESTIMONIALS -->
+  <section class="testi-sec">
+    <div class="section-head reveal">
+      <div class="section-label">Customer Stories</div>
+      <h2 class="section-title">Loved by <em>50,000+</em> Homes</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal d1">
+        <div style="color:var(--marigold);font-size:14px;margin-bottom:12px">★★★★★</div>
+        <p class="testi-text">The Sheesham wood sofa set transformed our living room completely. The craftsmanship is exceptional — you can feel the tradition in every joint. Vastu-compliant placement brought such positive energy!</p>
+        <div class="testi-author">
+          <img class="testi-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&q=80&auto=format&fit=crop&crop=face" alt="Priya">
+          <div><div class="testi-name">Priya Sharma</div><div class="testi-loc">Jaipur, Rajasthan</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div style="color:var(--marigold);font-size:14px;margin-bottom:12px">★★★★★</div>
+        <p class="testi-text">Ordered the entire bedroom set for my daughter's wedding. The intricate inlay work and brass fittings are museum-quality. The delivery team even performed a small griha pravesh blessing!</p>
+        <div class="testi-author">
+          <img class="testi-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&q=80&auto=format&fit=crop&crop=face" alt="Rohit">
+          <div><div class="testi-name">Rohit Verma</div><div class="testi-loc">Udaipur, Rajasthan</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d3">
+        <div style="color:var(--marigold);font-size:14px;margin-bottom:12px">★★★★★</div>
+        <p class="testi-text">My pooja room mandir is the spiritual center of our home now. The direction, the wood, the carvings — everything is perfect. Even our pandit ji was impressed with the Vastu alignment.</p>
+        <div class="testi-author">
+          <img class="testi-avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80&auto=format&fit=crop&crop=face" alt="Anjali">
+          <div><div class="testi-name">Anjali Nair</div><div class="testi-loc">Kochi, Kerala</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- NEWSLETTER -->
+  <div class="nl-sec reveal">
+    <h2 class="nl-title">Stay Blessed <span>आशीर्वाद</span></h2>
+    <p class="nl-desc">Exclusive festive offers, Vastu tips, and new artisan collections — straight to your inbox.</p>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="Your email address">
+      <button class="nl-submit">Subscribe</button>
+    </div>
+  </div>
+  
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid reveal">
+      <div>
+        <div class="footer-logo">गृह <span>Vastu</span></div>
+        <p class="footer-desc">Crafting blessed living spaces since 2012. Each piece designed with Vastu principles and built to bring prosperity for generations. 🇮🇳 Made in India, Loved Worldwide</p>
+        <div class="social-links">
+          <div class="social-btn"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></div>
+          <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+          <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></div>
+          <div class="social-btn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">Living Room <span>बैठक</span></a></li>
+          <li><a href="#">Bedroom <span>शयनकक्ष</span></a></li>
+          <li><a href="#">Dining <span>भोजनकक्ष</span></a></li>
+          <li><a href="#">Pooja Room <span>पूजाघर</span></a></li>
+          <li><a href="#">Outdoor <span>बाह्य</span></a></li>
+          <li><a href="#">Storage <span>भंडारण</span></a></li>
+          <li><a href="#">Festive Collection</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Returns & Exchange</a></li>
+          <li><a href="#">Shubh Warranty</a></li>
+          <li><a href="#">Vastu Consultation</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Store Locator</a></li>
+          <li><a href="#">WhatsApp: +91 98765 43210</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Our Heritage</h4>
+        <ul>
+          <li><a href="#">About गृह Vastu</a></li>
+          <li><a href="#">Our Artisans</a></li>
+          <li><a href="#">Vastu Shastra Guide</a></li>
+          <li><a href="#">Wood Types & Care</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Shipping Policy</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Vastu Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 गृह Vastu Furniture. All rights reserved. शुभम् भवतु</span>
+      <span>Crafted with ❤️ in Bharat 🇮🇳</span>
+    </div>
+  </footer>
+  
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <div class="cart-title">Your Cart <span id="cartCountLabel">(3 items)</span></div>
+      <button class="cart-close" id="cartCloseBtn">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-body">
+      <div class="cart-item">
+        <img class="cart-item-img" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=160&q=80&auto=format&fit=crop" alt="">
+        <div class="cart-item-info">
+          <div class="cart-item-name">Royal Sheesham Sofa</div>
+          <div class="cart-item-var">Honey Oak · 3-Seater · Vastu Compliant</div>
+          <div class="cart-item-footer">
+            <div class="cart-item-price">₹42,500</div>
+            <div class="qty-control"><button class="qty-btn">−</button><span class="qty-num">1</span><button class="qty-btn">+</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="cart-item">
+        <img class="cart-item-img" src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=160&q=80&auto=format&fit=crop" alt="">
+        <div class="cart-item-info">
+          <div class="cart-item-name">Heritage King Bed</div>
+          <div class="cart-item-var">Walnut Brown · King · East-Facing</div>
+          <div class="cart-item-footer">
+            <div class="cart-item-price">₹38,200</div>
+            <div class="qty-control"><button class="qty-btn">−</button><span class="qty-num">1</span><button class="qty-btn">+</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="cart-item">
+        <img class="cart-item-img" src="https://images.unsplash.com/photo-1547538832-9b350e00a4f8?w=160&q=80&auto=format&fit=crop" alt="">
+        <div class="cart-item-info">
+          <div class="cart-item-name">Brass Inlay Dining Chair ×2</div>
+          <div class="cart-item-var">Teak Wood · Traditional Joints</div>
+          <div class="cart-item-footer">
+            <div class="cart-item-price">₹17,800</div>
+            <div class="qty-control"><button class="qty-btn">−</button><span class="qty-num">2</span><button class="qty-btn">+</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Order Total</span>
+        <span class="cart-total-value">₹98,500</span>
+      </div>
+      <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+    </div>
+  </div>
+  
+  <!-- CHECKOUT MODAL -->
+  <div class="co-overlay" id="coOverlay"></div>
+  <div class="co-modal" id="coModal">
+    <div class="co-left" id="coLeft">
+      <a href="#" class="co-logo" onclick="closeCheckout();return false">गृह <span>Vastu</span></a>
+      <div class="co-steps">
+        <div class="co-step active" id="step1Ind"><div class="co-step-num">1</div><span>Address</span></div>
+        <div class="co-step-sep"></div>
+        <div class="co-step" id="step2Ind"><div class="co-step-num">2</div><span>Payment</span></div>
+        <div class="co-step-sep"></div>
+        <div class="co-step" id="step3Ind"><div class="co-step-num">3</div><span>Confirm</span></div>
+      </div>
+  
+      <!-- STEP 1: ADDRESS -->
+      <div id="coStep1">
+        <div class="co-sec-title">Contact Information</div>
+        <div class="co-form-row two">
+          <div class="co-form-group">
+            <label class="co-label">First Name</label>
+            <input class="co-input" id="f_fname" type="text" placeholder="Priya">
+            <div class="field-error" id="err_fname">Please enter your first name</div>
+          </div>
+          <div class="co-form-group">
+            <label class="co-label">Last Name</label>
+            <input class="co-input" id="f_lname" type="text" placeholder="Sharma">
+            <div class="field-error" id="err_lname">Please enter your last name</div>
+          </div>
+        </div>
+        <div class="co-form-row two">
+          <div class="co-form-group">
+            <label class="co-label">Email</label>
+            <input class="co-input" id="f_email" type="email" placeholder="priya@example.com">
+            <div class="field-error" id="err_email">Please enter a valid email</div>
+          </div>
+          <div class="co-form-group">
+            <label class="co-label">Phone</label>
+            <input class="co-input" id="f_phone" type="tel" placeholder="+91 98765 43210">
+            <div class="field-error" id="err_phone">Please enter a valid phone number</div>
+          </div>
+        </div>
+  
+        <div class="co-sec-title">Delivery Address</div>
+        <div class="co-form-row">
+          <div class="co-form-group">
+            <label class="co-label">Address Line 1</label>
+            <input class="co-input" id="f_addr1" type="text" placeholder="House / Flat / Building No.">
+            <div class="field-error" id="err_addr1">Please enter your address</div>
+          </div>
+        </div>
+        <div class="co-form-row">
+          <div class="co-form-group">
+            <label class="co-label">Address Line 2 (Optional)</label>
+            <input class="co-input" id="f_addr2" type="text" placeholder="Street / Colony / Area">
+          </div>
+        </div>
+        <div class="co-form-row three">
+          <div class="co-form-group">
+            <label class="co-label">City</label>
+            <input class="co-input" id="f_city" type="text" placeholder="Jaipur">
+            <div class="field-error" id="err_city">Required</div>
+          </div>
+          <div class="co-form-group">
+            <label class="co-label">State</label>
+            <select class="co-input" id="f_state">
+              <option value="">Select State</option>
+              <option>Rajasthan</option><option>Maharashtra</option><option>Karnataka</option>
+              <option>Tamil Nadu</option><option>Delhi</option><option>Gujarat</option>
+              <option>West Bengal</option><option>Uttar Pradesh</option><option>Telangana</option>
+              <option>Kerala</option><option>Punjab</option><option>Haryana</option>
+              <option>Madhya Pradesh</option><option>Andhra Pradesh</option><option>Bihar</option>
+            </select>
+            <div class="field-error" id="err_state">Required</div>
+          </div>
+          <div class="co-form-group">
+            <label class="co-label">PIN Code</label>
+            <input class="co-input" id="f_pin" type="text" placeholder="302001" maxlength="6">
+            <div class="field-error" id="err_pin">Enter valid 6-digit PIN</div>
+          </div>
+        </div>
+  
+        <div class="co-sec-title">Delivery Option</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px">
+          <label style="display:flex;align-items:center;gap:16px;border:2px solid var(--saffron);background:rgba(255,153,51,.08);padding:18px 22px;cursor:pointer;border-radius:12px">
+            <input type="radio" name="delivery" value="standard" checked style="accent-color:var(--saffron);width:20px;height:20px">
+            <div style="flex:1">
+              <div style="font-size:15px;font-weight:600;color:var(--charcoal)">Standard Delivery</div>
+              <div style="font-size:13px;color:var(--warm-brown);margin-top:4px">5–7 business days · Free assembly & Vastu placement</div>
+            </div>
+            <div style="font-size:16px;font-weight:700;color:#2d7a2d">FREE</div>
+          </label>
+          <label style="display:flex;align-items:center;gap:16px;border:2px solid var(--sand);background:#fff;padding:18px 22px;cursor:pointer;border-radius:12px">
+            <input type="radio" name="delivery" value="express" style="accent-color:var(--saffron);width:20px;height:20px">
+            <div style="flex:1">
+              <div style="font-size:15px;font-weight:600;color:var(--charcoal)">Express Delivery</div>
+              <div style="font-size:13px;color:var(--warm-brown);margin-top:4px">2–3 business days · Priority scheduling</div>
+            </div>
+            <div style="font-size:16px;font-weight:700;color:var(--deep-saffron)">₹499</div>
+          </label>
+        </div>
+  
+        <button class="co-btn-next" onclick="goToStep2()">
+          <svg class="lock-ic" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Continue to Payment
+        </button>
+  
+        <div class="co-trust">
+          <div class="co-trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> SSL Secured</div>
+          <div class="co-trust-item"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 1 0 .49 3"/></svg> Easy Returns</div>
+          <div class="co-trust-item"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Verified Payments</div>
+          <div class="co-trust-item"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> 5+ Gateways</div>
+        </div>
+      </div>
+  
+      <!-- STEP 2: PAYMENT -->
+      <div id="coStep2" style="display:none">
+        <div class="co-sec-title">Available Offers</div>
+        <div class="co-offers">
+          <div class="offer-tag-row"><span class="offer-tag-ic">🪔</span><span class="offer-tag-text">10% off on UPI payment</span><span class="offer-tag-val">Save ₹9,850</span></div>
+          <div class="offer-tag-row"><span class="offer-tag-ic">💳</span><span class="offer-tag-text">5% cashback on HDFC / ICICI cards</span><span class="offer-tag-val">Up to ₹2,000</span></div>
+          <div class="offer-tag-row"><span class="offer-tag-ic">📱</span><span class="offer-tag-text">No cost EMI on 6 / 9 / 12 months</span><span class="offer-tag-val">₹0 extra charge</span></div>
+        </div>
+  
+        <div class="co-sec-title">Have a Coupon?</div>
+        <div class="co-coupon">
+          <input class="coupon-input" id="couponInput" type="text" placeholder="Enter coupon code (try DIWALI25)">
+          <button class="coupon-btn" onclick="applyCoupon()">Apply</button>
+        </div>
+        <div class="coupon-success" id="couponSuccess">
+          <svg style="width:16px;height:16px;stroke:#2d7a2d;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>DIWALI25 applied — 25% discount added!</span>
+        </div>
+  
+        <div class="co-sec-title">Payment Method</div>
+        <div class="co-pay-methods">
+          <div class="pay-method selected" onclick="selectMethod('upi',this)">
+            <div class="pm-icon" style="font-size:28px">📱</div>
+            <div class="pm-label">UPI</div>
+          </div>
+          <div class="pay-method" onclick="selectMethod('card',this)">
+            <div class="pm-icon" style="font-size:28px">💳</div>
+            <div class="pm-label">Card</div>
+          </div>
+          <div class="pay-method" onclick="selectMethod('netbanking',this)">
+            <div class="pm-icon" style="font-size:28px">🏦</div>
+            <div class="pm-label">Net Banking</div>
+          </div>
+          <div class="pay-method" onclick="selectMethod('wallet',this)">
+            <div class="pm-icon" style="font-size:28px">👛</div>
+            <div class="pm-label">Wallet</div>
+          </div>
+          <div class="pay-method" onclick="selectMethod('emi',this)">
+            <div class="pm-icon" style="font-size:28px">📅</div>
+            <div class="pm-label">EMI</div>
+          </div>
+          <div class="pay-method" onclick="selectMethod('cod',this)">
+            <div class="pm-icon" style="font-size:28px">🚚</div>
+            <div class="pm-label">Cash on Delivery</div>
+          </div>
+        </div>
+  
+        <!-- UPI PANEL -->
+        <div id="panel_upi">
+          <div style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--warm-brown);margin-bottom:16px;font-weight:600">Pay with</div>
+          <div class="upi-apps">
+            <div class="upi-app selected" onclick="selectUpi(this)"><span class="upi-app-ic">📲</span> GPay</div>
+            <div class="upi-app" onclick="selectUpi(this)"><span class="upi-app-ic">💜</span> PhonePe</div>
+            <div class="upi-app" onclick="selectUpi(this)"><span class="upi-app-ic">🅿️</span> Paytm</div>
+            <div class="upi-app" onclick="selectUpi(this)"><span class="upi-app-ic">🔵</span> BHIM</div>
+            <div class="upi-app" onclick="selectUpi(this)"><span class="upi-app-ic">🏦</span> Amazon Pay</div>
+          </div>
+          <div class="co-form-group" style="margin-bottom:20px">
+            <label class="co-label">UPI ID</label>
+            <input class="co-input" id="f_upi" type="text" placeholder="yourname@upi">
+            <div class="field-error" id="err_upi">Please enter a valid UPI ID</div>
+          </div>
+          <div style="font-size:13px;color:var(--warm-brown);background:var(--cream);padding:16px;border-radius:8px;border-left:4px solid var(--saffron)">You'll receive a payment request on your UPI app. Accept to complete your order.</div>
+        </div>
+  
+        <!-- CARD PANEL -->
+        <div id="panel_card" style="display:none">
+          <div class="card-preview">
+            <div class="card-chip"></div>
+            <div class="card-number-disp" id="cardNumDisp">•••• •••• •••• ••••</div>
+            <div class="card-bottom">
+              <div><div class="card-holder-label">Card Holder</div><div class="card-holder-val" id="cardNameDisp">Your Name</div></div>
+              <div><div class="card-holder-label">Expires</div><div class="card-expiry-val" id="cardExpDisp">MM/YY</div></div>
+            </div>
+          </div>
+          <div class="co-form-row">
+            <div class="co-form-group co-input-icon">
+              <label class="co-label">Card Number</label>
+              <input class="co-input" id="f_cardnum" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)">
+              <div class="icon-badge" id="cardTypeIcon" style="font-size:24px">💳</div>
+              <div class="field-error" id="err_cardnum">Please enter a valid 16-digit card number</div>
+            </div>
+          </div>
+          <div class="co-form-row two">
+            <div class="co-form-group">
+              <label class="co-label">Expiry Date</label>
+              <input class="co-input" id="f_expiry" type="text" placeholder="MM / YY" maxlength="7" oninput="fmtExpiry(this)">
+              <div class="field-error" id="err_expiry">Enter valid expiry date</div>
+            </div>
+            <div class="co-form-group co-input-icon">
+              <label class="co-label">CVV</label>
+              <input class="co-input" id="f_cvv" type="password" placeholder="•••" maxlength="4">
+              <div class="icon-badge"><svg style="width:18px;height:18px;stroke:var(--warm-brown);fill:none;stroke-width:1.5" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div class="field-error" id="err_cvv">Enter valid CVV</div>
+            </div>
+          </div>
+          <div class="co-form-group">
+            <label class="co-label">Name on Card</label>
+            <input class="co-input" id="f_cardname" type="text" placeholder="PRIYA SHARMA" oninput="document.getElementById('cardNameDisp').textContent=this.value.toUpperCase()||'Your Name'">
+          </div>
+          <label style="display:flex;align-items:center;gap:12px;margin-top:18px;font-size:14px;color:var(--warm-brown);cursor:pointer">
+            <input type="checkbox" checked style="accent-color:var(--saffron);width:18px;height:18px">
+            Save this card for faster checkout
+          </label>
+        </div>
+  
+        <!-- NET BANKING PANEL -->
+        <div id="panel_netbanking" style="display:none">
+          <div style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--warm-brown);margin-bottom:16px;font-weight:600">Popular Banks</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px">
+            <div class="upi-app" onclick="selectBank(this)">🏦 HDFC</div>
+            <div class="upi-app" onclick="selectBank(this)">🏦 ICICI</div>
+            <div class="upi-app" onclick="selectBank(this)">🏦 SBI</div>
+            <div class="upi-app" onclick="selectBank(this)">🏦 Axis</div>
+            <div class="upi-app" onclick="selectBank(this)">🏦 Kotak</div>
+            <div class="upi-app" onclick="selectBank(this)">🏦 Yes Bank</div>
+          </div>
+          <div class="co-form-group">
+            <label class="co-label">Or select your bank</label>
+            <select class="co-input" style="cursor:pointer">
+              <option value="">-- Choose Bank --</option>
+              <option>HDFC Bank</option><option>ICICI Bank</option><option>State Bank of India</option>
+              <option>Axis Bank</option><option>Kotak Mahindra Bank</option><option>Yes Bank</option>
+              <option>Punjab National Bank</option><option>Bank of Baroda</option><option>Canara Bank</option>
+            </select>
+          </div>
+        </div>
+  
+        <!-- WALLET PANEL -->
+        <div id="panel_wallet" style="display:none">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+            <div class="upi-app" onclick="selectUpi(this)">💰 Paytm</div>
+            <div class="upi-app" onclick="selectUpi(this)">💛 Amazon Pay</div>
+            <div class="upi-app" onclick="selectUpi(this)">🔴 Mobikwik</div>
+            <div class="upi-app" onclick="selectUpi(this)">🟣 Freecharge</div>
+            <div class="upi-app" onclick="selectUpi(this)">🔵 Ola Money</div>
+            <div class="upi-app" onclick="selectUpi(this)">🟢 JioMoney</div>
+          </div>
+        </div>
+  
+        <!-- EMI PANEL -->
+        <div id="panel_emi" style="display:none">
+          <div style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--warm-brown);margin-bottom:16px;font-weight:600">Select Bank for EMI</div>
+          <div class="emi-bank-logos">
+            <div class="emi-bank selected" onclick="selectEmiBank(this)">HDFC</div>
+            <div class="emi-bank" onclick="selectEmiBank(this)">ICICI</div>
+            <div class="emi-bank" onclick="selectEmiBank(this)">Axis</div>
+            <div class="emi-bank" onclick="selectEmiBank(this)">SBI</div>
+            <div class="emi-bank" onclick="selectEmiBank(this)">Kotak</div>
+            <div class="emi-bank" onclick="selectEmiBank(this)">Yes Bank</div>
+          </div>
+          <div style="font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--warm-brown);margin-bottom:16px;font-weight:600">Choose Tenure</div>
+          <div class="emi-options">
+            <div class="emi-opt selected" onclick="selectEmi(this,'3')"><div class="emi-months">3</div><div class="emi-label">Months</div><div class="emi-amount">₹32,833/mo</div></div>
+            <div class="emi-opt" onclick="selectEmi(this,'6')"><div class="emi-months">6</div><div class="emi-label">Months</div><div class="emi-amount">₹16,417/mo</div></div>
+            <div class="emi-opt" onclick="selectEmi(this,'9')"><div class="emi-months">9</div><div class="emi-label">Months</div><div class="emi-amount">₹10,944/mo</div></div>
+            <div class="emi-opt" onclick="selectEmi(this,'12')"><div class="emi-months">12</div><div class="emi-label">Months</div><div class="emi-amount">₹8,208/mo</div></div>
+            <div class="emi-opt" onclick="selectEmi(this,'18')"><div class="emi-months">18</div><div class="emi-label">Months</div><div class="emi-amount">₹5,472/mo</div></div>
+            <div class="emi-opt" onclick="selectEmi(this,'24')"><div class="emi-months">24</div><div class="emi-label">Months</div><div class="emi-amount">₹4,104/mo</div></div>
+          </div>
+          <div style="background:rgba(45,122,45,.1);border:2px solid rgba(45,122,45,.2);padding:16px 20px;font-size:14px;color:#2d7a2d;border-radius:8px;font-weight:500">
+            ✅ No cost EMI — you pay exactly ₹98,500. Zero extra interest.
+          </div>
+        </div>
+  
+        <!-- COD PANEL -->
+        <div id="panel_cod" style="display:none">
+          <div style="background:var(--cream);border:2px solid var(--sand);padding:24px;margin-bottom:20px;border-radius:12px">
+            <div style="font-size:18px;font-weight:600;margin-bottom:12px;color:var(--charcoal)">Cash on Delivery</div>
+            <div style="font-size:15px;color:var(--warm-brown);line-height:1.8">Pay ₹98,500 in cash when your furniture is delivered and assembled at your home. Our delivery team will collect the payment and provide a proper GST invoice.</div>
+            <div style="margin-top:16px;font-size:14px;color:var(--deep-saffron);font-weight:600;background:rgba(255,153,51,.1);padding:12px 16px;border-radius:8px">⚠️ COD available for orders under ₹1,50,000 only</div>
+          </div>
+          <label style="display:flex;align-items:flex-start;gap:12px;font-size:14px;color:var(--warm-brown);cursor:pointer">
+            <input type="checkbox" id="codConfirm" style="accent-color:var(--saffron);width:18px;height:18px;margin-top:3px;flex-shrink:0">
+            I confirm I will have the exact amount ready at the time of delivery
+          </label>
+        </div>
+  
+        <button class="co-btn-next" id="payNowBtn" onclick="processPayment()">
+          <svg class="lock-ic" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Pay ₹98,500 Securely
+        </button>
+        <button class="co-btn-back" onclick="goToStep1()">← Back to Address</button>
+  
+        <div class="co-trust" style="margin-top:28px">
+          <div class="co-trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> 256-bit SSL</div>
+          <div class="co-trust-item"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg> PCI DSS Compliant</div>
+          <div class="co-trust-item"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> RBI Approved</div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- RIGHT: ORDER SUMMARY -->
+    <div class="co-right">
+      <div class="co-sum-title">Order Summary</div>
+      <div class="co-sum-items">
+        <div class="co-sum-item">
+          <div class="co-sum-img" style="position:relative">
+            <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=160&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px">
+            <div class="co-sum-qty">1</div>
+          </div>
+          <div>
+            <div class="co-sum-name">Royal Sheesham Sofa</div>
+            <div class="co-sum-var">Honey Oak · 3-Seater · Vastu Compliant</div>
+            <div class="co-sum-price">₹42,500</div>
+          </div>
+        </div>
+        <div class="co-sum-item">
+          <div class="co-sum-img" style="position:relative">
+            <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=160&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px">
+            <div class="co-sum-qty">1</div>
+          </div>
+          <div>
+            <div class="co-sum-name">Heritage King Bed Frame</div>
+            <div class="co-sum-var">Walnut Brown · King · East-Facing</div>
+            <div class="co-sum-price">₹38,200</div>
+          </div>
+        </div>
+        <div class="co-sum-item">
+          <div class="co-sum-img" style="position:relative">
+            <img src="https://images.unsplash.com/photo-1547538832-9b350e00a4f8?w=160&q=80&auto=format&fit=crop" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:8px">
+            <div class="co-sum-qty">2</div>
+          </div>
+          <div>
+            <div class="co-sum-name">Brass Inlay Dining Chair ×2</div>
+            <div class="co-sum-var">Teak Wood · Traditional Joints</div>
+            <div class="co-sum-price">₹17,800</div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="co-price-rows">
+        <div class="co-price-row"><span class="label">Subtotal</span><span class="value">₹98,500</span></div>
+        <div class="co-price-row discount" id="discountRow" style="display:none"><span class="label">Discount (DIWALI25)</span><span class="value">− ₹24,625</span></div>
+        <div class="co-price-row"><span class="label">Delivery</span><span class="value" style="color:#2d7a2d;font-weight:700">FREE</span></div>
+        <div class="co-price-row"><span class="label">GST (18%)</span><span class="value">₹17,730</span></div>
+        <div class="co-price-row total" id="totalRow"><span class="label">Total</span><span class="value">₹1,16,230</span></div>
+      </div>
+  
+      <div class="savings-badge" id="savingsBadge" style="display:none">
+        🎉 You're saving ₹24,625 on this festive order!
+      </div>
+  
+      <div class="co-delivery">
+        <div class="co-delivery-label">Estimated Delivery</div>
+        <div class="co-delivery-text">Tuesday, 22 April 2025</div>
+        <div class="co-delivery-free">✓ Free Vastu-compliant placement included</div>
+      </div>
+  
+      <div style="margin-top:auto;padding-top:28px;border-top:2px solid var(--sand);margin-top:28px">
+        <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--warm-brown);margin-bottom:16px;font-weight:600">Secured by</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+          <div style="background:#fff;border:2px solid var(--sand);padding:8px 16px;font-size:13px;font-weight:700;color:#072654;border-radius:6px">Razorpay</div>
+          <div style="background:#fff;border:2px solid var(--sand);padding:8px 16px;font-size:13px;font-weight:700;color:#00457C;border-radius:6px">PayPal</div>
+          <div style="background:#fff;border:2px solid var(--sand);padding:8px 16px;font-size:13px;font-weight:700;color:#003087;border-radius:6px">Visa</div>
+          <div style="background:#fff;border:2px solid var(--sand);padding:8px 16px;font-size:13px;font-weight:700;color:#EB001B;border-radius:6px">Mastercard</div>
+          <div style="background:#fff;border:2px solid var(--sand);padding:8px 16px;font-size:13px;font-weight:700;color:#1B6AE5;border-radius:6px">UPI</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- PAYMENT PROCESSING OVERLAY -->
+  <div class="pay-processing" id="payProcessing">
+    <div class="pay-spinner"></div>
+    <div class="pay-proc-text">Processing your payment...</div>
+    <div class="pay-proc-sub">Please do not refresh or close this page</div>
+  </div>
+  
+  <!-- SUCCESS SCREEN -->
+  <div class="pay-success" id="paySuccess">
+    <div class="confetti-container" id="confettiContainer"></div>
+    <div class="success-circle">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 class="success-title">Order Confirmed! 🪔</h2>
+    <p class="success-sub">Thank you for your purchase. Your furniture will be delivered with Vastu blessings. A confirmation has been sent to your email with auspicious delivery timing.</p>
+    <div class="success-id">Order ID: GRIH-2025-<span id="orderIdVal">08472</span></div>
+    <p style="font-size:14px;color:var(--warm-brown);margin-bottom:32px">Estimated Delivery: <strong style="color:var(--charcoal)">Tuesday, 22 April 2025</strong> (Shubh Muhurat)</p>
+    <div class="success-btns">
+      <button class="btn-saffron" onclick="closeSuccess()">Continue Shopping</button>
+      <button style="background:transparent;border:2px solid var(--sand);padding:16px 32px;font-family:'Poppins';font-size:12px;font-weight:500;cursor:pointer;transition:all .3s;border-radius:50px;color:var(--charcoal)" onmouseover="this.style.borderColor='var(--saffron)';this.style.color='var(--deep-saffron)'" onmouseout="this.style.borderColor='var(--sand)';this.style.color='var(--charcoal)'">Track Order</button>
+    </div>
+  </div>
+  
+  <script>
+  // ── PRODUCTS DATA ──────────────────────────
+  var products = [
+    {cat:'living', name:'Royal Sheesham Sofa', price:'₹42,500', old:'₹58,000', badge:'Best Seller', badgeColor:'#E65100', stars:5, reviews:348, img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=85&auto=format&fit=crop'},
+    {cat:'bedroom', name:'Heritage King Bed', price:'₹38,200', old:'', badge:'New Arrival', badgeColor:'#1A237E', stars:5, reviews:182, img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=85&auto=format&fit=crop'},
+    {cat:'dining', name:'Rajasthani 6-Seater Table', price:'₹32,000', old:'₹40,000', badge:'20% OFF', badgeColor:'#E65100', stars:5, reviews:129, img:'https://images.unsplash.com/photo-1604578762246-41134e37f9cc?w=600&q=85&auto=format&fit=crop'},
+    {cat:'living', name:'Brass Inlay Coffee Table', price:'₹16,800', old:'₹20,000', badge:'', badgeColor:'', stars:5, reviews:276, img:'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=85&auto=format&fit=crop'},
+    {cat:'pooja', name:'Carved Teak Mandir', price:'₹22,500', old:'₹28,000', badge:'Vastu Plus', badgeColor:'#1A237E', stars:5, reviews:94, img:'https://images.unsplash.com/photo-1593642702909-dec73df255d7?w=600&q=85&auto=format&fit=crop'},
+    {cat:'outdoor', name:'Jodhpur Swing Jhula', price:'₹28,000', old:'', badge:'Festive Pick', badgeColor:'#E65100', stars:5, reviews:67, img:'https://images.unsplash.com/photo-1600210491369-e753d80a41f3?w=600&q=85&auto=format&fit=crop'},
+    {cat:'bedroom', name:'Marble Top Wardrobe', price:'₹45,000', old:'₹64,000', badge:'30% OFF', badgeColor:'#E65100', stars:5, reviews:113, img:'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600&q=85&auto=format&fit=crop'},
+    {cat:'decor', name:'Brass Urli Set', price:'₹4,200', old:'₹5,500', badge:'', badgeColor:'', stars:5, reviews:314, img:'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=85&auto=format&fit=crop'},
+    {cat:'dining', name:'Peacock Back Chair', price:'₹8,900', old:'₹11,000', badge:"Editor's Pick", badgeColor:'#D4AF37', stars:5, reviews:206, img:'https://images.unsplash.com/photo-1547538832-9b350e00a4f8?w=600&q=85&auto=format&fit=crop'},
+    {cat:'living', name:'Open Sheesham Bookshelf', price:'₹19,500', old:'', badge:'Limited', badgeColor:'#E65100', stars:4, reviews:98, img:'https://images.unsplash.com/photo-1567016432779-094069958ea5?w=600&q=85&auto=format&fit=crop'},
+    {cat:'pooja', name:'Brass Diya Stand Set', price:'₹14,500', old:'₹18,000', badge:'Festive', badgeColor:'#E65100', stars:5, reviews:253, img:'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600&q=85&auto=format&fit=crop'},
+    {cat:'decor', name:'Pattachitra Wall Art', price:'₹6,800', old:'', badge:'New', badgeColor:'#D4AF37', stars:5, reviews:87, img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=85&auto=format&fit=crop'},
+    {cat:'bedroom', name:'Rosewood Bedside Table', price:'₹9,500', old:'₹12,000', badge:'', badgeColor:'', stars:4, reviews:142, img:'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600&q=85&auto=format&fit=crop'},
+    {cat:'living', name:'Diwan with Bolsters', price:'₹26,000', old:'₹32,000', badge:'Popular', badgeColor:'#E65100', stars:5, reviews:239, img:'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=600&q=85&auto=format&fit=crop'},
+    {cat:'dining', name:'Marble Inlay Dining Table', price:'₹54,000', old:'₹70,000', badge:'Luxury', badgeColor:'#D4AF37', stars:5, reviews:74, img:'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=600&q=85&auto=format&fit=crop'},
+    {cat:'outdoor', name:'Charpai Daybed', price:'₹18,500', old:'₹24,000', badge:'Trending', badgeColor:'#1A237E', stars:5, reviews:118, img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=85&auto=format&fit=crop&crop=right'},
+    {cat:'living', name:'TV Unit with Storage', price:'₹24,500', old:'₹30,000', badge:'', badgeColor:'', stars:4, reviews:184, img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=85&auto=format&fit=crop&crop=bottom'},
+    {cat:'bedroom', name:'Dressing Table Mirror', price:'₹31,000', old:'₹38,000', badge:'30% OFF', badgeColor:'#E65100', stars:5, reviews:96, img:'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&q=85&auto=format&fit=crop&crop=right'},
+    {cat:'pooja', name:'Bell Metal Prabhavali', price:'₹34,500', old:'₹42,000', badge:'Premium', badgeColor:'#D4AF37', stars:5, reviews:83, img:'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=600&q=85&auto=format&fit=crop&crop=right'},
+    {cat:'dining', name:'Thali Organizer Rack', price:'₹7,200', old:'₹9,500', badge:'New', badgeColor:'#D4AF37', stars:5, reviews:151, img:'https://images.unsplash.com/photo-1604578762246-41134e37f9cc?w=600&q=85&auto=format&fit=crop&crop=right'},
+  ];
+  
+  var catLabels = {all:'All',living:'Living Room',bedroom:'Bedroom',dining:'Dining',pooja:'Pooja Room',outdoor:'Outdoor',decor:'Decor & Art'};
+  
+  function starsHTML(n) {
+    var s = '';
+    for (var i = 1; i <= 5; i++) s += '<span style="color:' + (i<=n ? 'var(--marigold)' : 'var(--sand)') + '">★</span>';
+    return s;
+  }
+  
+  function renderProducts(filter) {
+    var grid = document.getElementById('productGrid');
+    var filtered = filter === 'all' ? products : products.filter(function(p){ return p.cat === filter; });
+    grid.innerHTML = filtered.map(function(p, i) {
+      return '<div class="product-card" data-cat="' + p.cat + '">' +
+        '<div class="product-img">' +
+          (p.badge ? '<div class="product-badge" style="background:' + p.badgeColor + '">' + p.badge + '</div>' : '') +
+          '<button class="product-wish" onclick="toggleWish(this)">' +
+            '<svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>' +
+          '</button>' +
+          '<img src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
+          '<button class="product-qadd" onclick="addToCart(event)">Quick Add to Cart</button>' +
+        '</div>' +
+        '<div class="product-info">' +
+          '<div class="product-cat">' + (catLabels[p.cat]||p.cat) + '</div>' +
+          '<div class="product-name">' + p.name + '</div>' +
+          '<div class="product-stars">' + starsHTML(p.stars) + '<span>(' + p.reviews + ')</span></div>' +
+          '<div class="product-footer">' +
+            '<div><span class="product-price">' + p.price + '</span>' + (p.old ? '<span class="product-old">' + p.old + '</span>' : '') + '</div>' +
+            '<button class="add-to-cart" onclick="addToCart(event)">' +
+              '<svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>' +
+            '</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+  renderProducts('all');
+  
+  // ── FILTER ──────────────────────────────────
+  document.getElementById('filterBar').addEventListener('click', function(e) {
+    var btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    renderProducts(btn.dataset.filter);
+    document.querySelectorAll('.product-card').forEach(function(el){ revObs.observe(el); });
+  });
+  
+  // ── SCROLL REVEAL ───────────────────────────
+  var revObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  function initReveal() {
+    document.querySelectorAll('.reveal, .product-card, .cat-card, .testi-card, .showcase-card').forEach(function(el) {
+      el.classList.add('reveal');
+      revObs.observe(el);
+    });
+  }
+  initReveal();
+  
+  // ── CART ────────────────────────────────────
+  var cartCount = 3;
+  function openCart() {
+    document.getElementById('cartDrawer').classList.add('open');
+    document.getElementById('cartOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeCart() {
+    document.getElementById('cartDrawer').classList.remove('open');
+    document.getElementById('cartOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('cartToggleBtn').addEventListener('click', openCart);
+  document.getElementById('cartCloseBtn').addEventListener('click', closeCart);
+  document.getElementById('cartOverlay').addEventListener('click', closeCart);
+  
+  function addToCart(e) {
+    cartCount++;
+    var badge = document.getElementById('cartBadge');
+    var label = document.getElementById('cartCountLabel');
+    badge.textContent = cartCount;
+    label.textContent = '(' + cartCount + ' items)';
+    badge.style.transform = 'scale(1.6)';
+    badge.style.background = '#FFB300';
+    setTimeout(function(){ badge.style.transform = ''; badge.style.background = '#B71C1C'; }, 350);
+    var dot = document.createElement('div');
+    dot.className = 'fly-dot';
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+    document.body.appendChild(dot);
+    setTimeout(function(){ dot.remove(); }, 700);
+  }
+  
+  function toggleWish(btn) { btn.classList.toggle('wishlisted'); }
+  
+  // ── QTY CONTROLS ────────────────────────────
+  document.querySelectorAll('.qty-btn').forEach(function(b) {
+    b.addEventListener('click', function() {
+      var n = this.parentElement.querySelector('.qty-num');
+      var v = parseInt(n.textContent);
+      n.textContent = this.textContent === '−' ? Math.max(1, v-1) : v+1;
+    });
+  });
+  
+  // ── NAV SCROLL ──────────────────────────────
+  window.addEventListener('scroll', function() {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+  
+  // ── COUNTDOWN ───────────────────────────────
+  var endTime = new Date(Date.now() + 8*3600000 + 34*60000 + 17000);
+  setInterval(function() {
+    var d = endTime - Date.now();
+    if (d < 0) return;
+    var h = Math.floor(d/3600000),
+        m = Math.floor((d%3600000)/60000),
+        s = Math.floor((d%60000)/1000);
+    document.getElementById('cH').textContent = String(h).padStart(2,'0');
+    document.getElementById('cM').textContent = String(m).padStart(2,'0');
+    document.getElementById('cS').textContent = String(s).padStart(2,'0');
+  }, 1000);
+  
+  // ─── CHECKOUT FUNCTIONS ───────────────────
+  function openCheckout() {
+    document.getElementById('coModal').classList.add('open');
+    document.getElementById('coOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeCart();
+  }
+  function closeCheckout() {
+    document.getElementById('coModal').classList.remove('open');
+    document.getElementById('coOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('coOverlay').addEventListener('click', closeCheckout);
+  
+  function goToStep2() {
+    if (!validateStep1()) return;
+    document.getElementById('coStep1').style.display = 'none';
+    document.getElementById('coStep2').style.display = 'block';
+    document.getElementById('step1Ind').className = 'co-step done';
+    document.getElementById('step1Ind').querySelector('.co-step-num').textContent = '✓';
+    document.getElementById('step2Ind').className = 'co-step active';
+    document.getElementById('coLeft').scrollTop = 0;
+  }
+  function goToStep1() {
+    document.getElementById('coStep2').style.display = 'none';
+    document.getElementById('coStep1').style.display = 'block';
+    document.getElementById('step1Ind').className = 'co-step active';
+    document.getElementById('step1Ind').querySelector('.co-step-num').textContent = '1';
+    document.getElementById('step2Ind').className = 'co-step';
+    document.getElementById('coLeft').scrollTop = 0;
+  }
+  
+  function showErr(id, show) {
+    var el = document.getElementById('err_' + id);
+    var inp = document.getElementById('f_' + id);
+    if (el) { el.classList.toggle('show', show); }
+    if (inp) { inp.classList.toggle('error', show); }
+  }
+  function validateStep1() {
+    var ok = true;
+    var fields = [
+      { id: 'fname', fn: function(v){ return v.trim().length >= 2; } },
+      { id: 'lname', fn: function(v){ return v.trim().length >= 2; } },
+      { id: 'email', fn: function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); } },
+      { id: 'phone', fn: function(v){ return /^[\d\s\+\-]{10,14}$/.test(v.trim()); } },
+      { id: 'addr1', fn: function(v){ return v.trim().length >= 5; } },
+      { id: 'city',  fn: function(v){ return v.trim().length >= 2; } },
+      { id: 'state', fn: function(v){ return v !== ''; } },
+      { id: 'pin',   fn: function(v){ return /^\d{6}$/.test(v.trim()); } },
+    ];
+    fields.forEach(function(f) {
+      var el = document.get
+      var el = document.getElementById('f_' + f.id);
+      var valid = el && f.fn(el.value);
+      showErr(f.id, !valid);
+      if (!valid) ok = false;
+    });
+    return ok;
+  }
+  function validateStep2() {
+    var method = currentMethod;
+    if (method === 'upi') {
+      var upi = document.getElementById('f_upi').value.trim();
+      var valid = /^[\w.\-]+@[\w]+$/.test(upi);
+      showErr('upi', !valid);
+      return valid;
+    }
+    if (method === 'card') {
+      var num = document.getElementById('f_cardnum').value.replace(/\s/g,'');
+      var exp = document.getElementById('f_expiry').value;
+      var cvv = document.getElementById('f_cvv').value;
+      var n = num.length === 16, e = /^\d{2}\/\d{2}$/.test(exp), c = cvv.length >= 3;
+      showErr('cardnum', !n); showErr('expiry', !e); showErr('cvv', !c);
+      return n && e && c;
+    }
+    return true;
+  }
+  
+  // ─── PAYMENT METHOD SELECTION ───────────────
+  var currentMethod = 'upi';
+  var panels = ['upi','card','netbanking','wallet','emi','cod'];
+  function selectMethod(method, el) {
+    document.querySelectorAll('.pay-method').forEach(function(m){ m.classList.remove('selected'); });
+    el.classList.add('selected');
+    currentMethod = method;
+    panels.forEach(function(p){
+      var panel = document.getElementById('panel_' + p);
+      if (panel) panel.style.display = p === method ? 'block' : 'none';
+    });
+    var btn = document.getElementById('payNowBtn');
+    if (method === 'cod') {
+      btn.innerHTML = '<svg class="lock-ic" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Place Order (Pay on Delivery)';
+    } else if (method === 'emi') {
+      btn.innerHTML = '<svg class="lock-ic" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Confirm EMI — ₹8,208/mo';
+    } else {
+      btn.innerHTML = '<svg class="lock-ic" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Pay ₹1,16,230 Securely';
+    }
+  }
+  function selectUpi(el) { document.querySelectorAll('.upi-app').forEach(function(e){ e.classList.remove('selected'); }); el.classList.add('selected'); }
+  function selectBank(el) { document.querySelectorAll('#panel_netbanking .upi-app').forEach(function(e){ e.classList.remove('selected'); }); el.classList.add('selected'); }
+  function selectEmiBank(el) { document.querySelectorAll('.emi-bank').forEach(function(e){ e.classList.remove('selected'); }); el.classList.add('selected'); }
+  function selectEmi(el, months) {
+    document.querySelectorAll('.emi-opt').forEach(function(e){ e.classList.remove('selected'); });
+    el.classList.add('selected');
+    var btn = document.getElementById('payNowBtn');
+    var amt = el.querySelector('.emi-amount').textContent;
+    btn.innerHTML = '<svg class="lock-ic" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Confirm EMI — ' + amt + ' × ' + months + ' months';
+  }
+  
+  // ─── CARD FORMATTING ────────────────────────
+  function fmtCard(inp) {
+    var v = inp.value.replace(/\D/g,'').slice(0,16);
+    inp.value = v.replace(/(.{4})/g,'$1 ').trim();
+    var disp = v ? (v + '•'.repeat(16-v.length)).replace(/(.{4})/g,'$1 ').trim() : '•••• •••• •••• ••••';
+    document.getElementById('cardNumDisp').textContent = disp;
+    var ic = document.getElementById('cardTypeIcon');
+    if (v.startsWith('4')) ic.textContent = '💙';
+    else if (v.startsWith('5')) ic.textContent = '🔴';
+    else if (v.startsWith('3')) ic.textContent = '🟡';
+    else ic.textContent = '💳';
+  }
+  function fmtExpiry(inp) {
+    var v = inp.value.replace(/\D/g,'').slice(0,4);
+    if (v.length > 2) v = v.slice(0,2) + ' / ' + v.slice(2);
+    inp.value = v;
+    document.getElementById('cardExpDisp').textContent = v || 'MM/YY';
+  }
+  
+  // ─── COUPON ─────────────────────────────────
+  function applyCoupon() {
+    var code = document.getElementById('couponInput').value.trim().toUpperCase();
+    var success = document.getElementById('couponSuccess');
+    if (code === 'DIWALI25') {
+      success.classList.add('show');
+      document.getElementById('discountRow').style.display = 'flex';
+      document.getElementById('totalRow').querySelector('.value').textContent = '₹91,605';
+      document.getElementById('savingsBadge').style.display = 'flex';
+      document.getElementById('couponInput').style.borderColor = '#2d7a2d';
+    } else {
+      success.classList.remove('show');
+      document.getElementById('couponInput').style.borderColor = '#e53e3e';
+      document.getElementById('couponInput').classList.add('error');
+      setTimeout(function(){ document.getElementById('couponInput').classList.remove('error'); document.getElementById('couponInput').style.borderColor = ''; }, 1500);
+    }
+  }
+  
+  // ─── PAYMENT PROCESSING ─────────────────────
+  function processPayment() {
+    if (!validateStep2()) return;
+    document.getElementById('step2Ind').className = 'co-step done';
+    document.getElementById('step2Ind').querySelector('.co-step-num').textContent = '✓';
+    document.getElementById('step3Ind').className = 'co-step active';
+    document.getElementById('payProcessing').classList.add('show');
+    setTimeout(function(){
+      document.getElementById('payProcessing').classList.remove('show');
+      document.getElementById('step3Ind').className = 'co-step done';
+      document.getElementById('step3Ind').querySelector('.co-step-num').textContent = '✓';
+      showSuccess();
+    }, 2500);
+  }
+  
+  // ─── SUCCESS ────────────────────────────────
+  function showSuccess() {
+    var id = Math.floor(Math.random()*90000)+10000;
+    document.getElementById('orderIdVal').textContent = id;
+    document.getElementById('paySuccess').classList.add('show');
+    launchConfetti();
+  }
+  function closeSuccess() {
+    document.getElementById('paySuccess').classList.remove('show');
+    closeCheckout();
+    document.getElementById('coStep2').style.display = 'none';
+    document.getElementById('coStep1').style.display = 'block';
+    document.getElementById('step1Ind').className = 'co-step active';
+    document.getElementById('step1Ind').querySelector('.co-step-num').textContent = '1';
+    document.getElementById('step2Ind').className = 'co-step';
+    document.getElementById('step2Ind').querySelector('.co-step-num').textContent = '2';
+    document.getElementById('step3Ind').className = 'co-step';
+    document.getElementById('step3Ind').querySelector('.co-step-num').textContent = '3';
+  }
+  
+  // ─── CONFETTI ───────────────────────────────
+  function launchConfetti() {
+    var container = document.getElementById('confettiContainer');
+    container.innerHTML = '';
+    var colors = ['#FF9933','#FFB300','#1A237E','#D4AF37','#B71C1C','#fff'];
+    for (var i = 0; i < 80; i++) {
+      var piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = Math.random() * 100 + 'vw';
+      piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+      piece.style.width = (Math.random()*8+4) + 'px';
+      piece.style.height = (Math.random()*8+4) + 'px';
+      piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      piece.style.animationDuration = (Math.random()*2+2) + 's';
+      piece.style.animationDelay = (Math.random()*1.5) + 's';
+      container.appendChild(piece);
+    }
+  }
+  </script>
+  
+  </body>
+  </html>

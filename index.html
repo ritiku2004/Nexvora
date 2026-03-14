@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexvora — Build. Launch. Grow.</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./assets/style.css">
+
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- PARTICLES -->
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Nexvora</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="goTo('order')">Order Now</button>
+  <button class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="#portfolio" onclick="closeMenu()">Portfolio</a>
+  <a href="#process" onclick="closeMenu()">Process</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="#order" class="mobile-cta" onclick="closeMenu()">Order Now</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span> Now accepting new clients</div>
+    <h1 class="hero-title">Build.<br><span>Launch. Grow.</span></h1>
+    <p class="hero-sub">Get a stunning, high-performance website for your business — delivered fast, built to convert.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="goTo('order')">Order Now</button>
+      <a href="#pricing" class="btn-outline">View Pricing</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num" data-count="50" data-suffix="+">0+</div><div class="stat-label">Projects Delivered</div></div>
+      <div class="stat"><div class="stat-num">7 Days</div><div class="stat-label">Avg. Delivery</div></div>
+      <div class="stat"><div class="stat-num" data-count="100" data-suffix="%">0%</div><div class="stat-label">Satisfaction</div></div>
+      <div class="stat"><div class="stat-num">₹2,999</div><div class="stat-label">Starting From</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-head reveal">
+    <span class="section-tag">What We Build</span>
+    <h2 class="section-title">Services For Every Need</h2>
+    <p class="section-sub">From simple portfolio sites to full e-commerce platforms — we cover it all.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="grid-3 stagger-children">
+    <a href="Demo/Interior.html" class="card reveal" style="text-decoration: none; color: inherit;">
+      <div class="card-icon">🏠</div>
+      <div class="card-title">Basic Website</div>
+      <div class="card-desc">Perfect for freelancers and small businesses getting started online.</div>
+      <ul class="feat-list"><li>Up to 5 pages</li><li>Mobile responsive</li><li>Contact form</li><li>Basic SEO</li></ul>
+      
+    </a>
+    <a href="Demo/Interior.html" class="card reveal" style="text-decoration: none; color: inherit;">
+      <div class="card-icon">🏢</div>
+      <div class="card-title">Business Website</div>
+      <div class="card-desc">Professional presence for growing businesses that need to convert.</div>
+      <ul class="feat-list"><li>Up to 10 pages</li><li>Smooth animations</li><li>Admin panel</li><li>Advanced SEO</li></ul>
+      
+    </a>
+    <a href="Demo/E-commerce.html" class="card reveal">
+      <div class="card-icon">🛒</div>
+      <div class="card-title">E-Commerce Store</div>
+      <div class="card-desc">Full-featured online store with payments, cart, and product management.</div>
+      <ul class="feat-list"><li>Cart system</li><li>Payment integration</li><li>Product dashboard</li><li>Order tracking</li></ul>
+      
+    </a>
+    <a href="Demo/RealState.html" class="card reveal">
+      <div class="card-icon">🏡</div>
+      <div class="card-title">Real Estate </div>
+      <div class="card-desc">PropTech, Rentify, EstateX, Landhub, HomeSync.</div>
+      <ul class="feat-list"><li>Property listings</li><li>Search & filters</li><li>Agent profiles</li><li>Contact inquiry</li></ul>
+      
+    </a>
+    <a href="Demo/Restaurent.html" class="card reveal">
+      <div class="card-icon">🍽️</div>
+      <div class="card-title">Restaurant Website</div>
+      <div class="card-desc">Appetizing design with online menu, reservations, and delivery links.</div>
+      <ul class="feat-list"><li>Digital menu</li><li>Table reservation</li><li>Photo gallery</li><li>WhatsApp order</li></ul>
+      
+    </a>
+    <a href="Demo/Edtech.html" class="card reveal">
+      <div class="card-icon">📚</div>
+      <div class="card-title">Course Platform</div>
+      <div class="card-desc">PW-style platform with video lessons, quizzes, and student dashboard.</div>
+      <ul class="feat-list"><li>Video lessons</li><li>Quiz system</li><li>Student dashboard</li><li>Payment gateway</li></ul>
+      
+    </a>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-head sec-center reveal">
+    <span class="section-tag">Transparent Pricing</span>
+    <h2 class="section-title">Simple, Honest Plans</h2>
+    <p class="section-sub">No hidden charges. No surprises. Just great websites at fair prices.</p>
+    <div class="divider" style="margin:0.6rem auto 0"></div>
+  </div>
+  <div class="pricing-grid stagger-children">
+    <div class="pricing-card reveal scale-in">
+      <div class="plan-name">Basic</div>
+      <div class="plan-price">₹2,999</div>
+      <div class="plan-note">one-time payment</div>
+      <div class="delivery-tag">⚡ Delivered in 3 days</div>
+      <ul class="plan-list">
+        <li><span class="y">✓</span> 5 pages</li>
+        <li><span class="y">✓</span> Mobile responsive</li>
+        <li><span class="y">✓</span> Contact form</li>
+        <li><span class="y">✓</span> Basic SEO</li>
+        <li><span class="y">✓</span> 2 revisions</li>
+        <li><span class="n">✗</span> Admin panel</li>
+        <li><span class="n">✗</span> E-commerce</li>
+      </ul>
+      <button class="pbtn pbtn-ghost" onclick="goTo('order')">Get Started</button>
+    </div>
+    <div class="pricing-card featured reveal scale-in">
+      <div class="popular-badge">Most Popular</div>
+      <div class="plan-name">Standard</div>
+      <div class="plan-price">₹9,999</div>
+      <div class="plan-note">one-time payment</div>
+      <div class="delivery-tag">⚡ Delivered in 7 days</div>
+      <ul class="plan-list">
+        <li><span class="y">✓</span> 10 pages</li>
+        <li><span class="y">✓</span> Animations & effects</li>
+        <li><span class="y">✓</span> Admin panel</li>
+        <li><span class="y">✓</span> Advanced SEO</li>
+        <li><span class="y">✓</span> Hosting setup</li>
+        <li><span class="y">✓</span> 5 revisions</li>
+        <li><span class="y">✓</span> 1 month support</li>
+      </ul>
+      <button class="pbtn pbtn-fill" onclick="goTo('order')">Order Now</button>
+    </div>
+    <div class="pricing-card reveal scale-in">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">₹14,999+</div>
+      <div class="plan-note">one-time payment</div>
+      <div class="delivery-tag">⚡ Delivered in 14 days</div>
+      <ul class="plan-list">
+        <li><span class="y">✓</span> E-commerce store</li>
+        <li><span class="y">✓</span> Payment integration</li>
+        <li><span class="y">✓</span> Full customization</li>
+        <li><span class="y">✓</span> Dashboard & CMS</li>
+        <li><span class="y">✓</span> Unlimited revisions</li>
+        <li><span class="y">✓</span> 3 months support</li>
+        <li><span class="y">✓</span> Speed optimization</li>
+      </ul>
+      <button class="pbtn pbtn-ghost" onclick="goTo('order')">Get Started</button>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section id="calculator">
+  <div class="section-head sec-center reveal">
+    <span class="section-tag">Build Your Package</span>
+    <h2 class="section-title">Price Calculator</h2>
+    <p class="section-sub">Select features and get an instant estimate.</p>
+    <div class="divider" style="margin:0.6rem auto 0"></div>
+  </div>
+  <div class="calc-box reveal scale-in">
+    <div class="calc-grid">
+      <div class="calc-item" id="ci0" onclick="toggleCalc(0)"><input type="checkbox" id="cb0"><div><div class="ci-label">Basic Website</div><div class="ci-price">+₹2,999</div></div></div>
+      <div class="calc-item" id="ci1" onclick="toggleCalc(1)"><input type="checkbox" id="cb1"><div><div class="ci-label">Admin Panel</div><div class="ci-price">+₹3,000</div></div></div>
+      <div class="calc-item" id="ci2" onclick="toggleCalc(2)"><input type="checkbox" id="cb2"><div><div class="ci-label">E-Commerce</div><div class="ci-price">+₹5,000</div></div></div>
+      <div class="calc-item" id="ci3" onclick="toggleCalc(3)"><input type="checkbox" id="cb3"><div><div class="ci-label">SEO Package</div><div class="ci-price">+₹2,000</div></div></div>
+      <div class="calc-item" id="ci4" onclick="toggleCalc(4)"><input type="checkbox" id="cb4"><div><div class="ci-label">Payment Gateway</div><div class="ci-price">+₹1,500</div></div></div>
+      <div class="calc-item" id="ci5" onclick="toggleCalc(5)"><input type="checkbox" id="cb5"><div><div class="ci-label">Monthly Maintenance</div><div class="ci-price">+₹999/mo</div></div></div>
+      <div class="calc-item" id="ci6" onclick="toggleCalc(6)"><input type="checkbox" id="cb6"><div><div class="ci-label">Logo Design</div><div class="ci-price">+₹1,200</div></div></div>
+      <div class="calc-item" id="ci7" onclick="toggleCalc(7)"><input type="checkbox" id="cb7"><div><div class="ci-label">Animations</div><div class="ci-price">+₹2,500</div></div></div>
+    </div>
+    <div class="calc-result">
+      <div class="calc-result-label">Estimated Total</div>
+      <div class="calc-result-price" id="calcTotal">₹0</div>
+    </div>
+    <button class="calc-order-btn" onclick="goTo('order')">Order This Package →</button>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-head reveal">
+    <span class="section-tag">Our Work</span>
+    <h2 class="section-title">Demo Projects</h2>
+    <p class="section-sub">A glimpse of what we can built for our clients.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="portfolio-grid stagger-children">
+    <div class="pcard reveal">
+      <div class="pcard-img pb1"><span class="pcard-emoji">🏫</span><div class="pcard-overlay"><button class="demo-btn">View Demo</button></div></div>
+      <div class="pcard-body"><div class="pcard-type">Real Estate</div><div class="pcard-name">Surya construction</div><div class="pcard-desc">Modern real estate website with property listings and inquiry system.</div></div>
+    </div>
+    <div class="pcard reveal">
+      <div class="pcard-img pb2"><span class="pcard-emoji">🍕</span><div class="pcard-overlay"><button class="demo-btn">View Demo</button></div></div>
+      <div class="pcard-body"><div class="pcard-type">Restaurant</div><div class="pcard-name">Spice Garden</div><div class="pcard-desc">Online menu, table booking, and delivery integration.</div></div>
+    </div>
+    <div class="pcard reveal">
+      <div class="pcard-img pb5"><span class="pcard-emoji">👗</span><div class="pcard-overlay"><button class="demo-btn">View Demo</button></div></div>
+      <div class="pcard-body"><div class="pcard-type">E-Commerce</div><div class="pcard-name">Trendzz Fashion</div><div class="pcard-desc">Full online store with Razorpay payment and order tracking.</div></div>
+    </div>
+    <div class="pcard reveal">
+      <div class="pcard-img pb3"><span class="pcard-emoji">🛋️</span><div class="pcard-overlay"><button class="demo-btn">View Demo</button></div></div>
+      <div class="pcard-body"><div class="pcard-type">Interior Design</div><div class="pcard-name">Elegant Interiors</div><div class="pcard-desc"> Modern interior design portfolio showcasing sofas, curtains, lighting and beautiful living spaces.</div></div>
+    </div>
+    <div class="pcard reveal">
+      <div class="pcard-img pb4"><span class="pcard-emoji">📖</span><div class="pcard-overlay"><button class="demo-btn">View Demo</button></div></div>
+      <div class="pcard-body"><div class="pcard-type">EdTech</div><div class="pcard-name">StudyRise Academy</div><div class="pcard-desc">Course platform with video lessons, quizzes, and student dashboard.</div></div>
+    </div>   
+    <div class="pcard reveal">
+      <div class="pcard-img pb6"><span class="pcard-emoji">✍️</span><div class="pcard-overlay"><button class="demo-btn">View Demo</button></div></div>
+      <div class="pcard-body"><div class="pcard-type">Blog</div><div class="pcard-name">TechByte Blog</div><div class="pcard-desc">Tech blog with CMS, categories, author dashboard, and newsletter.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="section-head sec-center reveal">
+    <span class="section-tag">How It Works</span>
+    <h2 class="section-title">Simple 4-Step Process</h2>
+    <p class="section-sub">From order to delivery — clear, fast, and hassle-free.</p>
+    <div class="divider" style="margin:0.6rem auto 0"></div>
+  </div>
+  <div class="process-grid stagger-children">
+    <div class="proc-card reveal from-left"><div class="proc-num">01</div><div class="proc-title">Fill the Order Form</div><div class="proc-desc">Tell us your requirements, budget, and deadline. Takes under 3 minutes.</div></div>
+    <div class="proc-card reveal"><div class="proc-num">02</div><div class="proc-title">We Confirm & Plan</div><div class="proc-desc">We review your request, confirm via WhatsApp, and collect advance payment.</div></div>
+    <div class="proc-card reveal"><div class="proc-num">03</div><div class="proc-title">Design & Develop</div><div class="proc-desc">Our team builds your website. You get live progress updates throughout.</div></div>
+    <div class="proc-card reveal from-right"><div class="proc-num">04</div><div class="proc-title">Review & Deliver</div><div class="proc-desc">You review, request revisions if needed, and we deploy your site live!</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-head reveal">
+    <span class="section-tag">Client Love</span>
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="testi-grid stagger-children">
+    <div class="tcard reveal">
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <div class="ttext">"Nexvora delivered my restaurant website in just 4 days. The design looks premium and my customers love ordering through it. Absolutely worth every rupee!"</div>
+      <div class="tauthor"><div class="tavatar">R</div><div><div class="tname">Rajesh Kumar</div><div class="trole">Spice Garden, Delhi</div></div></div>
+    </div>
+    <div class="tcard reveal">
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <div class="ttext">"I needed a portfolio site for my design work. Nexvora understood my vision and exceeded expectations. The animations are smooth and the site gets compliments daily."</div>
+      <div class="tauthor"><div class="tavatar">P</div><div><div class="tname">Priya Mehta</div><div class="trole">Freelance Designer, Mumbai</div></div></div>
+    </div>
+    <div class="tcard reveal">
+      <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+      <div class="ttext">"Our school website was outdated for years. Nexvora built us a beautiful new site with online admissions and notice board. Enrollments have increased!"</div>
+      <div class="tauthor"><div class="tavatar">S</div><div><div class="tname">Sunita Rao</div><div class="trole">Principal, GreenPine School</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER FORM -->
+<section id="order">
+  <div class="order-wrap">
+    <div class="order-info reveal from-left">
+      <span class="section-tag">Get Started Today</span>
+      <h2 class="section-title">Order Your Website</h2>
+      <div class="divider"></div>
+      <p class="section-sub" style="margin-top:0.8rem">Fill the form and we'll contact you within 2 hours via WhatsApp.</p>
+      <ul class="perk-list">
+        <li><span class="perk-ico">💰</span><div><strong>30% Advance Only</strong>Pay half upfront, rest after you approve the design.</div></li>
+        <li><span class="perk-ico">🔄</span><div><strong>Free Revisions</strong>Not happy? We revise until you love it.</div></li>
+        <li><span class="perk-ico">⚡</span><div><strong>Fast Delivery</strong>Basic sites in 3 days. We don't keep you waiting.</div></li>
+        <li><span class="perk-ico">🛡️</span><div><strong>Money Back Guarantee</strong>If we can't deliver, you get a full refund.</div></li>
+        <li><span class="perk-ico">📞</span><div><strong>Dedicated Support</strong>Direct WhatsApp access to your developer.</div></li>
+      </ul>
+    </div>
+    <div class="order-form reveal from-right">
+      <div class="frow">
+        <div class="fg"><label>Full Name *</label><input type="text" id="fname" placeholder="Your name"></div>
+        <div class="fg"><label>WhatsApp Number *</label><input type="tel" id="fphone" placeholder="+91 XXXXX XXXXX"></div>
+      </div>
+      <div class="fg"><label>Email Address *</label><input type="email" id="femail" placeholder="you@example.com"></div>
+      <div class="frow">
+        <div class="fg">
+          <label>Website Type *</label>
+          <select id="ftype">
+            <option value="">Select type...</option>
+            <option>Basic Website</option><option>Business Website</option>
+            <option>E-Commerce Store</option><option>School Website</option>
+            <option>Restaurant Website</option><option>Portfolio Website</option>
+            <option>Course Platform</option><option>Blog Website</option><option>Other</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Budget</label>
+          <select id="fbudget">
+            <option value="">Select budget...</option>
+            <option>₹2,999 – ₹5,000</option><option>₹5,000 – ₹10,000</option>
+            <option>₹10,000 – ₹20,000</option><option>₹20,000+</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label>Deadline</label><input type="date" id="fdeadline"></div>
+      <div class="fg"><label>Features Needed</label><input type="text" id="ffeatures" placeholder="e.g. Admin panel, Payment gateway, Blog..."></div>
+      <div class="fg"><label>Project Description *</label><textarea id="fdesc" placeholder="Tell us about your project — what you do, what you need, any references..."></textarea></div>
+      <button class="fsub" onclick="submitOrder()">Send My Order Request 🚀</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-head sec-center reveal">
+    <span class="section-tag">Questions</span>
+    <h2 class="section-title">Frequently Asked</h2>
+    <div class="divider" style="margin:0.6rem auto 0"></div>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">How long does it take to build a website? <span class="faq-icon">+</span></button><div class="faq-a">Basic websites take 3–5 days, business websites 7–10 days, and e-commerce/complex platforms 14–20 days. We confirm the exact timeline before starting.</div></div>
+    <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">What technologies do you use? <span class="faq-icon">+</span></button><div class="faq-a">We use HTML/CSS/JS for simple sites, React + Node.js for business sites, and Next.js + MongoDB for advanced platforms. We pick the best stack for your needs.</div></div>
+    <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">How does payment work? <span class="faq-icon">+</span></button><div class="faq-a">We take 50% advance to start and the remaining 50% after you approve the final design. We accept UPI, bank transfer, Razorpay, and PayPal.</div></div>
+    <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">Do you provide hosting? <span class="faq-icon">+</span></button><div class="faq-a">Yes! We set up hosting on Vercel, Netlify, or VPS. Hosting costs depend on the platform — we'll guide you through the best option for your budget.</div></div>
+    <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">What if I'm not happy with the design? <span class="faq-icon">+</span></button><div class="faq-a">We offer free revisions on every plan. If we're completely unable to meet your requirements, we offer a full refund on the advance paid.</div></div>
+    <div class="faq-item reveal"><button class="faq-q" onclick="toggleFaq(this)">Do you offer ongoing maintenance? <span class="faq-icon">+</span></button><div class="faq-a">Yes! Monthly maintenance packages start at ₹999/month, covering updates, security checks, backups, and minor content changes.</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-head sec-center reveal">
+    <span class="section-tag">Get In Touch</span>
+    <h2 class="section-title">Let's Talk</h2>
+    <p class="section-sub">Have a question or want to discuss your project? Reach out — we reply fast.</p>
+    <div class="divider" style="margin:0.6rem auto 0"></div>
+  </div>
+  <div class="contact-btns reveal">
+    <a href="https://wa.me/917811089216" class="cbtn" target="_blank">💬 WhatsApp: +91 78110 89216</a>
+    <a href="mailto:nexvoraweb@gmail.com" class="cbtn">✉️ nexvoraweb@gmail.com</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Nexvora</div>
+  <div class="footer-tag">Build. Launch. Grow.</div>
+  <div class="footer-links">
+    <a href="#home">Home</a><a href="#services">Services</a><a href="#pricing">Pricing</a>
+    <a href="#portfolio">Portfolio</a><a href="#order">Order</a><a href="#contact">Contact</a>
+  </div>
+  <div class="footer-copy">© 2025 Nexvora. All rights reserved. Built with ❤️ for growing businesses.</div>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/917811089216" class="wa-fab" target="_blank" title="Chat on WhatsApp">💬</a>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span>✅</span><span>Order submitted! We'll contact you within 2 hours.</span></div>
+
+<script src="./assets/script.js"></script>
+</body>
+</html>

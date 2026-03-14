@@ -1,0 +1,2323 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spice Garden | Premium Café Experience</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP + Plugins -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Three.js for WebGL -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#FF6B35',
+                        secondary: '#F7931E',
+                        accent: '#FFD23F',
+                        dark: '#0A0A0A',
+                        darker: '#050505',
+                        surface: '#111111',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            font-family: 'Inter', sans-serif;
+            background: #050505;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        
+        /* GPU Acceleration */
+        .gpu-accelerated {
+            transform: translateZ(0);
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+        
+        /* Glass Morphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Text Gradient */
+        .text-gradient {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 50%, #FFD23F 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Shimmer Loading */
+        .shimmer {
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.1) 50%, 
+                rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        /* Magnetic Button */
+        .magnetic-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        /* Cursor Glow */
+        .cursor-glow {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,107,53,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+        }
+        
+        /* Custom Cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #FF6B35;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), 
+                        width 0.3s, 
+                        height 0.3s,
+                        border-color 0.3s;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: difference;
+        }
+        
+        .custom-cursor.hover {
+            width: 50px;
+            height: 50px;
+            border-color: #FFD23F;
+            background: rgba(255, 107, 53, 0.1);
+        }
+        
+        .cursor-dot {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #FF6B35;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Liquid Blob */
+        .liquid-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            animation: blob-morph 8s ease-in-out infinite;
+        }
+        
+        @keyframes blob-morph {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
+            75% { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
+        }
+        
+        /* Text Reveal */
+        .text-reveal {
+            overflow: hidden;
+        }
+        
+        .text-reveal span {
+            display: inline-block;
+            transform: translateY(100%);
+        }
+        
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #FF6B35, #F7931E, #FFD23F);
+            z-index: 1000;
+            transform-origin: left;
+            transform: scaleX(0);
+        }
+        
+        /* Food Card Enhanced */
+        .food-card {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .food-card-inner {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .food-card:hover .food-card-inner {
+            transform: translateY(-10px) rotateX(5deg);
+        }
+        
+        .food-card:hover .food-image {
+            transform: scale(1.1);
+        }
+        
+        .food-image {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .food-card .shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+            pointer-events: none;
+        }
+        
+        .food-card:hover .shine {
+            left: 150%;
+        }
+        
+        /* Filter Tag Active */
+        .filter-tag {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .filter-tag.active {
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            border-color: transparent;
+            transform: scale(1.05);
+        }
+        
+        /* Stagger Animation Classes */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        /* Navigation */
+        .nav-hidden {
+            transform: translateY(-100%);
+        }
+        
+        .nav-visible {
+            transform: translateY(0);
+        }
+        
+        /* Input Focus Animation */
+        .input-animated {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .input-animated::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #FF6B35, #F7931E);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateX(-50%);
+        }
+        
+        .input-animated:focus-within::after {
+            width: 100%;
+        }
+        
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: ripple-animation 0.6s ease-out;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        /* Noise Overlay */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9997;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        
+        /* Hide scrollbar but keep functionality */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        body::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        
+        body::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        
+        body::-webkit-scrollbar-thumb:hover {
+            background: #FF6B35;
+        }
+
+        /* Hero 3D Canvas */
+        #hero-3d-canvas {
+            display: block;
+            filter: drop-shadow(0 0 40px rgba(255,107,53,0.35)) drop-shadow(0 0 80px rgba(247,147,30,0.2));
+            transition: filter 0.3s ease;
+        }
+        #hero-3d-canvas:hover {
+            filter: drop-shadow(0 0 60px rgba(255,107,53,0.55)) drop-shadow(0 0 120px rgba(247,147,30,0.3));
+            cursor: grabbing;
+        }
+
+        @keyframes float-badge1 {
+            0%, 100% { transform: translateY(0px) rotate(-2deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
+        }
+        @keyframes float-badge2 {
+            0%, 100% { transform: translateY(0px) rotate(1deg); }
+            50% { transform: translateY(-16px) rotate(-1deg); }
+        }
+        @keyframes float-badge3 {
+            0%, 100% { transform: translateX(0px); }
+            50% { transform: translateX(8px); }
+        }
+
+        /* Hero Section Specific */
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-visual {
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Ensure proper stacking */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-bg-elements {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased bg-darker text-white">
+
+    <!-- ══ PREMIUM LOADER ══ -->
+    <div id="site-loader" style="
+        position:fixed;inset:0;z-index:99999;background:#050505;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;
+        transition:opacity 0.8s ease, visibility 0.8s ease;
+    ">
+        <canvas id="loader-canvas" width="200" height="200" style="display:block;margin:0 auto;"></canvas>
+        <div style="margin-top:24px;font-family:'Playfair Display',serif;font-size:1.4rem;
+                    background:linear-gradient(135deg,#FF6B35,#F7931E,#FFD23F);
+                    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                    letter-spacing:0.15em;font-weight:600;">
+            SPICE GARDEN
+        </div>
+        <div style="margin-top:12px;width:160px;height:2px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden;">
+            <div id="loader-bar" style="height:100%;width:0%;background:linear-gradient(90deg,#FF6B35,#FFD23F);
+                 border-radius:2px;transition:width 0.05s linear;"></div>
+        </div>
+    </div>
+
+    <!-- WebGL Background -->
+    <canvas id="webgl-bg"></canvas>
+    
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+    
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursor-glow"></div>
+    
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
+    
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 px-6 py-4 nav-hidden">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-2xl px-6 py-3">
+            <a href="#" class="flex items-center gap-3 magnetic-btn" data-magnetic>
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                    <i data-lucide="leaf" class="w-5 h-5 text-white"></i>
+                </div>
+                <span class="font-serif text-xl font-bold">Spice Garden</span>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors magnetic-btn" data-magnetic>Home</a>
+                <a href="#menu" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors magnetic-btn" data-magnetic>Menu</a>
+                <a href="#booking" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors magnetic-btn" data-magnetic>Book Table</a>
+                <a href="#about" class="nav-link text-sm font-medium text-gray-300 hover:text-white transition-colors magnetic-btn" data-magnetic>About</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCart()" class="magnetic-btn relative p-3 glass rounded-full hover:bg-white/10 transition-all" data-magnetic>
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 w-5 h-5 bg-primary rounded-full text-xs flex items-center justify-center font-bold">0</span>
+                </button>
+                <button onclick="toggleLogin()" class="magnetic-btn hidden md:block px-6 py-2.5 bg-gradient-to-r from-primary to-secondary rounded-full text-sm font-medium hover:shadow-lg hover:shadow-primary/25 transition-all" data-magnetic>
+                    Login
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - FIXED LAYOUT -->
+    <section id="home" class="hero-section relative overflow-hidden pt-20">
+        <!-- Background Elements -->
+        <div class="hero-bg-elements">
+            <div class="liquid-blob w-96 h-96 bg-primary/30 top-20 -left-20"></div>
+            <div class="liquid-blob w-80 h-80 bg-secondary/20 bottom-20 right-10" style="animation-delay: -2s;"></div>
+            <div class="liquid-blob w-64 h-64 bg-accent/20 top-1/2 left-1/2" style="animation-delay: -4s;"></div>
+        </div>
+        
+        <div class="w-full max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[80vh]">
+                <!-- Left Content - FIXED ALIGNMENT -->
+                <div class="hero-content space-y-8 max-w-xl">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 glass rounded-full text-sm stagger-item">
+                        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span>Open Now - Until 11 PM</span>
+                    </div>
+                    
+                    <h1 class="font-serif text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                        <span class="text-reveal block overflow-hidden">
+                            <span class="inline-block">Taste the</span>
+                        </span>
+                        <span class="text-reveal block overflow-hidden text-gradient">
+                            <span class="inline-block" id="hero-typing">Extraordinary</span>
+                        </span>
+                    </h1>
+                    
+                    <p class="text-lg text-gray-400 leading-relaxed stagger-item max-w-md">
+                        Experience authentic flavors crafted with passion. From farm-fresh ingredients to your plate in 30 minutes or less.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 stagger-item">
+                        <button onclick="scrollToSection('menu')" class="magnetic-btn px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full font-medium hover:shadow-xl hover:shadow-primary/30 transition-all transform hover:scale-105" data-magnetic>
+                            Order Now <i data-lucide="arrow-right" class="inline-block w-4 h-4 ml-2"></i>
+                        </button>
+                        <button onclick="scrollToSection('booking')" class="magnetic-btn px-8 py-4 glass rounded-full font-medium hover:bg-white/10 transition-all" data-magnetic>
+                            Book Table
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-8 pt-4 stagger-item">
+                        <div class="text-center">
+                            <div class="font-serif text-3xl font-bold text-gradient counter" data-target="4.9">0</div>
+                            <div class="text-sm text-gray-500">Rating</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/10"></div>
+                        <div class="text-center">
+                            <div class="font-serif text-3xl font-bold text-gradient counter" data-target="15">0</div>
+                            <div class="text-sm text-gray-500">k+ Customers</div>
+                        </div>
+                        <div class="w-px h-12 bg-white/10"></div>
+                        <div class="text-center">
+                            <div class="font-serif text-3xl font-bold text-gradient">30<span class="text-lg">min</span></div>
+                            <div class="text-sm text-gray-500">Delivery</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Visual — GOD LEVEL 3D -->
+                <div class="hero-visual hidden lg:flex justify-center items-center relative" style="min-height:560px;">
+                    <!-- Ambient glow rings -->
+                    <div class="absolute inset-0 pointer-events-none" id="glow-rings">
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full border border-primary/10 animate-ping" style="animation-duration:4s;"></div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] rounded-full border border-orange-400/15 animate-ping" style="animation-duration:3s;animation-delay:0.5s;"></div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" style="animation-duration:2s;"></div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-secondary/15 rounded-full blur-2xl animate-pulse" style="animation-duration:3s;animation-delay:1s;"></div>
+                    </div>
+
+                    <!-- 3D Model Canvas -->
+                    <canvas id="hero-3d-canvas" style="width:520px;height:520px;border-radius:50%;position:relative;z-index:5;cursor:grab;"></canvas>
+
+                    <!-- Floating Glass Badge — top right -->
+                    <div class="absolute top-10 -right-4 glass-strong p-4 rounded-2xl z-20" style="animation: float-badge1 4s ease-in-out infinite;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-green-500/20 flex items-center justify-center">
+                                <i data-lucide="leaf" class="w-4 h-4 text-green-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-medium text-sm">100% Organic</div>
+                                <div class="text-xs text-gray-400">Farm fresh</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Price Badge — bottom left -->
+                    <div class="absolute bottom-16 -left-6 glass-strong px-5 py-3 rounded-2xl z-20" style="animation: float-badge2 5s ease-in-out infinite;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center">
+                                <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-yellow-400"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-sm text-gradient">Chef's Pick</div>
+                                <div class="text-xs text-gray-400">From $12</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating delivery badge -->
+                    <div class="absolute top-1/2 -right-8 glass-strong px-4 py-2.5 rounded-2xl z-20" style="animation: float-badge3 6s ease-in-out infinite;">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="zap" class="w-4 h-4 text-yellow-400"></i>
+                            <span class="text-sm font-medium">30 min</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="py-12 relative z-10">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="glass-strong rounded-2xl p-2 flex items-center gap-2 input-animated stagger-item">
+                <i data-lucide="search" class="w-5 h-5 text-gray-400 ml-4"></i>
+                <input type="text" 
+                       id="search-input"
+                       placeholder="Search for dishes, ingredients..." 
+                       class="flex-1 bg-transparent border-none outline-none text-white placeholder-gray-500 px-4 py-3 text-lg"
+                       onkeyup="handleSearch(this.value)">
+                <button class="px-6 py-3 bg-primary rounded-xl font-medium hover:bg-primary/80 transition-all magnetic-btn" data-magnetic>
+                    Search
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ CATEGORIES — PREMIUM REDESIGN ══ -->
+    <section id="categories" class="py-24 relative overflow-hidden">
+        <!-- Section ambient blobs -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="liquid-blob w-[500px] h-[500px] bg-primary/10 -top-20 -right-40" style="animation-delay:-3s;"></div>
+            <div class="liquid-blob w-[400px] h-[400px] bg-secondary/8 bottom-0 -left-32" style="animation-delay:-6s;"></div>
+            <div class="absolute inset-0" style="background:radial-gradient(ellipse 80% 40% at 50% 50%, rgba(255,107,53,0.04) 0%, transparent 70%);"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+
+            <!-- Header -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6 stagger-item">
+                <div>
+                    <span class="inline-flex items-center gap-2 text-primary text-sm font-medium tracking-widest uppercase mb-3">
+                        <span class="w-8 h-px bg-primary inline-block"></span>
+                        Browse By Type
+                    </span>
+                    <h2 class="font-serif text-5xl font-bold leading-tight">
+                        Explore <span class="text-gradient">Categories</span>
+                    </h2>
+                    <p class="text-gray-400 mt-3 text-lg">8 curated collections · 120+ dishes</p>
+                </div>
+                <button onclick="scrollToSection('menu')" class="self-start md:self-auto magnetic-btn px-7 py-3 glass rounded-full text-sm font-medium hover:bg-white/10 transition-all flex items-center gap-2" data-magnetic>
+                    View All Menu <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- FEATURED WIDE CARD + SIDE CARDS grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-5">
+
+                <!-- Featured card (spans 1 col on lg, wide on its own row) -->
+                <div class="cat-card-featured lg:col-span-1 relative rounded-3xl overflow-hidden cursor-pointer group stagger-item"
+                     style="min-height:320px;" onclick="filterCategory('all')">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80"
+                         alt="All Menu"
+                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0" style="background:linear-gradient(160deg,rgba(255,107,53,0.6) 0%,rgba(5,5,5,0.85) 100%);"></div>
+                    <!-- Neon border glow on hover -->
+                    <div class="absolute inset-0 rounded-3xl border border-primary/0 group-hover:border-primary/50 transition-all duration-500"></div>
+                    <div class="absolute inset-0 p-8 flex flex-col justify-between">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:rgba(255,107,53,0.25);backdrop-filter:blur(8px);border:1px solid rgba(255,107,53,0.3);">
+                            <i data-lucide="utensils" class="w-7 h-7 text-primary"></i>
+                        </div>
+                        <div>
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold mb-3 text-white" style="background:rgba(255,107,53,0.35);backdrop-filter:blur(6px);">
+                                🔥 Most Popular
+                            </div>
+                            <h3 class="font-serif text-3xl font-bold text-white mb-1">All Menu</h3>
+                            <p class="text-white/60 text-sm mb-4">Every dish we craft</p>
+                            <div class="flex items-center gap-4">
+                                <span class="text-2xl font-bold text-primary">120+</span>
+                                <span class="text-white/50 text-sm">dishes available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right 2-col grid -->
+                <div class="lg:col-span-2 grid grid-cols-2 gap-5">
+                    <!-- Vegetarian -->
+                    <div class="cat-card relative rounded-2xl overflow-hidden cursor-pointer group stagger-item"
+                         style="min-height:150px;" onclick="filterCategory('vegetarian')">
+                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Vegetarian"
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(34,197,94,0.55) 0%,rgba(5,5,5,0.8) 100%);"></div>
+                        <div class="absolute inset-0 rounded-2xl border border-green-500/0 group-hover:border-green-500/40 transition-all duration-500"></div>
+                        <div class="absolute inset-0 p-5 flex flex-col justify-between">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(34,197,94,0.2);backdrop-filter:blur(6px);border:1px solid rgba(34,197,94,0.3);">
+                                <i data-lucide="leaf" class="w-5 h-5 text-green-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-white">Vegetarian</h3>
+                                <p class="text-white/50 text-xs mt-0.5">45 dishes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Non-Veg -->
+                    <div class="cat-card relative rounded-2xl overflow-hidden cursor-pointer group stagger-item"
+                         style="min-height:150px;" onclick="filterCategory('non-veg')">
+                        <img src="https://images.unsplash.com/photo-1598103442097-8b74394b95c7?w=600&q=80" alt="Non-Veg"
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(239,68,68,0.55) 0%,rgba(5,5,5,0.8) 100%);"></div>
+                        <div class="absolute inset-0 rounded-2xl border border-red-500/0 group-hover:border-red-500/40 transition-all duration-500"></div>
+                        <div class="absolute inset-0 p-5 flex flex-col justify-between">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(239,68,68,0.2);backdrop-filter:blur(6px);border:1px solid rgba(239,68,68,0.3);">
+                                <i data-lucide="flame" class="w-5 h-5 text-red-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-white">Non-Veg</h3>
+                                <p class="text-white/50 text-xs mt-0.5">50 dishes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Desserts -->
+                    <div class="cat-card relative rounded-2xl overflow-hidden cursor-pointer group stagger-item"
+                         style="min-height:150px;" onclick="filterCategory('desserts')">
+                        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=600&q=80" alt="Desserts"
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(236,72,153,0.55) 0%,rgba(5,5,5,0.8) 100%);"></div>
+                        <div class="absolute inset-0 rounded-2xl border border-pink-500/0 group-hover:border-pink-500/40 transition-all duration-500"></div>
+                        <div class="absolute inset-0 p-5 flex flex-col justify-between">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(236,72,153,0.2);backdrop-filter:blur(6px);border:1px solid rgba(236,72,153,0.3);">
+                                <i data-lucide="cake" class="w-5 h-5 text-pink-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-white">Desserts</h3>
+                                <p class="text-white/50 text-xs mt-0.5">25 dishes</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drinks -->
+                    <div class="cat-card relative rounded-2xl overflow-hidden cursor-pointer group stagger-item"
+                         style="min-height:150px;" onclick="filterCategory('drinks')">
+                        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=600&q=80" alt="Drinks"
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(99,102,241,0.55) 0%,rgba(5,5,5,0.8) 100%);"></div>
+                        <div class="absolute inset-0 rounded-2xl border border-indigo-500/0 group-hover:border-indigo-500/40 transition-all duration-500"></div>
+                        <div class="absolute inset-0 p-5 flex flex-col justify-between">
+                            <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(99,102,241,0.2);backdrop-filter:blur(6px);border:1px solid rgba(99,102,241,0.3);">
+                                <i data-lucide="coffee" class="w-5 h-5 text-indigo-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-serif text-xl font-bold text-white">Drinks</h3>
+                                <p class="text-white/50 text-xs mt-0.5">30 options</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom row of 4 pill cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Breakfast -->
+                <div class="cat-pill relative rounded-2xl overflow-hidden cursor-pointer group stagger-item flex items-center gap-4 p-5"
+                     style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);"
+                     onclick="filterCategory('breakfast')">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(135deg,rgba(251,191,36,0.12),transparent);"></div>
+                    <div class="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center relative z-10" style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.25);">
+                        <i data-lucide="sunrise" class="w-6 h-6 text-yellow-400"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h4 class="font-medium text-white group-hover:text-yellow-300 transition-colors">Breakfast</h4>
+                        <p class="text-gray-500 text-xs">18 items</p>
+                    </div>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4 text-gray-600 group-hover:text-yellow-400 ml-auto relative z-10 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                </div>
+
+                <!-- Spicy -->
+                <div class="cat-pill relative rounded-2xl overflow-hidden cursor-pointer group stagger-item flex items-center gap-4 p-5"
+                     style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);"
+                     onclick="filterCategory('spicy')">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(135deg,rgba(239,68,68,0.12),transparent);"></div>
+                    <div class="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center relative z-10" style="background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.25);">
+                        <i data-lucide="zap" class="w-6 h-6 text-red-400"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h4 class="font-medium text-white group-hover:text-red-300 transition-colors">Spicy</h4>
+                        <p class="text-gray-500 text-xs">22 items</p>
+                    </div>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4 text-gray-600 group-hover:text-red-400 ml-auto relative z-10 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                </div>
+
+                <!-- Healthy -->
+                <div class="cat-pill relative rounded-2xl overflow-hidden cursor-pointer group stagger-item flex items-center gap-4 p-5"
+                     style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);"
+                     onclick="filterCategory('healthy')">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(135deg,rgba(34,197,94,0.12),transparent);"></div>
+                    <div class="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center relative z-10" style="background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.25);">
+                        <i data-lucide="heart-pulse" class="w-6 h-6 text-green-400"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h4 class="font-medium text-white group-hover:text-green-300 transition-colors">Healthy</h4>
+                        <p class="text-gray-500 text-xs">35 items</p>
+                    </div>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4 text-gray-600 group-hover:text-green-400 ml-auto relative z-10 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                </div>
+
+                <!-- Bestsellers -->
+                <div class="cat-pill relative rounded-2xl overflow-hidden cursor-pointer group stagger-item flex items-center gap-4 p-5"
+                     style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);"
+                     onclick="filterCategory('bestseller')">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style="background:linear-gradient(135deg,rgba(255,107,53,0.12),transparent);"></div>
+                    <div class="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center relative z-10" style="background:rgba(255,107,53,0.15);border:1px solid rgba(255,107,53,0.25);">
+                        <i data-lucide="trending-up" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <h4 class="font-medium text-white group-hover:text-primary transition-colors">Bestsellers</h4>
+                        <p class="text-gray-500 text-xs">Top picks</p>
+                    </div>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4 text-gray-600 group-hover:text-primary ml-auto relative z-10 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- POPULAR DISHES SECTION -->
+    <section id="menu" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <!-- Section Header -->
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-12 gap-6 stagger-item">
+                <div>
+                    <span class="text-primary text-sm font-medium tracking-wider uppercase mb-2 block">Our Menu</span>
+                    <h2 class="font-serif text-5xl font-bold mb-3">Popular Dishes</h2>
+                    <p class="text-gray-400 text-lg">Most loved by our customers</p>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-4">
+                    <select id="sort-select" onchange="sortMenu()" class="glass rounded-xl px-4 py-3 text-sm outline-none cursor-pointer hover:bg-white/5 transition-colors">
+                        <option value="popular">Most Popular</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                    
+                    <div class="flex gap-1 glass rounded-xl p-1">
+                        <button onclick="setView('grid')" class="view-btn p-3 rounded-lg hover:bg-white/10 transition-all active bg-white/20" data-view="grid">
+                            <i data-lucide="grid-3x3" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="setView('list')" class="view-btn p-3 rounded-lg hover:bg-white/10 transition-all" data-view="list">
+                            <i data-lucide="list" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Tags -->
+            <div class="flex flex-wrap gap-3 mb-10 stagger-item" id="filter-tags">
+                <button onclick="filterTag('all')" class="filter-tag active px-6 py-2.5 rounded-full text-sm font-medium border border-white/10 hover:border-primary/50 transition-all">
+                    All Dishes
+                </button>
+                <button onclick="filterTag('bestseller')" class="filter-tag px-6 py-2.5 rounded-full text-sm font-medium border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2">
+                    <span>🔥</span> Bestseller
+                </button>
+                <button onclick="filterTag('spicy')" class="filter-tag px-6 py-2.5 rounded-full text-sm font-medium border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2">
+                    <span>🌶️</span> Spicy
+                </button>
+                <button onclick="filterTag('new')" class="filter-tag px-6 py-2.5 rounded-full text-sm font-medium border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2">
+                    <span>✨</span> New
+                </button>
+                <button onclick="filterTag('healthy')" class="filter-tag px-6 py-2.5 rounded-full text-sm font-medium border border-white/10 hover:border-primary/50 transition-all flex items-center gap-2">
+                    <span>💚</span> Healthy
+                </button>
+            </div>
+
+            <!-- Menu Grid -->
+            <div id="menu-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Menu items will be injected here -->
+            </div>
+
+            <!-- Load More -->
+            <div class="text-center mt-16 stagger-item">
+                <button onclick="loadMore()" class="magnetic-btn group px-8 py-4 glass rounded-full font-medium hover:bg-white/10 transition-all inline-flex items-center gap-2" data-magnetic>
+                    <span>Load More Dishes</span>
+                    <i data-lucide="chevron-down" class="w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-secondary/5"></div>
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="glass-card rounded-3xl p-8 md:p-12 grid md:grid-cols-2 gap-12 items-center overflow-hidden">
+                <div class="stagger-item">
+                    <div class="inline-block px-4 py-1.5 bg-primary/20 rounded-full text-primary text-sm font-semibold mb-6">Limited Time Offer</div>
+                    <h2 class="font-serif text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        Get <span class="text-gradient">50% Off</span><br>
+                        Your First Order!
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-8 max-w-md">Use code <span class="text-primary font-bold font-mono text-xl">SPICE50</span> at checkout. Valid for new customers only.</p>
+                    
+                    <div class="flex flex-wrap items-center gap-6 mb-8">
+                        <button onclick="scrollToSection('menu')" class="magnetic-btn px-8 py-4 bg-gradient-to-r from-primary to-secondary rounded-full font-medium hover:shadow-xl hover:shadow-primary/30 transition-all" data-magnetic>
+                            Order Now
+                        </button>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i data-lucide="clock" class="w-5 h-5"></i>
+                            <span class="font-mono text-lg" id="countdown">23:59:59</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative stagger-item">
+                    <div class="relative transform rotate-3 hover:rotate-0 transition-transform duration-700">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" 
+                             alt="Special Offer" 
+                             class="rounded-3xl shadow-2xl w-full">
+                        <div class="absolute -top-6 -right-6 w-28 h-28 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center animate-bounce shadow-xl shadow-primary/30">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold">50%</div>
+                                <div class="text-xs font-medium">OFF</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20 stagger-item">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">How It Works</h2>
+                <p class="text-gray-400 text-lg">Get your favorite food in 3 simple steps</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12 relative">
+                <div class="hidden md:block absolute top-24 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-primary via-secondary to-accent opacity-20"></div>
+                
+                <div class="text-center relative stagger-item" data-delay="0">
+                    <div class="w-20 h-20 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center relative z-10 group hover:scale-110 transition-transform duration-500 cursor-pointer">
+                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-sm font-bold">1</span>
+                        <i data-lucide="smartphone" class="w-8 h-8 text-primary"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">Choose</h3>
+                    <p class="text-gray-400 leading-relaxed">Browse our menu and select your favorite dishes from 100+ options</p>
+                </div>
+
+                <div class="text-center relative stagger-item" data-delay="0.1">
+                    <div class="w-20 h-20 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-secondary/20 to-secondary/5 flex items-center justify-center relative z-10 group hover:scale-110 transition-transform duration-500 cursor-pointer">
+                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-secondary rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                        <i data-lucide="credit-card" class="w-8 h-8 text-secondary"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">Pay</h3>
+                    <p class="text-gray-400 leading-relaxed">Secure payment via UPI, Card, or Cash on Delivery</p>
+                </div>
+
+                <div class="text-center relative stagger-item" data-delay="0.2">
+                    <div class="w-20 h-20 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center relative z-10 group hover:scale-110 transition-transform duration-500 cursor-pointer">
+                        <span class="absolute -top-2 -right-2 w-8 h-8 bg-accent rounded-full flex items-center justify-center text-sm font-bold text-black">3</span>
+                        <i data-lucide="truck" class="w-8 h-8 text-accent"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">Enjoy</h3>
+                    <p class="text-gray-400 leading-relaxed">Hot & fresh food delivered to your doorstep in 30 minutes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="stagger-item">
+                    <span class="text-primary text-sm font-medium tracking-wider uppercase mb-2 block">Reservations</span>
+                    <h2 class="font-serif text-5xl font-bold mb-6">Book a Table</h2>
+                    <p class="text-gray-400 text-lg mb-10">Reserve your spot for an unforgettable dining experience</p>
+                    
+                    <form id="booking-form" class="space-y-6" onsubmit="handleBooking(event)">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="input-animated">
+                                <label class="block text-sm text-gray-400 mb-2">Date</label>
+                                <input type="date" id="booking-date" required 
+                                       class="w-full glass rounded-xl px-4 py-3 outline-none bg-transparent text-white">
+                            </div>
+                            <div class="input-animated">
+                                <label class="block text-sm text-gray-400 mb-2">Time</label>
+                                <select id="booking-time" required 
+                                        class="w-full glass rounded-xl px-4 py-3 outline-none bg-transparent text-white">
+                                    <option value="" class="bg-darker">Select Time</option>
+                                    <option value="11:00" class="bg-darker">11:00 AM</option>
+                                    <option value="12:00" class="bg-darker">12:00 PM</option>
+                                    <option value="13:00" class="bg-darker">1:00 PM</option>
+                                    <option value="18:00" class="bg-darker">6:00 PM</option>
+                                    <option value="19:00" class="bg-darker">7:00 PM</option>
+                                    <option value="20:00" class="bg-darker">8:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-3">Number of Guests</label>
+                            <div class="flex gap-3">
+                                <button type="button" onclick="setGuests(2)" class="guest-btn flex-1 py-3 glass rounded-xl hover:bg-primary/20 transition-all border border-transparent" data-guests="2">2</button>
+                                <button type="button" onclick="setGuests(4)" class="guest-btn flex-1 py-3 glass rounded-xl hover:bg-primary/20 transition-all border border-transparent" data-guests="4">4</button>
+                                <button type="button" onclick="setGuests(6)" class="guest-btn flex-1 py-3 glass rounded-xl hover:bg-primary/20 transition-all border border-transparent" data-guests="6">6</button>
+                                <button type="button" onclick="setGuests(8)" class="guest-btn flex-1 py-3 glass rounded-xl hover:bg-primary/20 transition-all border border-transparent" data-guests="8">8+</button>
+                            </div>
+                            <input type="hidden" id="guest-count" value="2">
+                        </div>
+
+                        <div class="input-animated">
+                            <label class="block text-sm text-gray-400 mb-2">Occasion</label>
+                            <select class="w-full glass rounded-xl px-4 py-3 outline-none bg-transparent text-white">
+                                <option class="bg-darker">Casual Dining</option>
+                                <option class="bg-darker">Birthday</option>
+                                <option class="bg-darker">Anniversary</option>
+                                <option class="bg-darker">Business Meeting</option>
+                                <option class="bg-darker">Date Night</option>
+                            </select>
+                        </div>
+
+                        <div class="input-animated">
+                            <label class="block text-sm text-gray-400 mb-2">Special Requests</label>
+                            <textarea class="w-full glass rounded-xl px-4 py-3 outline-none bg-transparent h-24 resize-none text-white" 
+                                      placeholder="Any dietary restrictions or preferences..."></textarea>
+                        </div>
+
+                        <button type="submit" 
+                                class="w-full py-4 bg-gradient-to-r from-primary to-secondary rounded-xl font-medium hover:shadow-xl hover:shadow-primary/30 transition-all magnetic-btn relative overflow-hidden" 
+                                data-magnetic>
+                            <span class="relative z-10">Confirm Booking</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="relative stagger-item">
+                    <div class="glass-card rounded-3xl p-8">
+                        <h3 class="font-serif text-2xl font-bold mb-6">Live Availability</h3>
+                        <div class="space-y-3" id="availability-grid">
+                            <!-- Injected via JS -->
+                        </div>
+                        <div class="mt-6 p-4 bg-green-500/10 rounded-xl border border-green-500/20 flex items-center gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-green-400"></i>
+                            <span class="text-sm text-green-400">Instant confirmation via SMS</span>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/10 rounded-full blur-3xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 stagger-item">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold mb-4">What Customers Say</h2>
+                <div class="flex items-center justify-center gap-2 mb-2">
+                    <div class="flex text-primary">
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                    </div>
+                    <span class="font-bold text-xl">4.9</span>
+                    <span class="text-gray-500">(2,847 reviews)</span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8" id="reviews-grid">
+                <!-- Reviews injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 pt-20 pb-8 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                            <i data-lucide="leaf" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <span class="font-serif text-2xl font-bold">Spice Garden</span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">Serving happiness on a plate since 2009. Authentic flavors, modern experience.</p>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary/20 transition-colors magnetic-btn" data-magnetic>
+                            <i data-lucide="facebook" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary/20 transition-colors magnetic-btn" data-magnetic>
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full glass flex items-center justify-center hover:bg-primary/20 transition-colors magnetic-btn" data-magnetic>
+                            <i data-lucide="twitter" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-medium mb-6 text-lg">Quick Links</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="#home" class="hover:text-primary transition-colors">Home</a></li>
+                        <li><a href="#menu" class="hover:text-primary transition-colors">Menu</a></li>
+                        <li><a href="#booking" class="hover:text-primary transition-colors">Book Table</a></li>
+                        <li><a href="#about" class="hover:text-primary transition-colors">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-medium mb-6 text-lg">Support</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-primary transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-medium mb-6 text-lg">Newsletter</h4>
+                    <p class="text-gray-500 text-sm mb-4">Subscribe for exclusive offers and updates</p>
+                    <form class="flex gap-2" onsubmit="event.preventDefault(); showToast('Subscribed successfully!')">
+                        <input type="email" placeholder="Email" class="flex-1 glass rounded-lg px-4 py-2 text-sm outline-none bg-transparent">
+                        <button type="submit" class="px-4 py-2 bg-primary rounded-lg hover:bg-primary/80 transition-colors magnetic-btn" data-magnetic>
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                <p>© 2024 Spice Garden. All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                    <a href="#" class="hover:text-white transition-colors">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed inset-y-0 right-0 w-full md:w-[450px] bg-darker border-l border-white/10 transform translate-x-full transition-transform duration-500 z-50 overflow-y-auto">
+        <div class="p-8">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="font-serif text-2xl font-bold">Your Cart</h3>
+                <button onclick="toggleCart()" class="p-2 hover:bg-white/10 rounded-full transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="space-y-4 mb-8">
+                <!-- Cart items injected here -->
+            </div>
+            
+            <div id="cart-empty" class="text-center py-16 text-gray-500">
+                <i data-lucide="shopping-basket" class="w-16 h-16 mx-auto mb-4 opacity-30"></i>
+                <p class="text-lg">Your cart is empty</p>
+                <button onclick="toggleCart(); scrollToSection('menu')" class="mt-4 text-primary hover:underline">Browse Menu</button>
+            </div>
+            
+            <div id="cart-footer" class="hidden border-t border-white/10 pt-6 space-y-4">
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-400">Subtotal</span>
+                    <span id="cart-subtotal" class="font-medium">$0.00</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-400">Tax (8%)</span>
+                    <span id="cart-tax" class="font-medium">$0.00</span>
+                </div>
+                <div class="flex justify-between text-xl font-bold pt-4 border-t border-white/10">
+                    <span>Total</span>
+                    <span id="cart-total" class="text-gradient">$0.00</span>
+                </div>
+                <button onclick="showCheckout()" class="w-full py-4 bg-gradient-to-r from-primary to-secondary rounded-xl font-medium hover:shadow-xl hover:shadow-primary/30 transition-all magnetic-btn mt-4" data-magnetic>
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="toggleLogin()"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-md p-6">
+            <div class="glass-card rounded-3xl p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="font-serif text-2xl font-bold">Welcome Back</h3>
+                    <button onclick="toggleLogin()" class="p-2 hover:bg-white/10 rounded-full">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4">
+                    <button class="w-full py-3 glass rounded-xl flex items-center justify-center gap-3 hover:bg-white/10 transition-colors">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        Continue with Google
+                    </button>
+                    
+                    <div class="relative text-center my-6">
+                        <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/10"></div></div>
+                        <span class="relative bg-darker px-4 text-sm text-gray-500">or</span>
+                    </div>
+                    
+                    <input type="email" placeholder="Email" class="w-full glass rounded-xl px-4 py-3 outline-none bg-transparent">
+                    <input type="password" placeholder="Password" class="w-full glass rounded-xl px-4 py-3 outline-none bg-transparent">
+                    
+                    <button onclick="handleLogin()" class="w-full py-3 bg-gradient-to-r from-primary to-secondary rounded-xl font-medium hover:opacity-90 transition-opacity">
+                        Login
+                    </button>
+                    
+                    <p class="text-center text-sm text-gray-400">
+                        Don't have an account? <a href="#" class="text-primary hover:underline">Sign up</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-3 glass-strong rounded-full text-sm font-medium opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
+        <i data-lucide="check-circle" class="w-4 h-4 text-green-400"></i>
+        <span id="toast-message">Message</span>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Data
+        const menuItems = [
+            {
+                id: 1,
+                name: "Butter Chicken",
+                price: 18.99,
+                rating: 4.9,
+                reviews: 328,
+                category: "non-veg",
+                tags: ["bestseller", "spicy"],
+                image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600&q=80",
+                description: "Tender chicken cooked in rich, creamy tomato gravy with aromatic spices",
+                calories: 450,
+                time: "25 min"
+            },
+            {
+                id: 2,
+                name: "Paneer Tikka",
+                price: 14.99,
+                rating: 4.8,
+                reviews: 256,
+                category: "veg",
+                tags: ["bestseller", "healthy"],
+                image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?w=600&q=80",
+                description: "Grilled cottage cheese cubes marinated in yogurt and spices",
+                calories: 320,
+                time: "20 min"
+            },
+            {
+                id: 3,
+                name: "Biryani Supreme",
+                price: 22.99,
+                rating: 4.9,
+                reviews: 412,
+                category: "non-veg",
+                tags: ["bestseller", "spicy", "new"],
+                image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&q=80",
+                description: "Fragrant basmati rice layered with succulent meat and saffron",
+                calories: 580,
+                time: "35 min"
+            },
+            {
+                id: 4,
+                name: "Dal Makhani",
+                price: 12.99,
+                rating: 4.7,
+                reviews: 189,
+                category: "veg",
+                tags: ["healthy"],
+                image: "https://images.unsplash.com/photo-1546833998-877b37c2e5c4?w=600&q=80",
+                description: "Creamy black lentils slow-cooked overnight with butter and cream",
+                calories: 380,
+                time: "30 min"
+            },
+            {
+                id: 5,
+                name: "Masala Dosa",
+                price: 11.99,
+                rating: 4.8,
+                reviews: 298,
+                category: "veg",
+                tags: ["healthy", "new"],
+                image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=80",
+                description: "Crispy rice crepe filled with spiced potato mixture",
+                calories: 280,
+                time: "20 min"
+            },
+            {
+                id: 6,
+                name: "Rogan Josh",
+                price: 24.99,
+                rating: 4.8,
+                reviews: 156,
+                category: "non-veg",
+                tags: ["spicy"],
+                image: "https://images.unsplash.com/photo-1545247181-516773cae754?w=600&q=80",
+                description: "Kashmiri lamb curry with intense red color and aromatic spices",
+                calories: 520,
+                time: "40 min"
+            }
+        ];
+
+        const reviews = [
+            {
+                name: "Sarah Johnson",
+                rating: 5,
+                text: "Absolutely amazing food! The butter chicken was the best I've ever had. Delivery was super quick too!",
+                image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80",
+                date: "2 days ago"
+            },
+            {
+                name: "Michael Chen",
+                rating: 5,
+                text: "Great ambiance and even better food. The booking system is seamless. Highly recommend!",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",
+                date: "1 week ago"
+            },
+            {
+                name: "Emma Williams",
+                rating: 4,
+                text: "Love the variety of vegetarian options. The paneer tikka is a must-try. Will order again!",
+                image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80",
+                date: "3 days ago"
+            }
+        ];
+
+        let cart = [];
+        let currentTag = 'all';
+        let lenis;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lenis Smooth Scroll
+            lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+                infinite: false,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // GSAP ScrollTrigger Integration with Lenis
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => {
+                lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+
+            // Initialize all systems
+            initWebGL();
+            initMagneticButtons();
+            initCustomCursor();
+            initScrollProgress();
+            initNavigation();
+            initAnimations();
+            renderCategories();
+            renderMenu();
+            renderReviews();
+            renderAvailability();
+            initCounters();
+            initCountdown();
+            initTiltEffect();
+            initCategoryTilt();
+            lucide.createIcons();
+            // Set today's date
+            const today = new Date().toISOString().split('T')[0];
+            const dateInput = document.getElementById('booking-date');
+            if (dateInput) {
+                dateInput.min = today;
+                dateInput.value = today;
+            }
+        });
+
+        // ═══════════════════════════════════════════════════
+        //  GOD LEVEL WebGL  —  Background + Hero 3D Model
+        // ═══════════════════════════════════════════════════
+        function initWebGL() {
+
+            // ── 1. BACKGROUND PARTICLE FIELD ──────────────────
+            const bgCanvas = document.getElementById('webgl-bg');
+            if (bgCanvas) {
+                const bgScene    = new THREE.Scene();
+                const bgCamera   = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                const bgRenderer = new THREE.WebGLRenderer({ canvas: bgCanvas, alpha: true, antialias: false });
+                bgRenderer.setSize(window.innerWidth, window.innerHeight);
+                bgRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+
+                const bgGeo  = new THREE.BufferGeometry();
+                const count  = 250;
+                const bgPos  = new Float32Array(count * 3);
+                const bgSize = new Float32Array(count);
+                for (let i = 0; i < count; i++) {
+                    bgPos[i*3]   = (Math.random() - 0.5) * 14;
+                    bgPos[i*3+1] = (Math.random() - 0.5) * 14;
+                    bgPos[i*3+2] = (Math.random() - 0.5) * 14;
+                    bgSize[i]    = Math.random();
+                }
+                bgGeo.setAttribute('position', new THREE.BufferAttribute(bgPos, 3));
+                const bgMat  = new THREE.PointsMaterial({
+                    size: 0.025, color: 0xFF6B35, transparent: true,
+                    opacity: 0.5, blending: THREE.AdditiveBlending
+                });
+                const bgMesh = new THREE.Points(bgGeo, bgMat);
+                bgScene.add(bgMesh);
+                bgCamera.position.z = 3;
+
+                let bgMX = 0, bgMY = 0;
+                document.addEventListener('mousemove', e => {
+                    bgMX = (e.clientX / window.innerWidth)  *  2 - 1;
+                    bgMY = (e.clientY / window.innerHeight) * -2 + 1;
+                });
+
+                function bgAnimate() {
+                    requestAnimationFrame(bgAnimate);
+                    bgMesh.rotation.x += 0.0002 + bgMY * 0.0004;
+                    bgMesh.rotation.y += 0.0004 + bgMX * 0.0004;
+                    bgRenderer.render(bgScene, bgCamera);
+                }
+                bgAnimate();
+
+                window.addEventListener('resize', () => {
+                    bgCamera.aspect = window.innerWidth / window.innerHeight;
+                    bgCamera.updateProjectionMatrix();
+                    bgRenderer.setSize(window.innerWidth, window.innerHeight);
+                });
+            }
+
+            // ── 2. HERO 3D MODEL — GOD LEVEL ──────────────────
+            const heroCanvas = document.getElementById('hero-3d-canvas');
+            if (!heroCanvas) return;
+
+            const W = 520, H = 520;
+            heroCanvas.width  = W * Math.min(window.devicePixelRatio, 2);
+            heroCanvas.height = H * Math.min(window.devicePixelRatio, 2);
+
+            const hScene    = new THREE.Scene();
+            const hCamera   = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+            hCamera.position.set(0, 0, 7);
+
+            const hRenderer = new THREE.WebGLRenderer({
+                canvas: heroCanvas, alpha: true,
+                antialias: true, powerPreference: 'high-performance'
+            });
+            hRenderer.setSize(W, H);
+            hRenderer.setPixelRatio(Math.min(window.devicePixelRatio * 1.5, 3));
+            hRenderer.outputEncoding        = THREE.sRGBEncoding;
+            hRenderer.physicallyCorrectLights = true;
+            hRenderer.toneMapping           = THREE.ACESFilmicToneMapping;
+            hRenderer.toneMappingExposure   = 1.3;
+            hRenderer.shadowMap.enabled     = true;
+            hRenderer.shadowMap.type        = THREE.PCFSoftShadowMap;
+
+            // ── ENVIRONMENT (fake HDRI via PMREMGenerator trick) ──
+            const pmremGen = new THREE.PMREMGenerator(hRenderer);
+            pmremGen.compileEquirectangularShader();
+
+            // Build a gradient env cube manually
+            const envScene = new THREE.Scene();
+            const envGeo   = new THREE.SphereGeometry(50, 32, 32);
+            const envMat   = new THREE.MeshBasicMaterial({
+                color: 0x0a0a14, side: THREE.BackSide
+            });
+            envScene.add(new THREE.Mesh(envGeo, envMat));
+            const envTex = pmremGen.fromScene(envScene).texture;
+            hScene.environment = envTex;
+
+            // ── MAIN GEM MESH ──────────────────────────────────
+            const gemGeo = new THREE.IcosahedronGeometry(1.8, 2);
+            const gemMat = new THREE.MeshPhysicalMaterial({
+                color:               0xFF6B35,
+                metalness:           0.85,
+                roughness:           0.08,
+                clearcoat:           1.0,
+                clearcoatRoughness:  0.05,
+                reflectivity:        1.0,
+                envMapIntensity:     2.5,
+                transparent:         true,
+                opacity:             0.95,
+            });
+            const gem = new THREE.Mesh(gemGeo, gemMat);
+            gem.castShadow = true;
+            hScene.add(gem);
+
+            // ── WIRE OVERLAY (holographic grid) ───────────────
+            const wireGeo = new THREE.IcosahedronGeometry(1.85, 2);
+            const wireMat = new THREE.MeshBasicMaterial({
+                color: 0xFFD23F, wireframe: true,
+                transparent: true, opacity: 0.06,
+                blending: THREE.AdditiveBlending
+            });
+            const wire = new THREE.Mesh(wireGeo, wireMat);
+            hScene.add(wire);
+
+            // ── ORBITING RING 1 ────────────────────────────────
+            const ring1Geo = new THREE.TorusGeometry(2.6, 0.012, 8, 100);
+            const ring1Mat = new THREE.MeshBasicMaterial({
+                color: 0xFF6B35, transparent: true, opacity: 0.45,
+                blending: THREE.AdditiveBlending
+            });
+            const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+            ring1.rotation.x = Math.PI / 2.5;
+            hScene.add(ring1);
+
+            // ── ORBITING RING 2 ────────────────────────────────
+            const ring2Geo = new THREE.TorusGeometry(2.9, 0.007, 8, 100);
+            const ring2Mat = new THREE.MeshBasicMaterial({
+                color: 0xF7931E, transparent: true, opacity: 0.3,
+                blending: THREE.AdditiveBlending
+            });
+            const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+            ring2.rotation.x = Math.PI / 3.5;
+            ring2.rotation.y = Math.PI / 4;
+            hScene.add(ring2);
+
+            // ── PARTICLE HALO ──────────────────────────────────
+            const haloGeo   = new THREE.BufferGeometry();
+            const haloCount = 180;
+            const haloPos   = new Float32Array(haloCount * 3);
+            for (let i = 0; i < haloCount; i++) {
+                const theta = Math.random() * Math.PI * 2;
+                const phi   = Math.acos(2 * Math.random() - 1);
+                const r     = 2.4 + Math.random() * 1.2;
+                haloPos[i*3]   = r * Math.sin(phi) * Math.cos(theta);
+                haloPos[i*3+1] = r * Math.sin(phi) * Math.sin(theta);
+                haloPos[i*3+2] = r * Math.cos(phi);
+            }
+            haloGeo.setAttribute('position', new THREE.BufferAttribute(haloPos, 3));
+            const haloMat = new THREE.PointsMaterial({
+                size: 0.055, color: 0xFFD23F,
+                transparent: true, opacity: 0.8,
+                blending: THREE.AdditiveBlending
+            });
+            const halo = new THREE.Points(haloGeo, haloMat);
+            hScene.add(halo);
+
+            // ── 3-POINT STUDIO LIGHTING ────────────────────────
+            //  KEY light — main warm white
+            const keyLight = new THREE.PointLight(0xffffff, 3.5, 30);
+            keyLight.position.set(5, 5, 5);
+            keyLight.castShadow = true;
+            hScene.add(keyLight);
+
+            //  RIM light — cool neon blue glow edge
+            const rimLight = new THREE.PointLight(0x00aaff, 2.5, 20);
+            rimLight.position.set(-5, 3, -5);
+            hScene.add(rimLight);
+
+            //  FILL light — soft ambient fill
+            const fillLight = new THREE.PointLight(0xFF6B35, 0.8, 15);
+            fillLight.position.set(0, 2, 5);
+            hScene.add(fillLight);
+
+            //  ACCENT top — orange crown
+            const crownLight = new THREE.PointLight(0xF7931E, 1.5, 10);
+            crownLight.position.set(0, 4, 0);
+            hScene.add(crownLight);
+
+            //  Ambient base
+            hScene.add(new THREE.AmbientLight(0x111111, 0.8));
+
+            // ── MOUSE PARALLAX ─────────────────────────────────
+            let targetRX = 0, targetRY = 0;
+            let isDragging = false, prevMX = 0, prevMY = 0;
+            let velX = 0, velY = 0;
+
+            heroCanvas.addEventListener('mousedown', e => { isDragging = true; prevMX = e.clientX; prevMY = e.clientY; });
+            window.addEventListener('mouseup',   () => { isDragging = false; });
+            window.addEventListener('mousemove', e => {
+                if (isDragging) {
+                    velX += (e.clientX - prevMX) * 0.01;
+                    velY += (e.clientY - prevMY) * 0.01;
+                    prevMX = e.clientX; prevMY = e.clientY;
+                } else {
+                    // Subtle parallax from cursor position
+                    const rect = heroCanvas.getBoundingClientRect();
+                    const nx = (e.clientX - rect.left)  / rect.width  - 0.5;
+                    const ny = (e.clientY - rect.top)   / rect.height - 0.5;
+                    targetRX = ny * 0.5;
+                    targetRY = nx * 0.8;
+                }
+            });
+
+            // ── GSAP ENTRANCE ANIMATION ────────────────────────
+            gsap.fromTo(heroCanvas,
+                { opacity: 0, scale: 0.7 },
+                { opacity: 1, scale: 1, duration: 1.6, ease: 'expo.out', delay: 0.4 }
+            );
+
+            // ── ANIMATION LOOP ─────────────────────────────────
+            const clock = new THREE.Clock();
+            function heroAnimate() {
+                requestAnimationFrame(heroAnimate);
+                const t = clock.getElapsedTime();
+
+                // Inertia
+                velX *= 0.92;
+                velY *= 0.92;
+
+                // Smooth lerp to target
+                gem.rotation.x += (targetRX - gem.rotation.x) * 0.04 + velY;
+                gem.rotation.y += (targetRY - gem.rotation.y) * 0.04 + velX;
+                gem.rotation.y += 0.004;   // slow auto-spin
+
+                // Wire follows gem
+                wire.rotation.x = gem.rotation.x;
+                wire.rotation.y = gem.rotation.y + t * 0.12;
+
+                // Rings orbit
+                ring1.rotation.y = t * 0.4;
+                ring1.rotation.z = t * 0.15;
+                ring2.rotation.y = -t * 0.3;
+                ring2.rotation.x = t * 0.2;
+
+                // Halo slow drift
+                halo.rotation.y = t * 0.08;
+                halo.rotation.x = t * 0.04;
+
+                // Gem float
+                gem.position.y  = Math.sin(t * 0.7) * 0.12;
+                wire.position.y = gem.position.y;
+
+                // Pulse lights
+                keyLight.intensity  = 3.5 + Math.sin(t * 1.2) * 0.4;
+                rimLight.intensity  = 2.5 + Math.sin(t * 0.9 + 1) * 0.5;
+                crownLight.intensity = 1.5 + Math.sin(t * 1.5) * 0.3;
+
+                hRenderer.render(hScene, hCamera);
+            }
+            heroAnimate();
+        }
+
+        // Magnetic Buttons
+        function initMagneticButtons() {
+            const buttons = document.querySelectorAll('[data-magnetic]');
+            
+            buttons.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    gsap.to(btn, {
+                        x: x * 0.3,
+                        y: y * 0.3,
+                        duration: 0.3,
+                        ease: "power2.out"
+                    });
+                });
+                
+                btn.addEventListener('mouseleave', () => {
+                    gsap.to(btn, {
+                        x: 0,
+                        y: 0,
+                        duration: 0.3,
+                        ease: "elastic.out(1, 0.3)"
+                    });
+                });
+            });
+        }
+
+        // Custom Cursor with Glow
+        function initCustomCursor() {
+            const cursor = document.getElementById('cursor');
+            const cursorDot = document.getElementById('cursor-dot');
+            const cursorGlow = document.getElementById('cursor-glow');
+            
+            if (window.matchMedia('(pointer: coarse)').matches) {
+                cursor.style.display = 'none';
+                cursorDot.style.display = 'none';
+                cursorGlow.style.display = 'none';
+                return;
+            }
+            
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                cursorDot.style.left = mouseX + 'px';
+                cursorDot.style.top = mouseY + 'px';
+                
+                cursorGlow.style.left = mouseX + 'px';
+                cursorGlow.style.top = mouseY + 'px';
+            });
+            
+            // Smooth cursor follow (LERP)
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.15;
+                cursorY += (mouseY - cursorY) * 0.15;
+                
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+            
+            // Hover effects
+            const interactiveElements = document.querySelectorAll('a, button, .food-card, .tilt-card');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hover');
+                    gsap.to(cursorGlow, { opacity: 1, scale: 1.2, duration: 0.3 });
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hover');
+                    gsap.to(cursorGlow, { opacity: 0.5, scale: 1, duration: 0.3 });
+                });
+            });
+        }
+
+        // Scroll Progress
+        function initScrollProgress() {
+            const progressBar = document.getElementById('scroll-progress');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = scrollTop / docHeight;
+                progressBar.style.transform = `scaleX(${progress})`;
+            }, { passive: true });
+        }
+
+        // Navigation Show/Hide
+        function initNavigation() {
+            const navbar = document.getElementById('navbar');
+            let lastScroll = 0;
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.scrollY;
+                
+                if (currentScroll > 100) {
+                    navbar.classList.remove('nav-hidden');
+                    navbar.classList.add('nav-visible');
+                } else {
+                    navbar.classList.add('nav-hidden');
+                    navbar.classList.remove('nav-visible');
+                }
+                
+                lastScroll = currentScroll;
+            }, { passive: true });
+        }
+
+        // GSAP Animations
+        function initAnimations() {
+            // Register plugins
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Text reveal animation
+            gsap.utils.toArray('.text-reveal span').forEach((text, i) => {
+                gsap.to(text, {
+                    y: 0,
+                    duration: 1,
+                    delay: i * 0.2,
+                    ease: "power4.out",
+                    scrollTrigger: {
+                        trigger: text,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            });
+            
+            // Stagger items
+            gsap.utils.toArray('.stagger-item').forEach((item, i) => {
+                const delay = item.dataset.delay || 0;
+                gsap.fromTo(item, 
+                    { opacity: 0, y: 30 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay: parseFloat(delay),
+                        ease: "power3.out",
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+        }
+
+        // Render Categories
+        // Category card 3D tilt
+        function initCategoryTilt() {
+            const cards = document.querySelectorAll('.cat-card, .cat-card-featured');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const r = card.getBoundingClientRect();
+                    const x = (e.clientX - r.left) / r.width  - 0.5;
+                    const y = (e.clientY - r.top)  / r.height - 0.5;
+                    card.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 10}deg) scale3d(1.03,1.03,1.03)`;
+                    card.style.transition = 'transform 0.1s ease';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(600px) rotateY(0deg) rotateX(0deg) scale3d(1,1,1)';
+                    card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+                });
+            });
+        }
+
+        function renderCategories() { /* replaced by static HTML */ }
+
+
+
+        // Render Menu
+        function renderMenu() {
+            const container = document.getElementById('menu-container');
+            if (!container) return;
+            
+            let filtered = menuItems;
+            
+            if (currentTag !== 'all') {
+                filtered = filtered.filter(item => item.tags.includes(currentTag));
+            }
+            
+            // Clear container
+            container.innerHTML = '';
+            
+            // Create items with proper layout
+            filtered.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'food-card group cursor-pointer gpu-accelerated';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.onclick = () => addToCart(item.id);
+                
+                card.innerHTML = `
+                    <div class="food-card-inner glass-card rounded-3xl overflow-hidden h-full flex flex-col">
+                        <div class="relative overflow-hidden h-56 flex-shrink-0">
+                            <img src="${item.image}" alt="${item.name}" class="food-image w-full h-full object-cover">
+                            <div class="shine"></div>
+                            
+                            ${item.tags.includes('bestseller') ? 
+                                '<span class="absolute top-4 left-4 px-3 py-1 bg-primary text-xs font-bold rounded-full uppercase tracking-wider">Bestseller</span>' : ''}
+                            ${item.tags.includes('new') ? 
+                                '<span class="absolute top-4 left-4 px-3 py-1 bg-green-500 text-xs font-bold rounded-full uppercase tracking-wider">New</span>' : ''}
+                            
+                            <button onclick="event.stopPropagation(); toggleFavorite(${item.id})" 
+                                    class="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500/20 hover:scale-110">
+                                <i data-lucide="heart" class="w-5 h-5"></i>
+                            </button>
+                            
+                            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/80 to-transparent"></div>
+                        </div>
+                        
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-serif text-xl font-bold group-hover:text-primary transition-colors">${item.name}</h3>
+                                <div class="flex items-center gap-1 text-sm bg-white/10 px-2 py-1 rounded-lg">
+                                    <i data-lucide="star" class="w-3 h-3 text-primary fill-primary"></i>
+                                    <span class="font-medium">${item.rating}</span>
+                                </div>
+                            </div>
+                            
+                            <p class="text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">${item.description}</p>
+                            
+                            <div class="flex items-center justify-between pt-4 border-t border-white/10">
+                                <div>
+                                    <span class="text-2xl font-bold text-gradient">$${item.price}</span>
+                                    <span class="text-xs text-gray-500 ml-2">${item.time}</span>
+                                </div>
+                                <button onclick="event.stopPropagation(); addToCart(${item.id})" 
+                                        class="magnetic-btn w-12 h-12 rounded-full bg-primary flex items-center justify-center hover:scale-110 transition-transform shadow-lg shadow-primary/30"
+                                        data-magnetic>
+                                    <i data-lucide="plus" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+                
+                // Animate in with stagger
+                gsap.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    delay: index * 0.1,
+                    ease: "power3.out"
+                });
+            });
+            
+            lucide.createIcons();
+            initMagneticButtons();
+        }
+
+        // Filter Tag
+        function filterTag(tag) {
+            currentTag = tag;
+            
+            // Update UI
+            document.querySelectorAll('.filter-tag').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.filter-tag').classList.add('active');
+            
+            // Animate out current items
+            const cards = document.querySelectorAll('.food-card');
+            gsap.to(cards, {
+                opacity: 0,
+                y: 20,
+                duration: 0.3,
+                stagger: 0.05,
+                onComplete: () => {
+                    renderMenu();
+                }
+            });
+        }
+
+        // Sort Menu
+        function sortMenu() {
+            const sort = document.getElementById('sort-select').value;
+            
+            if (sort === 'price-low') {
+                menuItems.sort((a, b) => a.price - b.price);
+            } else if (sort === 'price-high') {
+                menuItems.sort((a, b) => b.price - a.price);
+            } else if (sort === 'rating') {
+                menuItems.sort((a, b) => b.rating - a.rating);
+            }
+            
+            renderMenu();
+        }
+
+        // Set View
+        function setView(view) {
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-white/20');
+            });
+            event.target.closest('.view-btn').classList.add('active', 'bg-white/20');
+            
+            const container = document.getElementById('menu-container');
+            if (view === 'list') {
+                container.classList.remove('grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3');
+                container.classList.add('grid-cols-1');
+            } else {
+                container.classList.add('grid-cols-1', 'md:grid-cols-2', 'lg:grid-cols-3');
+            }
+        }
+
+        // Search
+        function handleSearch(query) {
+            if (!query) {
+                renderMenu();
+                return;
+            }
+            
+            const filtered = menuItems.filter(item => 
+                item.name.toLowerCase().includes(query.toLowerCase()) ||
+                item.description.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            // Temporarily replace menuItems for display
+            const original = [...menuItems];
+            menuItems.length = 0;
+            menuItems.push(...filtered);
+            renderMenu();
+            
+            // Restore original
+            menuItems.length = 0;
+            menuItems.push(...original);
+        }
+
+        // Cart Functions
+        function addToCart(id) {
+            const item = menuItems.find(i => i.id === id);
+            const existing = cart.find(i => i.id === id);
+            
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...item, qty: 1 });
+            }
+            
+            updateCart();
+            showToast(`${item.name} added to cart`);
+            
+            // Button animation
+            const btn = event.target.closest('button');
+            if (btn) {
+                gsap.fromTo(btn, 
+                    { scale: 0.8 },
+                    { scale: 1, duration: 0.3, ease: "elastic.out(1, 0.3)" }
+                );
+            }
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCart();
+        }
+
+        function updateQty(id, change) {
+            const item = cart.find(i => i.id === id);
+            if (item) {
+                item.qty += change;
+                if (item.qty <= 0) removeFromCart(id);
+                else updateCart();
+            }
+        }
+
+        function updateCart() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-count').textContent = count;
+            
+            const itemsContainer = document.getElementById('cart-items');
+            const emptyMsg = document.getElementById('cart-empty');
+            const footer = document.getElementById('cart-footer');
+            
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = '';
+                emptyMsg.classList.remove('hidden');
+                footer.classList.add('hidden');
+                return;
+            }
+            
+            emptyMsg.classList.add('hidden');
+            footer.classList.remove('hidden');
+            
+            itemsContainer.innerHTML = cart.map(item => `
+                <div class="flex gap-4 glass rounded-xl p-4 group hover:bg-white/5 transition-colors">
+                    <img src="${item.image}" class="w-20 h-20 rounded-lg object-cover">
+                    <div class="flex-1">
+                        <h4 class="font-medium mb-1">${item.name}</h4>
+                        <div class="text-gradient font-bold">$${(item.price * item.qty).toFixed(2)}</div>
+                        <div class="flex items-center gap-3 mt-2">
+                            <button onclick="updateQty(${item.id}, -1)" class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                                <i data-lucide="minus" class="w-3 h-3"></i>
+                            </button>
+                            <span class="text-sm font-medium w-4 text-center">${item.qty}</span>
+                            <button onclick="updateQty(${item.id}, 1)" class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors">
+                                <i data-lucide="plus" class="w-3 h-3"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" class="text-gray-500 hover:text-red-400 transition-colors opacity-0 group-hover:opacity-100">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            `).join('');
+            
+            lucide.createIcons();
+            
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const tax = subtotal * 0.08;
+            const total = subtotal + tax;
+            
+            document.getElementById('cart-subtotal').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('cart-tax').textContent = '$' + tax.toFixed(2);
+            document.getElementById('cart-total').textContent = '$' + total.toFixed(2);
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const isOpen = !sidebar.classList.contains('translate-x-full');
+            
+            if (isOpen) {
+                sidebar.classList.add('translate-x-full');
+                document.body.style.overflow = '';
+            } else {
+                sidebar.classList.remove('translate-x-full');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Booking
+        function setGuests(n) {
+            document.getElementById('guest-count').value = n;
+            document.querySelectorAll('.guest-btn').forEach(btn => {
+                btn.classList.remove('bg-primary', 'border-primary');
+                if (parseInt(btn.dataset.guests) === n) {
+                    btn.classList.add('bg-primary', 'border-primary');
+                }
+            });
+        }
+
+        function renderAvailability() {
+            const times = ['11:00 AM', '12:00 PM', '1:00 PM', '6:00 PM', '7:00 PM', '8:00 PM'];
+            const container = document.getElementById('availability-grid');
+            if (!container) return;
+            
+            container.innerHTML = times.map(time => {
+                const available = Math.random() > 0.3;
+                return `
+                    <div class="flex justify-between items-center p-3 glass rounded-lg ${available ? 'cursor-pointer hover:bg-primary/10 transition-colors' : 'opacity-40'}">
+                        <span class="font-medium">${time}</span>
+                        <span class="text-xs ${available ? 'text-green-400' : 'text-red-400'} font-medium">
+                            ${available ? 'Available' : 'Full'}
+                        </span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function handleBooking(e) {
+            e.preventDefault();
+            showToast('Table booked successfully! Check your SMS for confirmation.');
+            
+            // Reset form
+            document.getElementById('booking-form').reset();
+            setGuests(2);
+        }
+
+        // Reviews
+        function renderReviews() {
+            const container = document.getElementById('reviews-grid');
+            if (!container) return;
+            
+            container.innerHTML = reviews.map((review, i) => `
+                <div class="glass-card rounded-2xl p-6 stagger-item hover:bg-white/5 transition-colors" style="animation-delay: ${i * 0.1}s">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="${review.image}" class="w-12 h-12 rounded-full object-cover ring-2 ring-primary/30">
+                        <div>
+                            <div class="font-medium">${review.name}</div>
+                            <div class="text-xs text-gray-500">${review.date}</div>
+                        </div>
+                    </div>
+                    <div class="flex text-primary mb-3">
+                        ${Array(review.rating).fill('<i data-lucide="star" class="w-4 h-4 fill-current"></i>').join('')}
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">"${review.text}"</p>
+                </div>
+            `).join('');
+            
+            lucide.createIcons();
+        }
+
+        // Counter Animation
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            
+            counters.forEach(counter => {
+                const target = parseFloat(counter.dataset.target);
+                const duration = 2000;
+                const start = 0;
+                const increment = target / (duration / 16);
+                let current = start;
+                
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = current.toFixed(1);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                
+                ScrollTrigger.create({
+                    trigger: counter,
+                    start: "top 80%",
+                    onEnter: () => updateCounter(),
+                    once: true
+                });
+            });
+        }
+
+        // Countdown
+        function initCountdown() {
+            let hours = 23, minutes = 59, seconds = 59;
+            const display = document.getElementById('countdown');
+            if (!display) return;
+            
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 59;
+                    minutes--;
+                }
+                if (minutes < 0) {
+                    minutes = 59;
+                    hours--;
+                }
+                if (hours < 0) hours = 23;
+                
+                display.textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // 3D Tilt Effect (legacy - hero card replaced by 3D canvas)
+        function initTiltEffect() {
+            const card = document.getElementById('hero-card');
+            if (!card) return;
+            
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        }
+
+        // Utility Functions
+        function toggleLogin() {
+            const modal = document.getElementById('login-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function handleLogin() {
+            toggleLogin();
+            showToast('Welcome back! You are now logged in.');
+        }
+
+        function showCheckout() {
+            toggleCart();
+            showToast('Proceeding to checkout...');
+        }
+
+        function toggleFavorite(id) {
+            showToast('Added to favorites!');
+        }
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                lenis.scrollTo(element);
+            }
+        }
+
+        function loadMore() {
+            showToast('Loading more dishes...');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toast-message');
+            
+            msgEl.textContent = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // ══ PREMIUM LOADER ANIMATION ══
+        (function() {
+            const lc = document.getElementById('loader-canvas');
+            if (!lc) return;
+            const ctx = lc.getContext('2d');
+            const bar = document.getElementById('loader-bar');
+            const loader = document.getElementById('site-loader');
+            let progress = 0;
+            let angle = 0;
+
+            function drawLoader() {
+                ctx.clearRect(0, 0, 200, 200);
+
+                // Outer rotating arc
+                ctx.beginPath();
+                ctx.arc(100, 100, 55, angle, angle + Math.PI * 1.5);
+                const grad = ctx.createLinearGradient(45, 45, 155, 155);
+                grad.addColorStop(0, '#FF6B35');
+                grad.addColorStop(1, '#FFD23F');
+                ctx.strokeStyle = grad;
+                ctx.lineWidth = 3;
+                ctx.lineCap = 'round';
+                ctx.stroke();
+
+                // Inner rotating arc (opposite)
+                ctx.beginPath();
+                ctx.arc(100, 100, 38, -angle - 0.5, -angle + Math.PI);
+                ctx.strokeStyle = 'rgba(247,147,30,0.4)';
+                ctx.lineWidth = 1.5;
+                ctx.stroke();
+
+                // Center pulsing dot
+                const pulse = 0.5 + 0.5 * Math.sin(Date.now() * 0.005);
+                ctx.beginPath();
+                ctx.arc(100, 100, 6 + pulse * 3, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,107,53,${0.6 + pulse * 0.4})`;
+                ctx.fill();
+
+                angle += 0.04;
+            }
+
+            const interval = setInterval(() => {
+                progress += 1.8;
+                if (progress > 100) progress = 100;
+                if (bar) bar.style.width = progress + '%';
+                drawLoader();
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loader.style.opacity = '0';
+                        loader.style.visibility = 'hidden';
+                    }, 300);
+                }
+            }, 20);
+        })();
+
+        // Ripple Effect
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('button')) {
+                const btn = e.target.closest('button');
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                
+                btn.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            }
+        });
+    </script>
+</body>
+</html>
